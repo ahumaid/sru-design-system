@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
+
+@import 'bootstrap/scss/functions';
+
+// Bootstrap Sass color variables are set before its component styles compile.
+$white: #fff;
+$black: #241331;
+$sru-purple-dark: #3a1464;
+$sru-purple-deep: #170822;
+$gray-100: #f7f5fb;
+$gray-200: #f0ebf8;
+$gray-300: #ddd3e8;
+$gray-400: #b7a5cb;
+$gray-500: #9486a0;
+$gray-600: #675b72;
+$gray-700: #44334f;
+$gray-800: #3a1464;
+$gray-900: #241331;
+
+$blue: #0a6eaa;
+$indigo: $sru-purple-dark;
+$purple: #501e8c;
+$pink: #501e8c;
+$red: #b3261e;
+$orange: #f0b429;
+$yellow: #f0b429;
+$green: #2f855a;
+$teal: #276749;
+$cyan: #0a6eaa;
+
+$primary: $purple;
+$secondary: $gray-600;
+$success: $green;
+$info: $blue;
+$warning: $yellow;
+$danger: $red;
+$light: $gray-100;
+$dark: $sru-purple-dark;
+
+$font-family-sans-serif: 'Cairo', sans-serif;
+$font-weight-base: 600;
+$body-color: $gray-900;
+$body-bg: $white;
+$body-secondary-color: $gray-600;
+$body-secondary-bg: $gray-100;
+$body-tertiary-color: $gray-500;
+$body-tertiary-bg: $gray-100;
+$body-emphasis-color: $gray-900;
+$border-color: rgba($purple, .12);
+$border-color-translucent: rgba($purple, .15);
+$focus-ring-color: rgba($purple, .25);
+$link-color: $purple;
+$link-hover-color: $sru-purple-dark;
+$code-color: $purple;
+$navbar-dark-color: $white;
+$navbar-dark-hover-color: $white;
+$navbar-dark-active-color: $white;
+$navbar-dark-disabled-color: rgba($white, .65);
+$navbar-dark-brand-color: $white;
+$navbar-dark-brand-hover-color: $white;
+$mark-bg: #fff3cd;
+$gradient: linear-gradient(180deg, rgba($purple, .15), rgba($purple, 0));
+$box-shadow: 0 .5rem 1rem rgba($sru-purple-deep, .15);
+$box-shadow-sm: 0 .125rem .25rem rgba($sru-purple-deep, .08);
+$box-shadow-lg: 0 1rem 3rem rgba($sru-purple-deep, .18);
+$box-shadow-inset: inset 0 1px 2px rgba($sru-purple-deep, .08);
+$border-radius: 2px;
+$border-radius-lg: 2px;
+
+@import 'bootstrap/scss/bootstrap';
+
+.card {
+    box-shadow: $box-shadow-sm;
+}
+
+:root {
+    --sru-font-family: 'Cairo', Tahoma, Arial, sans-serif;
+    --sru-white: #fff;
+    --sru-purple: #501e8c;
+    --sru-purple-dark: #3a1464;
+    --sru-purple-deep: #170822;
+    --sru-purple-soft: #f0ebf8;
+    --sru-purple-muted: #9486a0;
+    --sru-purple-gray-300: #ddd3e8;
+    --sru-purple-gray-400: #b7a5cb;
+    --sru-purple-gray-700: #44334f;
+    --sru-blue: #0a6eaa;
+    --sru-blue-light: #e6f3fa;
+    --sru-ink: #241331;
+    --sru-muted: #675b72;
+    --sru-line: rgb(80 30 140 / 12%);
+    --sru-surface: #fff;
+    --sru-surface-alt: #f7f5fb;
+    --sru-shadow-soft: 0 10px 28px rgb(31 13 51 / 8%);
+    --sru-shadow: 0 16px 44px rgb(31 13 51 / 12%);
+
+    --sru-green: #2f855a;
+    --sru-green-dark: #276749;
+    --sru-green-soft: #e6f4ec;
+    --sru-warning: #f0b429;
+    --sru-warning-dark: #7a5700;
+    --sru-warning-soft: #fff3cd;
+    --sru-danger: #b3261e;
+    --sru-danger-dark: #842029;
+    --sru-danger-soft: #f8d7da;
+    --sru-on-dark-muted: rgba(255, 255, 255, .76);
+    --sru-on-dark-border: rgba(255, 255, 255, .65);
+    --sru-on-dark-divider: rgba(255, 255, 255, .18);
+    --sru-on-dark-hover: rgba(255, 255, 255, .12);
+    --sru-sso-dark-surface: #19161f;
+    --sru-sso-dark-border: #45404b;
+    --sru-sso-dark-text: #f5f2f8;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+}
+
+html {
+    min-width: 320px;
+    scroll-behavior: smooth;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    line-height: 1.7;
+}
+
+:focus-visible {
+    outline: 3px solid var(--sru-blue);
+    outline-offset: 3px;
+}
+
+.sec-head {
+    max-width: 760px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+.title {
+    margin: 0 0 10px;
+    font-size: clamp(26px, 3.2vw, 38px);
+    font-weight: 800;
+    line-height: 1.35;
+}
+
+.sec-sub {
+    margin: 0;
+    color: var(--sru-muted);
+    font-size: 16.5px;
+}
+
+.form-select:focus {
+    border-color: var(--sru-blue);
+    box-shadow: 0 0 0 0.25rem rgb(80 30 140 / 16%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}

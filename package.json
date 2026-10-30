@@ -1,0 +1,31 @@
+{
+  "name": "sru-design-system",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "predev": "npm run build:assets",
+    "build": "npm run build:assets && vite build",
+    "build:assets": "npm run build:theme && npm run build:rtl && npm run build:bootstrap",
+    "build:theme": "sass --quiet-deps --silence-deprecation=import --load-path=node_modules --no-source-map --style=compressed src/styles/sru-theme.scss public/design-system/sru-theme.css",
+    "build:rtl": "rtlcss public/design-system/sru-theme.css public/design-system/sru-theme.rtl.css",
+    "build:bootstrap": "cp node_modules/bootstrap/dist/js/bootstrap.bundle.min.js public/design-system/bootstrap.bundle.js",
+    "preview": "vite preview --host 0.0.0.0",
+    "pages:dev": "npm run build && wrangler pages dev dist",
+    "pages:create": "wrangler pages project create sru-design-system --production-branch main",
+    "pages:deploy": "npm run build && wrangler pages deploy dist --project-name sru-design-system"
+  },
+  "dependencies": {
+    "bootstrap": "5.3.8"
+  },
+  "devDependencies": {
+    "rtlcss": "^4.3.0",
+    "sass": "^1.106.1",
+    "vite": "^8.0.0",
+    "wrangler": "^4.0.0"
+  }
+}

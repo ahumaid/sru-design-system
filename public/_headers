@@ -1,0 +1,7 @@
+/design-system/*
+  Cache-Control: public, no-cache, must-revalidate
+  Access-Control-Allow-Origin: *
+  X-Content-Type-Options: nosniff
+
+/*
+  X-Content-Type-Options: nosniff
