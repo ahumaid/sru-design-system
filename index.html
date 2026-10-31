@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en" dir="ltr" data-bs-theme="light">
+<html lang="ar" dir="rtl" data-bs-theme="light">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Live preview of the SRU Bootstrap design system and its components.">
-    <title>SRU Design System — Component Gallery</title>
-    <link id="theme-css" rel="stylesheet" href="/design-system/sru-theme.css">
+    <meta name="description" content="معاينة مباشرة لنظام تصميم SRU المبني على Bootstrap ومكوناته.">
+    <title>نظام تصميم SRU — معرض المكونات</title>
+    <link id="theme-css" rel="stylesheet" href="/design-system/sru-theme.rtl.css">
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow-sm">
@@ -20,8 +20,9 @@
             <a class="nav-link" href="/design-system/INSTALL.md">Usage guide</a>
           </div>
           <div class="d-flex flex-wrap gap-2 py-2 py-lg-0">
-            <button class="btn btn-sm btn-outline-light" id="direction-toggle" type="button" aria-pressed="false">Preview RTL</button>
-            <button class="btn btn-sm btn-light" id="theme-toggle" type="button" aria-pressed="false">Dark preview</button>
+            <button class="btn btn-sm btn-outline-light" id="language-toggle" type="button" aria-pressed="true">الإنجليزية</button>
+            <button class="btn btn-sm btn-outline-light" id="direction-toggle" type="button" aria-pressed="true">معاينة من اليسار إلى اليمين</button>
+            <button class="btn btn-sm btn-light" id="theme-toggle" type="button" aria-pressed="false">معاينة المظهر الداكن</button>
           </div>
         </div>
       </div>
@@ -31,6 +32,12 @@
       <div class="row g-4 py-4 py-lg-5">
         <aside class="col-lg-3 col-xl-2">
           <nav class="gallery-nav sticky-lg-top" aria-label="Bootstrap components">
+            <p class="small text-secondary fw-bold text-uppercase mb-2">Guide</p>
+            <div class="list-group list-group-flush mb-4">
+              <a class="list-group-item list-group-item-action" href="#introduction">Introduction</a>
+              <a class="list-group-item list-group-item-action" href="#getting-started">Getting started</a>
+              <a class="list-group-item list-group-item-action" href="#installation">Installation</a>
+            </div>
             <p class="small text-secondary fw-bold text-uppercase mb-2">Components</p>
             <div class="list-group list-group-flush">
               <a class="list-group-item list-group-item-action" href="#foundations">Foundations</a>
@@ -85,6 +92,70 @@
               </div>
             </div>
           </header>
+
+          <section class="gallery-section" id="introduction" aria-labelledby="introduction-title">
+            <div class="gallery-section-heading">
+              <p class="eyebrow">Guide · 01</p>
+              <h2 id="introduction-title">Introduction</h2>
+              <p class="text-secondary">The SRU Design System combines Bootstrap 5.3.8 with university colors, typography, and direction-specific styles. Use the same components and design tokens across SRU websites.</p>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-4"><div class="card h-100"><div class="card-body"><h3 class="h6">Bootstrap included</h3><p class="mb-0">The theme stylesheet already includes Bootstrap. Add only the SRU stylesheet to your page.</p></div></div></div>
+              <div class="col-md-4"><div class="card h-100"><div class="card-body"><h3 class="h6">LTR and RTL</h3><p class="mb-0">Choose the direction-specific stylesheet that matches the page language.</p></div></div></div>
+              <div class="col-md-4"><div class="card h-100"><div class="card-body"><h3 class="h6">Interactive components</h3><p class="mb-0">Load the bundled JavaScript only when the page uses interactive Bootstrap components.</p></div></div></div>
+            </div>
+          </section>
+
+          <section class="gallery-section" id="getting-started" aria-labelledby="getting-started-title">
+            <div class="gallery-section-heading">
+              <p class="eyebrow">Guide · 02</p>
+              <h2 id="getting-started-title">Getting started</h2>
+              <p class="text-secondary">For developers and AI coding assistants building an SRU website, follow the same integration steps:</p>
+            </div>
+            <div class="card"><div class="card-body">
+              <ol class="mb-0">
+                <li class="mb-2">Choose the stylesheet that matches the page direction and language.</li>
+                <li class="mb-2">Build layouts with Bootstrap 5.3.8 components and utilities; the SRU theme provides the shared colors and typography.</li>
+                <li class="mb-2">Load the JavaScript bundle only when using interactive components such as modals, dropdowns, or tooltips.</li>
+                <li>Use the examples in this gallery as patterns, and check keyboard access and RTL layout when relevant.</li>
+              </ol>
+              <div class="alert alert-warning mt-4 mb-0 ai-review-hint" role="note">AI agents make mistakes. You are responsible for comparing their output with the referenced gallery example and confirming it follows the design system before accepting it.</div>
+              <details class="ai-prompt mt-4">
+                <summary class="fw-semibold">AI coding prompt · copy and paste</summary>
+                <p class="mt-3">Give this prompt to an AI coding agent before it works on your site:</p>
+                <pre class="guide-code" dir="ltr"><code>You are building with the SRU Design System.
+
+Before creating or changing any component or HTML design, read this guide and inspect the SRU component gallery. Find the closest existing example and use it as your reference for markup, states, spacing, typography, colors, responsive behavior, and LTR or RTL direction.
+
+Follow these rules:
+- Use the published SRU stylesheet and its Bootstrap 5.3.8 components and utilities. The stylesheet already includes Bootstrap; never add a second Bootstrap CSS file.
+- Do not add custom styling, inline styles, CSS overrides, theme or token overrides, !important rules, or replacement styles to change the appearance of the system or its components unless the user explicitly asks for that styling or override. Do not infer permission from a request to build or implement a component.
+- If the requested result cannot be built with the existing system, explain the limitation and ask the user before adding custom styles or overrides.
+- Keep HTML semantic, accessible, keyboard usable, responsive, and compatible with the page direction.
+- Load the Bootstrap JavaScript bundle only when interactive components need it; it already includes Popper.
+- When working in this source repository, follow AGENTS.md. Edit src/styles/sru-theme.scss only for explicitly requested theme changes, keep preview-only rules in src/styles/gallery.scss, and never hand-edit generated files under public/design-system/.
+
+Before finishing, compare the result with the gallery example you used and confirm that no unrequested styling or overrides were introduced.</code></pre>
+              </details>
+            </div></div>
+          </section>
+
+          <section class="gallery-section" id="installation" aria-labelledby="installation-title">
+            <div class="gallery-section-heading">
+              <p class="eyebrow">Guide · 03</p>
+              <h2 id="installation-title">Install on a website</h2>
+              <p class="text-secondary">Add the hosted stylesheet in the page head. Use the RTL file for Arabic pages and add the JavaScript bundle when interactive components need it.</p>
+            </div>
+            <div class="card"><div class="card-body">
+              <h3 class="h6">LTR stylesheet</h3>
+              <pre class="guide-code"><code>&lt;link rel="stylesheet" href="https://&lt;design-system-domain&gt;/design-system/sru-theme.css"&gt;</code></pre>
+              <h3 class="h6 mt-4">RTL stylesheet</h3>
+              <pre class="guide-code"><code>&lt;link rel="stylesheet" href="https://&lt;design-system-domain&gt;/design-system/sru-theme.rtl.css"&gt;</code></pre>
+              <h3 class="h6 mt-4">Optional JavaScript</h3>
+              <pre class="guide-code"><code>&lt;script defer src="https://&lt;design-system-domain&gt;/design-system/bootstrap.bundle.js"&gt;&lt;/script&gt;</code></pre>
+              <p class="installation-note mb-0">For Arabic or another right-to-left page, use <code>sru-theme.rtl.css</code>. The stylesheet already includes Bootstrap 5.3.8, so do not load a second Bootstrap CSS file.</p>
+            </div></div>
+          </section>
 
           <section class="gallery-section" id="foundations" aria-labelledby="foundations-title">
             <div class="gallery-section-heading">
@@ -364,7 +435,6 @@
 
           <footer class="border-top pt-4 pb-5 mt-5 text-secondary small">
             <p class="mb-1">SRU Design System · Bootstrap 5.3.8</p>
-            <p class="mb-0">The page previews the shared components. Keep page-specific rules in each website; keep company-wide changes in the theme source.</p>
           </footer>
         </main>
       </div>

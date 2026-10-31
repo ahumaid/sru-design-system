@@ -31,9 +31,3 @@ tooltips, popovers, toasts, and other Bootstrap interactive components.
 The theme loads Cairo from Google Fonts. If the website has a Content Security
 Policy, allow `https://fonts.googleapis.com` in `style-src` and
 `https://fonts.gstatic.com` in `font-src`.
-
-## Local preview
-
-Run `npm ci` and `npm run dev` from the project directory, then open
-`http://localhost:5173`. The component gallery includes LTR/RTL and light/dark
-preview switches.
