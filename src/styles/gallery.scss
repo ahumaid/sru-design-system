@@ -81,6 +81,10 @@ body {
     box-shadow: var(--bs-box-shadow-sm);
 }
 
+.showcase-panel.has-class-reference {
+    flex-wrap: wrap;
+}
+
 .class-reference {
     display: block;
     width: 100%;

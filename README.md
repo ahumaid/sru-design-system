@@ -1,8 +1,9 @@
-# SRU Design System
+# Sulaiman AlRajhi University Design System (SRU)
 
-The source of truth for the company's Bootstrap theme and a live component
-gallery for developers. Once connected to Cloudflare Pages, changes published
-from the production branch update the stable, unversioned theme asset URLs.
+The source of truth for Sulaiman AlRajhi University's Bootstrap theme and a
+live component gallery for developers. Once connected to Cloudflare Pages,
+changes published from the production branch update the stable, unversioned
+theme asset URLs.
 
 ## Local development
 
@@ -38,7 +39,7 @@ docker compose run --build --rm gallery sh -c "npm ci && npm run build"
 
 The stable paths served by Cloudflare Pages and the production Docker image are:
 
-- `/design-system/sru-theme.css` — Bootstrap 5.3.8 with the SRU theme, LTR.
+- `/design-system/sru-theme.css` — Bootstrap 5.3.8 with the university theme, LTR.
 - `/design-system/sru-theme.rtl.css` — the same theme, transformed for RTL.
 - `/design-system/bootstrap.bundle.js` — Bootstrap JavaScript bundle with Popper.
 
@@ -56,8 +57,8 @@ carousels, offcanvas, tooltips, popovers, and toasts. It includes Popper and
 does not require jQuery. If a site already loads Bootstrap JavaScript, do not
 load a second bundle.
 
-The CSS contains the complete Bootstrap stylesheet and the SRU theme. Do not
-add a second Bootstrap CSS file. Cairo is loaded from Google Fonts by the theme;
+The CSS contains the complete Bootstrap stylesheet and the university theme.
+Do not add a second Bootstrap CSS file. Cairo is loaded from Google Fonts by the theme;
 sites with a restrictive Content Security Policy must allow
 `fonts.googleapis.com` in `style-src` and `fonts.gstatic.com` in `font-src`.
 
@@ -69,8 +70,8 @@ Cloudflare Pages project. Set the production branch to `main`, the build command
 to `npm run build`, and the build output directory to `dist`. Cloudflare should
 install dependencies from `package-lock.json` before running the build.
 
-Cloudflare assigns the project a `pages.dev` hostname. Add the company's chosen
-custom domain in the Pages project if websites should use a company-owned
+Cloudflare assigns the project a `pages.dev` hostname. Add the university's chosen
+custom domain in the Pages project if websites should use a university-owned
 hostname instead. Replace `<design-system-domain>` in the usage examples above
 with that hostname after it is active.
 

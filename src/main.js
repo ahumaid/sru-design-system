@@ -5,6 +5,22 @@ const themeStylesheet = document.querySelector('#theme-css');
 const directionToggle = document.querySelector('#direction-toggle');
 const themeToggle = document.querySelector('#theme-toggle');
 const languageToggle = document.querySelector('#language-toggle');
+const aiPromptCopy = document.querySelector('#ai-prompt-copy');
+
+const englishAiPrompt = `You are building with the Sulaiman AlRajhi University (SRU) Design System.
+
+Before creating or changing any component or HTML design, read this guide and inspect the Sulaiman AlRajhi University component gallery. Find the closest existing example and use it as your reference for markup, states, spacing, typography, colors, responsive behavior, and LTR or RTL direction.
+
+Follow these rules:
+- Use the published university stylesheet and its Bootstrap 5.3.8 components and utilities. The stylesheet already includes Bootstrap; never add a second Bootstrap CSS file.
+- Do not add custom styling, inline styles, CSS overrides, theme or token overrides, !important rules, or replacement styles to change the appearance of the system or its components unless the user explicitly asks for that styling or override. Do not infer permission from a request to build or implement a component.
+- If the requested result cannot be built with the existing system, explain the limitation and ask the user before adding custom styles or overrides.
+- Keep HTML semantic, accessible, keyboard usable, responsive, and compatible with the page direction.
+- Load the Bootstrap JavaScript bundle only when interactive components need it; it already includes Popper.
+
+Before finishing, compare the result with the gallery example you used and confirm that no unrequested styling or overrides were introduced.`;
+
+const arabicAiPrompt = aiPromptCopy?.textContent.trim() ?? '';
 
 const voidElements = new Set([
     'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr',
@@ -180,6 +196,7 @@ document.querySelectorAll('.showcase-panel').forEach((panel) => {
     pre.append(code);
     editor.append(toolbar, pre);
     reference.append(summary, editor);
+    panel.classList.add('has-class-reference');
     panel.append(reference);
 });
 
@@ -239,30 +256,30 @@ const arabicNavigation = {
 };
 
 const localizedCopy = [
-    ['#introduction .gallery-section-heading .text-secondary', 'يجمع نظام تصميم SRU بين Bootstrap 5.3.8 وألوان الجامعة وخطوطها والأنماط المخصصة لاتجاه الصفحة. استخدم المكونات ورموز التصميم نفسها عبر مواقع SRU.'],
-    ['#introduction .col-md-4:nth-child(1) p', 'يتضمن ملف التنسيق Bootstrap. أضف ملف تنسيق SRU فقط إلى صفحتك.'],
+    ['#introduction .gallery-section-heading .text-secondary', 'يجمع نظام تصميم جامعة سليمان الراجحي (SRU) بين Bootstrap 5.3.8 وألوان الجامعة وخطوطها والأنماط المخصصة لاتجاه الصفحة. استخدم المكونات ورموز التصميم نفسها عبر مواقع الجامعة.'],
+    ['#introduction .col-md-4:nth-child(1) p', 'يتضمن ملف التنسيق Bootstrap. أضف ملف تنسيق الجامعة فقط إلى صفحتك.'],
     ['#introduction .col-md-4:nth-child(2) p', 'اختر ملف التنسيق المناسب لاتجاه لغة الصفحة.'],
     ['#introduction .col-md-4:nth-child(3) p', 'حمّل حزمة JavaScript عند استخدام مكونات Bootstrap التفاعلية فقط.'],
-    ['#getting-started .gallery-section-heading .text-secondary', 'للمطورين ومساعدات البرمجة بالذكاء الاصطناعي التي تبني مواقع SRU، اتبعوا خطوات الدمج نفسها:'],
+    ['#getting-started .gallery-section-heading .text-secondary', 'للمطورين ومساعدات البرمجة بالذكاء الاصطناعي التي تبني مواقع جامعة سليمان الراجحي، اتبعوا خطوات الدمج نفسها:'],
     ['#getting-started li:nth-child(1)', 'اختر ملف التنسيق الذي يطابق اتجاه الصفحة ولغتها.'],
-    ['#getting-started li:nth-child(2)', 'أنشئ التخطيطات باستخدام مكونات وأدوات Bootstrap 5.3.8؛ يوفر مظهر SRU الألوان والخطوط المشتركة.'],
+    ['#getting-started li:nth-child(2)', 'أنشئ التخطيطات باستخدام مكونات وأدوات Bootstrap 5.3.8؛ يوفر مظهر الجامعة الألوان والخطوط المشتركة.'],
     ['#getting-started li:nth-child(3)', 'حمّل حزمة JavaScript عند استخدام المكونات التفاعلية فقط، مثل النوافذ المنبثقة والقوائم المنسدلة والتلميحات.'],
-    ['#getting-started li:nth-child(4)', 'استخدم أمثلة هذا المعرض كنماذج، وتحقق من دعم لوحة المفاتيح وتخطيط RTL عند الحاجة.'],
+    ['#getting-started li:nth-child(4)', 'استخدم أمثلة هذا المعرض كنماذج، وتحقق من دعم لوحة المفاتيح واتجاه الكتابة من اليمين إلى اليسار (RTL) عند الحاجة.'],
     ['#getting-started .ai-review-hint', 'وكلاء الذكاء الاصطناعي يخطئون. تقع على عاتقك مسؤولية مقارنة مخرجاتهم بمثال المعرض المرجعي والتأكد من التزامها بنظام التصميم قبل اعتمادها.'],
-    ['#installation .gallery-section-heading .text-secondary', 'أضف ملف التنسيق المستضاف داخل ترويسة الصفحة. استخدم ملف RTL للصفحات العربية، وأضف حزمة JavaScript عند الحاجة إلى مكونات تفاعلية.'],
+    ['#installation .gallery-section-heading .text-secondary', 'أضف ملف التنسيق المستضاف داخل ترويسة الصفحة. استخدم ملف التنسيق للكتابة من اليمين إلى اليسار (RTL) للصفحات العربية، وأضف حزمة JavaScript عند الحاجة إلى مكونات تفاعلية.'],
     ['#installation .installation-note', 'للصفحات العربية أو الصفحات الأخرى من اليمين إلى اليسار، استخدم sru-theme.rtl.css. يتضمن ملف التنسيق Bootstrap 5.3.8، لذلك لا تحمّل ملف Bootstrap CSS آخر.'],
-    ['.gallery-hero .lead', 'تصفح المكونات والحالات والتفاعلات التي يمكن للمطورين استخدامها في مواقع الشركة. بدّل الاتجاه والمظهر لمعاينة النظام نفسه في الوضع من اليمين إلى اليسار والوضع الداكن.'],
-    ['.gallery-hero .card .small', 'يتضمن ملف CSS Bootstrap ورموز تصميم SRU. أضف حزمة JavaScript للمكونات التفاعلية.'],
-    ['#foundations .gallery-section-heading .text-secondary', 'تستخدم ألوان Bootstrap السياقية لوحة SRU. خط Cairo هو الخط المشترك للمحتوى اللاتيني والعربي.'],
+    ['.gallery-hero .lead', 'تصفح المكونات والحالات والتفاعلات التي يمكن للمطورين استخدامها في مواقع الجامعة. بدّل الاتجاه والمظهر لمعاينة النظام نفسه في الوضع من اليمين إلى اليسار والوضع الداكن.'],
+    ['.gallery-hero .card .small', 'يتضمن ملف CSS Bootstrap ورموز تصميم جامعة سليمان الراجحي. أضف حزمة JavaScript للمكونات التفاعلية.'],
+    ['#foundations .gallery-section-heading .text-secondary', 'تستخدم ألوان Bootstrap السياقية لوحة الجامعة. خط Cairo هو الخط المشترك للمحتوى اللاتيني والعربي.'],
     ['#foundations .showcase-panel .lead', 'فقرة تمهيدية قصيرة بمزيد من التركيز.'],
-    ['#forms .gallery-section-heading .text-secondary', 'تشترك عناصر النماذج في أنماط التركيز والحدود والتحقق. تبقى التسميات ظاهرة ومرتبطة بحقوق الإدخال.'],
+    ['#forms .gallery-section-heading .text-secondary', 'تشترك عناصر النماذج في أنماط التركيز والحدود والتحقق. تبقى التسميات ظاهرة ومرتبطة بحقول الإدخال.'],
     ['#accordion-one .accordion-body', 'تجمع الأكورديونات المحتوى المرتبط في أقسام قابلة للتوسيع. يبدأ العنصر الأول مفتوحاً.'],
     ['#accordion-two .accordion-body', 'استخدم تسميات واضحة وحافظ على سلوك لوحة المفاتيح المدمج.'],
     ['#cards .card-text:nth-of-type(1)', 'سطح مرن لعرض الملخص والحالة والخطوة التالية.'],
     ['#cards .card-text:nth-of-type(2)', 'تستخدم ترويسة البطاقة وتذييلها نمط الحدود المشترك.'],
     ['#cards .card-text:nth-of-type(3)', 'تحافظ خلفيات البطاقات السياقية على لوحة الألوان نفسها.'],
     ['#demo-carousel .carousel-item:nth-child(1) .mb-0', 'شريحة متجاوبة مع وصف توضيحي سهل الوصول.'],
-    ['#demo-carousel .carousel-item:nth-child(2) .mb-0', 'استخدم المكونات نفسها عبر مواقع الشركة.'],
+    ['#demo-carousel .carousel-item:nth-child(2) .mb-0', 'استخدم المكونات نفسها عبر مواقع الجامعة.'],
     ['#demo-carousel .carousel-item:nth-child(3) .mb-0', 'استخدم عناصر التحكم للتنقل بين الشرائح.'],
     ['#modal .showcase-panel p', 'استخدم النافذة المنبثقة لمهمة مركزة تحتاج إلى استجابة واضحة.'],
     ['#demo-modal .modal-body', 'طلبك جاهز للإرسال. هل تريد المتابعة؟'],
@@ -280,6 +297,9 @@ const localizedCopy = [
 
 const arabicUi = {
     Guide: 'الدليل',
+    'Guide · 01': 'الدليل · 01',
+    'Guide · 02': 'الدليل · 02',
+    'Guide · 03': 'الدليل · 03',
     'Bootstrap included': 'يتضمن Bootstrap',
     'LTR and RTL': 'من اليسار إلى اليمين ومن اليمين إلى اليسار',
     'Interactive components': 'المكونات التفاعلية',
@@ -292,9 +312,11 @@ const arabicUi = {
     Components: 'المكونات',
     'Component gallery': 'معرض المكونات',
     'Usage guide': 'دليل الاستخدام',
-    'SRU Design System': 'نظام تصميم SRU',
-    'SRU Design System · Bootstrap 5.3.8': 'نظام تصميم SRU · Bootstrap 5.3.8',
-    'SRU Portal': 'بوابة SRU',
+    'Sulaiman AlRajhi University': 'جامعة سليمان الراجحي',
+    'Sulaiman AlRajhi University Design System': 'نظام تصميم جامعة سليمان الراجحي (SRU)',
+    'Sulaiman AlRajhi University Design System · Bootstrap 5.3.8': 'نظام تصميم جامعة سليمان الراجحي · Bootstrap 5.3.8',
+    'Sulaiman AlRajhi University Portal': 'بوابة جامعة سليمان الراجحي',
+    'Sulaiman AlRajhi University · Bootstrap 5.3.8': 'جامعة سليمان الراجحي · Bootstrap 5.3.8',
     'Use this system': 'استخدم هذا النظام',
     'A primary alert with an action link.': 'تنبيه أساسي مع رابط إجراء.',
     'Your changes were saved successfully.': 'تم حفظ تغييراتك بنجاح.',
@@ -377,35 +399,35 @@ const arabicUi = {
     'Toggle navigation': 'تبديل التنقل',
     'Bootstrap components': 'مكونات Bootstrap',
     'One theme, every website.': 'سمة واحدة لكل موقع.',
-    'Bootstrap 5.3.8 · SRU theme': 'سمة SRU المبنية على Bootstrap 5.3.8',
-    '01 · Foundations': '٠١ · الأساسيات',
-    '02 · Content': '٠٢ · المحتوى',
-    '03 · Feedback': '٠٣ · التنبيهات',
-    '04 · Labels': '٠٤ · التسميات',
-    '05 · Navigation': '٠٥ · التنقل',
-    '06 · Actions': '٠٦ · الإجراءات',
-    '07 · Actions': '٠٧ · الإجراءات',
-    '08 · Content': '٠٨ · المحتوى',
-    '09 · Content': '٠٩ · المحتوى',
-    '10 · Actions': '١٠ · الإجراءات',
-    '11 · Interaction': '١١ · التفاعل',
-    '12 · Interaction': '١٢ · التفاعل',
-    '13 · Data entry': '١٣ · إدخال البيانات',
-    '14 · Content': '١٤ · المحتوى',
-    '15 · Interaction': '١٥ · التفاعل',
-    '16 · Navigation': '١٦ · التنقل',
-    '17 · Navigation': '١٧ · التنقل',
-    '18 · Navigation': '١٨ · التنقل',
-    '19 · Navigation': '١٩ · التنقل',
-    '20 · Loading': '٢٠ · التحميل',
-    '21 · Interaction': '٢١ · التفاعل',
-    '22 · Status': '٢٢ · الحالة',
-    '23 · Navigation': '٢٣ · التنقل',
-    '24 · Status': '٢٤ · الحالة',
-    '25 · Data': '٢٥ · البيانات',
-    '26 · Feedback': '٢٦ · التنبيهات',
-    '27 · Help': '٢٧ · المساعدة',
-    '28 · Layout': '٢٨ · التخطيط',
+    'Links follow the university palette': 'تتبع الروابط لوحة ألوان الجامعة',
+    '01 · Foundations': '01 · الأساسيات',
+    '02 · Content': '02 · المحتوى',
+    '03 · Feedback': '03 · التنبيهات',
+    '04 · Labels': '04 · التسميات',
+    '05 · Navigation': '05 · التنقل',
+    '06 · Actions': '06 · الإجراءات',
+    '07 · Actions': '07 · الإجراءات',
+    '08 · Content': '08 · المحتوى',
+    '09 · Content': '09 · المحتوى',
+    '10 · Actions': '10 · الإجراءات',
+    '11 · Interaction': '11 · التفاعل',
+    '12 · Interaction': '12 · التفاعل',
+    '13 · Data entry': '13 · إدخال البيانات',
+    '14 · Content': '14 · المحتوى',
+    '15 · Interaction': '15 · التفاعل',
+    '16 · Navigation': '16 · التنقل',
+    '17 · Navigation': '17 · التنقل',
+    '18 · Navigation': '18 · التنقل',
+    '19 · Navigation': '19 · التنقل',
+    '20 · Loading': '20 · التحميل',
+    '21 · Interaction': '21 · التفاعل',
+    '22 · Status': '22 · الحالة',
+    '23 · Navigation': '23 · التنقل',
+    '24 · Status': '24 · الحالة',
+    '25 · Data': '25 · البيانات',
+    '26 · Feedback': '26 · التنبيهات',
+    '27 · Help': '27 · المساعدة',
+    '28 · Layout': '28 · التخطيط',
     'Color and type': 'الألوان والخطوط',
     Primary: 'أساسي',
     Secondary: 'ثانوي',
@@ -417,12 +439,11 @@ const arabicUi = {
     Light: 'فاتح',
     Dark: 'داكن',
     'Typography scale': 'مقياس أحجام الخطوط',
-    'Heading 1': 'العنوان ١',
-    'Heading 2': 'العنوان ٢',
-    'Heading 3': 'العنوان ٣',
+    'Heading 1': 'العنوان 1',
+    'Heading 2': 'العنوان 2',
+    'Heading 3': 'العنوان 3',
     'Lead paragraph — a short introduction with more emphasis.': 'فقرة تمهيدية قصيرة بمزيد من التركيز.',
     'Body text for longer content.': 'نص أساسي للمحتوى الطويل.',
-    'Links follow the SRU palette': 'تتبع الروابط لوحة ألوان SRU',
     ', and': '، كما أن',
     'important text': 'النصوص المهمة',
     'keeps accessible contrast.': 'تحافظ على تباين واضح وسهل الوصول.',
@@ -483,9 +504,9 @@ const arabicUi = {
     'A flexible surface for a summary, status, and next step.': 'مساحة مرنة لعرض الملخص والحالة والخطوة التالية.',
     'The card header and footer use the shared border treatment.': 'تستخدم ترويسة البطاقة وتذييلها نمط الحدود المشترك.',
     'Contextual card backgrounds keep the same theme palette.': 'تحافظ خلفيات البطاقات السياقية على لوحة ألوان السمة نفسها.',
-    'Slide 1': 'الشريحة ١',
-    'Slide 2': 'الشريحة ٢',
-    'Slide 3': 'الشريحة ٣',
+    'Slide 1': 'الشريحة 1',
+    'Slide 2': 'الشريحة 2',
+    'Slide 3': 'الشريحة 3',
     'A responsive slide with an accessible caption.': 'شريحة متجاوبة مع وصف توضيحي سهل الوصول.',
     'Dismissible content': 'محتوى قابل للإغلاق',
     'Disabled close button': 'زر إغلاق معطل',
@@ -553,7 +574,7 @@ const arabicUi = {
     'Student record': 'سجل الطالب',
     'New application': 'طلب جديد',
     View: 'عرض',
-    'Oct 28': '٢٨ أكتوبر',
+    'Oct 28': '28 أكتوبر',
     'Toasts show brief, non-blocking status feedback.': 'تعرض الإشعارات تحديثاً موجزاً للحالة دون مقاطعة المستخدم.',
     'Helpful context for this action': 'معلومات مساعدة حول هذا الإجراء',
     'Hover or focus me': 'مرر المؤشر أو ركز هنا',
@@ -561,7 +582,7 @@ const arabicUi = {
     'Tooltip on the right': 'تلميح على اليمين',
     'Common helpers keep layouts responsive without adding one-off CSS.': 'تحافظ الأدوات المساعدة الشائعة على تجاوب التخطيطات دون إضافة CSS مخصص لكل حالة.',
     'Responsive ratio': 'نسبة أبعاد متجاوبة',
-    '16:9 content': 'محتوى بنسبة ١٦:٩',
+    '16:9 content': 'محتوى بنسبة 16:9',
     'Example stretched link': 'مثال على رابط ممتد',
     'Stacks and text utilities': 'التكديس وأدوات النص',
     'Vertical stack item one': 'العنصر الأول في التكديس الرأسي',
@@ -596,9 +617,9 @@ const arabicAttributes = {
     'Text formatting': 'تنسيق النص',
     Close: 'إغلاق',
     'Disabled close button': 'زر إغلاق معطل',
-    'Slide 1': 'الشريحة ١',
-    'Slide 2': 'الشريحة ٢',
-    'Slide 3': 'الشريحة ٣',
+    'Slide 1': 'الشريحة 1',
+    'Slide 2': 'الشريحة 2',
+    'Slide 3': 'الشريحة 3',
     Actions: 'الإجراءات',
     'Toggle sample navbar': 'تبديل شريط التنقل النموذجي',
     Search: 'بحث',
@@ -637,6 +658,13 @@ const englishLabels = Object.fromEntries(Object.keys(arabicLabels).map((id) => [
 const setLanguage = (isArabic) => {
     root.lang = isArabic ? 'ar' : 'en';
     root.dir = isArabic ? 'rtl' : 'ltr';
+    if (aiPromptCopy) aiPromptCopy.textContent = isArabic ? arabicAiPrompt : englishAiPrompt;
+    document.title = isArabic
+        ? 'نظام تصميم جامعة سليمان الراجحي — معرض المكونات'
+        : 'Sulaiman AlRajhi University Design System — Component Gallery';
+    document.querySelector('meta[name="description"]')?.setAttribute('content', isArabic
+        ? 'معاينة مباشرة لنظام تصميم جامعة سليمان الراجحي المبني على Bootstrap ومكوناته.'
+        : 'Live preview of the Sulaiman AlRajhi University design system, built on Bootstrap and its components.');
     languageToggle?.setAttribute('aria-pressed', String(isArabic));
     if (languageToggle) languageToggle.textContent = isArabic ? 'الإنجليزية' : 'العربية';
     document.querySelectorAll('.class-reference summary').forEach((summary) => {
@@ -673,13 +701,24 @@ const setLanguage = (isArabic) => {
         textNode.nodeValue = `${current.slice(0, start)}${translated}${current.slice(end)}`;
     }
     document.querySelectorAll('body *').forEach((element) => {
-        ['placeholder', 'aria-label', 'title', 'data-bs-content'].forEach((attribute) => {
+        ['placeholder', 'aria-label', 'title', 'data-bs-original-title', 'data-bs-content'].forEach((attribute) => {
             const value = element.getAttribute(attribute);
             if (!value) return;
             const translated = isArabic ? arabicAttributes[value] : englishAttributes[value];
             if (translated) element.setAttribute(attribute, translated);
         });
     });
+    if (globalThis.bootstrap) {
+        [
+            ['[data-bs-toggle="tooltip"]', globalThis.bootstrap.Tooltip],
+            ['[data-bs-toggle="popover"]', globalThis.bootstrap.Popover],
+        ].forEach(([selector, Component]) => {
+            document.querySelectorAll(selector).forEach((element) => {
+                Component.getInstance(element)?.dispose();
+                Component.getOrCreateInstance(element);
+            });
+        });
+    }
     const primaryAlert = document.querySelector('#alerts .alert-primary');
     if (primaryAlert) {
         primaryAlert.innerHTML = isArabic
@@ -735,14 +774,6 @@ themeToggle?.addEventListener('click', () => {
 });
 
 if (globalThis.bootstrap) {
-    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach((element) => {
-        bootstrap.Tooltip.getOrCreateInstance(element);
-    });
-
-    document.querySelectorAll('[data-bs-toggle="popover"]').forEach((element) => {
-        bootstrap.Popover.getOrCreateInstance(element);
-    });
-
     const toastElement = document.querySelector('#demo-toast');
     const toastButton = document.querySelector('#show-toast');
 

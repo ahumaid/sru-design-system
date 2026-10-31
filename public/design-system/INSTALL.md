@@ -1,9 +1,10 @@
-# Use the SRU design system
+# Use the Sulaiman AlRajhi University design system
 
 ## Add it to a website
 
 Include the hosted stylesheet in the page `<head>`. It already contains
-Bootstrap 5.3.8 and the SRU theme, so do not add another Bootstrap CSS file.
+Bootstrap 5.3.8 and the Sulaiman AlRajhi University theme, so do not add
+another Bootstrap CSS file.
 
 ```html
 <link rel="stylesheet" href="https://<design-system-domain>/design-system/sru-theme.css">
