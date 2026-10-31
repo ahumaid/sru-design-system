@@ -20,9 +20,12 @@
     "pages:deploy": "npm run build && wrangler pages deploy dist --project-name sru-design-system"
   },
   "dependencies": {
-    "bootstrap": "5.3.8"
+    "bootstrap": "5.3.8",
+    "vue": "^3.5.44",
+    "vue-router": "^5.4.0"
   },
   "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.10",
     "rtlcss": "^4.3.0",
     "sass": "^1.106.1",
     "vite": "^8.0.0",

@@ -1,0 +1,10 @@
+<template>
+<section class="gallery-section" id="navs" aria-labelledby="navs-title">
+            <div class="gallery-section-heading"><p class="eyebrow">17 · Navigation</p><h2 id="navs-title">Navs and tabs</h2></div>
+            <div class="showcase-panel">
+              <ul class="nav nav-tabs" id="demo-tabs" role="tablist"><li class="nav-item" role="presentation"><button class="nav-link active" id="tab-overview" data-bs-toggle="tab" data-bs-target="#tab-panel-overview" type="button" role="tab" aria-controls="tab-panel-overview" aria-selected="true">Overview</button></li><li class="nav-item" role="presentation"><button class="nav-link" id="tab-details" data-bs-toggle="tab" data-bs-target="#tab-panel-details" type="button" role="tab" aria-controls="tab-panel-details" aria-selected="false">Details</button></li><li class="nav-item" role="presentation"><button class="nav-link" id="tab-history" data-bs-toggle="tab" data-bs-target="#tab-panel-history" type="button" role="tab" aria-controls="tab-panel-history" aria-selected="false">History</button></li></ul>
+              <div class="tab-content pt-3" id="demo-tab-content"><div class="tab-pane fade show active" id="tab-panel-overview" role="tabpanel" aria-labelledby="tab-overview" tabindex="0">A tab panel displays one related view at a time.</div><div class="tab-pane fade" id="tab-panel-details" role="tabpanel" aria-labelledby="tab-details" tabindex="0">Keep tab labels short and descriptive.</div><div class="tab-pane fade" id="tab-panel-history" role="tabpanel" aria-labelledby="tab-history" tabindex="0">Use tabs for peer content, not sequential steps.</div></div>
+              <ul class="nav nav-pills mt-4"><li class="nav-item"><RouterLink class="nav-link active" to="/components/navs">Active pill</RouterLink></li><li class="nav-item"><RouterLink class="nav-link" to="/components/navs">Another pill</RouterLink></li><li class="nav-item"><a class="nav-link disabled" aria-disabled="true">Disabled</a></li></ul>
+            </div>
+          </section>
+</template>

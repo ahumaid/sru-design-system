@@ -1,34 +1,47 @@
-# Use the Sulaiman AlRajhi University design system
+# استخدام نظام تصميم جامعة سليمان الراجحي
 
-## Add it to a website
+## إضافة النظام إلى موقع
 
-Include the hosted stylesheet in the page `<head>`. It already contains
-Bootstrap 5.3.8 and the Sulaiman AlRajhi University theme, so do not add
-another Bootstrap CSS file.
+أضف ملف التنسيق المستضاف داخل عنصر `<head>`. يتضمن الملف Bootstrap 5.3.8 وسمة جامعة سليمان الراجحي، لذلك لا تضف ملف Bootstrap CSS آخر.
 
 ```html
 <link rel="stylesheet" href="https://<design-system-domain>/design-system/sru-theme.css">
 ```
 
-For an Arabic or otherwise right-to-left page, use the RTL stylesheet instead:
+للصفحات العربية أو الصفحات الأخرى من اليمين إلى اليسار، استخدم ملف RTL:
 
 ```html
 <link rel="stylesheet" href="https://<design-system-domain>/design-system/sru-theme.rtl.css">
 ```
 
-Load the hosted JavaScript bundle before the closing `</body>` tag when the
-website uses interactive Bootstrap components:
+حمّل حزمة JavaScript المستضافة قبل إغلاق وسم `</body>` عند استخدام مكونات Bootstrap التفاعلية:
 
 ```html
 <script defer src="https://<design-system-domain>/design-system/bootstrap.bundle.js"></script>
 ```
 
-The bundle includes Popper and does not require jQuery. Load it only once. It
-provides behavior for dropdowns, modals, collapse, carousels, offcanvas,
-tooltips, popovers, toasts, and other Bootstrap interactive components.
+تتضمن الحزمة Popper ولا تحتاج إلى jQuery. حمّلها مرة واحدة فقط. وهي توفر سلوك القوائم المنسدلة والنوافذ المنبثقة والطي والشرائط المتحركة واللوحات الجانبية والتلميحات والنوافذ التوضيحية والإشعارات ومكونات Bootstrap التفاعلية الأخرى.
 
-## Font and security policy
+## استخدام أيقونات Lucide
 
-The theme loads Cairo from Google Fonts. If the website has a Content Security
-Policy, allow `https://fonts.googleapis.com` in `style-src` and
-`https://fonts.gstatic.com` in `font-src`.
+أضف مكتبة Lucide عند استخدام الأيقونات، ثم استدعِ `lucide.createIcons()` بعد عناصر الأيقونات. تستبدل المكتبة العناصر التي تحتوي على `data-lucide` برسوم SVG.
+
+```html
+<button class="btn btn-primary" type="button">
+  <i data-lucide="search" aria-hidden="true"></i>
+  بحث
+</button>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  lucide.createIcons();
+</script>
+```
+
+استخدم قيمة `data-lucide` المطابقة لاسم الأيقونة في المعرض. أخفِ الأيقونات الزخرفية عن قارئات الشاشة باستخدام `aria-hidden="true"` عندما يشرح النص المحيط وظيفة العنصر. إذا كان الزر يحتوي على أيقونة فقط، فأضف إليه `aria-label` يصف الإجراء. ترث الأيقونات لون النص ويكون مقاسها الافتراضي `24 × 24` بكسل.
+
+تستخدم الوصلة `@latest` أحدث إصدار منشور. إذا كانت الصفحة تستخدم سياسة أمان المحتوى (CSP)، اسمح بالمجال `https://unpkg.com` في توجيه `script-src`.
+
+## الخط وسياسة الأمان
+
+تحمّل السمة خط Cairo من Google Fonts. إذا كان الموقع يستخدم سياسة أمان المحتوى (CSP)، اسمح بـ `https://fonts.googleapis.com` في `style-src` وبـ `https://fonts.gstatic.com` في `font-src`.

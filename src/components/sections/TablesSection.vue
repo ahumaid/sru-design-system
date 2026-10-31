@@ -1,0 +1,6 @@
+<template>
+<section class="gallery-section" id="tables" aria-labelledby="tables-title">
+            <div class="gallery-section-heading"><p class="eyebrow">25 · Data</p><h2 id="tables-title">Tables</h2></div>
+            <div class="showcase-panel"><div class="table-responsive"><table class="table table-striped table-hover align-middle mb-0"><caption class="caption-top">Recent requests</caption><thead class="table-light"><tr><th scope="col">Reference</th><th scope="col">Service</th><th scope="col">Status</th><th scope="col">Updated</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead><tbody><tr><th scope="row">SRU-1042</th><td>Account access</td><td><span class="badge text-bg-success">Complete</span></td><td>Today</td><td><RouterLink to="/components/tables" class="link-primary">View</RouterLink></td></tr><tr><th scope="row">SRU-1041</th><td>Student record</td><td><span class="badge text-bg-warning">In review</span></td><td>Yesterday</td><td><RouterLink to="/components/tables" class="link-primary">View</RouterLink></td></tr><tr><th scope="row">SRU-1040</th><td>New application</td><td><span class="badge text-bg-info">Received</span></td><td>Oct 28</td><td><RouterLink to="/components/tables" class="link-primary">View</RouterLink></td></tr></tbody></table></div></div>
+          </section>
+</template>
