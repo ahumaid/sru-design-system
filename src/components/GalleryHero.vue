@@ -16,12 +16,12 @@ watch(locale, renderIcons);
 </script>
 
 <template>
-  <header class="bg-primary text-white rounded-3 p-4 p-lg-5 mb-5 shadow-sm" aria-labelledby="page-title">
-    <div class="row align-items-center g-4 g-xl-5">
-      <div class="col-lg-7 col-xl-8">
+  <header class="bg-primary text-white rounded-3 p-4 p-xxl-5 mb-5 shadow-sm" aria-labelledby="page-title">
+    <div class="row align-items-center g-4 g-xxl-5">
+      <div class="col-xl-7">
         <p class="small text-white-50 fw-bold text-uppercase mb-2">{{ $t('phrases.sulaiman-alrajhi-university-bootstrap-5-3-8') }}</p>
-        <h1 class="display-5 fw-bold text-white mb-3" id="page-title">{{ $t('labels.page-title') }}</h1>
-        <p class="lead text-white text-opacity-75 mb-4">{{ $t('copy.heroDescription') }}</p>
+        <h1 class="h2 fw-bold text-white mb-3" id="page-title">{{ $t('labels.page-title') }}</h1>
+        <p class="text-white text-opacity-75 mb-4">{{ $t('copy.heroDescription') }}</p>
 
         <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
           <a href="#getting-started" class="btn btn-light text-primary fw-bold d-inline-flex align-items-center gap-2 shadow-sm">
@@ -58,7 +58,7 @@ watch(locale, renderIcons);
         </div>
       </div>
 
-      <div class="col-lg-5 col-xl-4">
+      <div class="col-xl-5">
         <div class="card bg-white bg-opacity-10 border border-white border-opacity-25 text-white rounded-3 shadow-sm">
           <div class="card-header bg-transparent border-bottom border-white border-opacity-25 d-flex align-items-center justify-content-between py-3 px-4">
             <span class="badge bg-light text-primary fw-bold">{{ $t('hero.toolkitBadge') }}</span>
