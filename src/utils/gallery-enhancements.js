@@ -6,6 +6,7 @@ const root = document.documentElement;
 const boundToastButtons = new WeakSet();
 const boundRangeInputs = new WeakSet();
 const boundValidationForms = new WeakSet();
+let galleryContentObserver;
 
 const voidElements = new Set([
     'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr',
@@ -74,7 +75,14 @@ const formatHtml = (element) => Array.from(element.childNodes)
 
 const addClassReferences = () => {
     document.querySelectorAll('.showcase-panel:not(.icon-gallery-panel):not(.has-class-reference)').forEach((panel) => {
-        const snippet = formatHtml(panel).trim();
+        const example = panel.cloneNode(true);
+        example.querySelectorAll('[data-bs-original-title]').forEach((element) => {
+            if (!element.hasAttribute('title')) {
+                element.setAttribute('title', element.getAttribute('data-bs-original-title'));
+            }
+            element.removeAttribute('data-bs-original-title');
+        });
+        const snippet = formatHtml(example).trim();
         const snippetMount = document.createElement('div');
         snippetMount.className = 'w-100';
         snippetMount.dataset.htmlSnippetMount = 'true';
@@ -96,6 +104,32 @@ const refreshClassReferences = () => {
     addClassReferences();
 };
 
+const initializeInteractiveComponents = () => {
+    if (!globalThis.bootstrap) return;
+
+    [
+        ['[data-bs-toggle="tooltip"]', globalThis.bootstrap.Tooltip],
+        ['[data-bs-toggle="popover"]', globalThis.bootstrap.Popover],
+    ].forEach(([selector, Component]) => {
+        document.querySelectorAll(selector).forEach((element) => {
+            Component.getOrCreateInstance(element);
+        });
+    });
+};
+
+const observeGalleryContent = () => {
+    if (galleryContentObserver) return;
+
+    const content = document.querySelector('#main-content');
+    if (!content) return;
+
+    galleryContentObserver = new MutationObserver(() => {
+        addClassReferences();
+        initializeInteractiveComponents();
+    });
+    galleryContentObserver.observe(content, { childList: true, subtree: true });
+};
+
 export const setLocale = (locale) => {
     i18n.global.locale.value = locale;
     root.lang = locale;
@@ -110,14 +144,17 @@ export const setLocale = (locale) => {
         ].forEach(([selector, Component]) => {
             document.querySelectorAll(selector).forEach((element) => {
                 Component.getInstance(element)?.dispose();
-                Component.getOrCreateInstance(element);
             });
         });
+        initializeInteractiveComponents();
     }
 };
 
 export const initializeGalleryPage = (locale) => {
+    observeGalleryContent();
     setLocale(locale);
+    addClassReferences();
+    initializeInteractiveComponents();
 
     if (globalThis.bootstrap) {
         const toastElement = document.querySelector('#demo-toast');

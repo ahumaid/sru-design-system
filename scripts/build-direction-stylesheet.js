@@ -104,6 +104,10 @@ for (let index = 0; index < rtlRules.length; index += 1) {
     throw new Error(`RTL conversion changed selector order near ${ltrRule.selector} / ${rtlRule.selector}.`);
   }
 
+  // Bootstrap remaps tooltip placements in JavaScript for RTL. Its arrow rules
+  // describe physical Popper placements and must not be mirrored a second time.
+  if (ltrRule.selector.includes('.bs-tooltip-') && ltrRule.selector.includes('.tooltip-arrow')) continue;
+
   const before = declarationsByProperty(ltrRule);
   const after = declarationsByProperty(rtlRule);
   const changedProperties = new Set();
