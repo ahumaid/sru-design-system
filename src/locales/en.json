@@ -24,7 +24,7 @@
     "gettingStarted": "Getting started",
     "installation": "Installation",
     "iconInstruction": "When using Lucide icons, load {url} and call {createIcons} after the icon elements are in the page.",
-    "aiPrompt": "You are building with the Sulaiman AlRajhi University (SRU) Design System.\n\nBefore creating or changing any component or HTML design, read this guide and inspect the Sulaiman AlRajhi University component gallery. Find the closest existing example and use it as your reference for markup, states, spacing, typography, colors, responsive behavior, and LTR or RTL direction.\n\nFollow these rules:\n- Use the published university stylesheet and its  components and utilities. The stylesheet already includes Bootstrap; never add a second Bootstrap CSS file.\n- Do not add custom styling, inline styles, CSS overrides, theme or token overrides, !important rules, or replacement styles to change the appearance of the system or its components unless the user explicitly asks for that styling or override. Do not infer permission from a request to build or implement a component.\n- If the requested result cannot be built with the existing system, explain the limitation and ask the user before adding custom styles or overrides.\n- Keep HTML semantic, accessible, keyboard usable, responsive, and compatible with the page direction.\n- Load the Bootstrap JavaScript bundle only when interactive components need it; it already includes Popper.\n- When using Lucide icons, load https://unpkg.com/lucide@latest and call lucide.createIcons() after adding the icon elements to the page.\n- Use the icon names shown in the gallery. Hide decorative icons from screen readers, and give icon-only buttons a clear accessible name.\n\nBefore finishing, compare the result with the gallery example you used and confirm that no unrequested styling or overrides were introduced."
+    "aiPrompt": "You are building with the Sulaiman AlRajhi University (SRU) Design System.\n\nBefore creating or changing any component or HTML design, read this guide and inspect the Sulaiman AlRajhi University component gallery. Find the closest existing example and use it as your reference for markup, states, spacing, typography, colors, responsive behavior, and LTR or RTL direction.\n\nFollow these rules:\n- Use the published university stylesheet and its  components and utilities. The stylesheet already includes Bootstrap; never add a second Bootstrap CSS file.\n- Do not add custom styling, inline styles, CSS overrides, theme or token overrides, !important rules, or replacement styles to change the appearance of the system or its components unless the user explicitly asks for that styling or override. Do not infer permission from a request to build or implement a component.\n- If the requested result cannot be built with the existing system, explain the limitation and ask the user before adding custom styles or overrides.\n- Keep HTML semantic, accessible, keyboard usable, responsive, and compatible with the page direction.\n- Load the Bootstrap JavaScript bundle only when interactive components need it; it already includes Popper.\n- When using Lucide icons, load https://unpkg.com/lucide{'@'}latest and call lucide.createIcons() after adding the icon elements to the page.\n- Use the icon names shown in the gallery. Hide decorative icons from screen readers, and give icon-only buttons a clear accessible name.\n\nBefore finishing, compare the result with the gallery example you used and confirm that no unrequested styling or overrides were introduced."
   },
   "phrases": {
     "guide": "Guide",
@@ -346,6 +346,11 @@
     "choose-a-role": "Choose a role",
     "close": "Close",
     "abstract-purple-and-blue-university-brand-illustration": "Abstract purple and blue university brand illustration",
+    "color-logo": "Color logo",
+    "white-logo": "White logo",
+    "color-logo-alt": "Sulaiman AlRajhi University color logo",
+    "white-logo-alt": "Sulaiman AlRajhi University white logo",
+    "university-logo-alt-text": "Sulaiman AlRajhi University",
     "design-system-components": "Design system components",
     "lucide-icon-preview": "Lucide icon preview",
     "introduction": "Introduction",
@@ -395,11 +400,16 @@
     "scrollspyActiveItem": "The active item moves as this section enters the scroll area.",
     "toastDescription": "Toasts show brief, non-blocking status feedback.",
     "helperDescription": "Common helpers keep layouts responsive without adding one-off CSS.",
-    "textTruncation": "This line demonstrates text truncation when a long label does not fit in its container."
+    "textTruncation": "This line demonstrates text truncation when a long label does not fit in its container.",
+    "brandLogoDescription": "Choose the logo version that has enough contrast with its background. Keep the image at its original proportions.",
+    "colorLogoUsage": "Use the color logo on a light background so its colors stay clear.",
+    "whiteLogoUsage": "Use the white logo on a dark background. It may disappear on a light background.",
+    "brandLogoEmbedNote": "Add the logo as an image and provide meaningful alternative text. For example:"
   },
   "labels": {
     "page-title": "One theme, every website.",
     "introduction-title": "Introduction",
+    "brand-logos-title": "Brand logos",
     "getting-started-title": "Getting started",
     "installation-title": "Install on a website",
     "foundations-title": "Color and type",
