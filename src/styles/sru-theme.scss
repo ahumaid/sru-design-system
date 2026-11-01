@@ -122,6 +122,22 @@ $form-invalid-border-color-dark: #ef7770;
 
 @import 'bootstrap/scss/bootstrap';
 
+// Bootstrap mirrors carousel control positions in RTL, while its embedded
+// SVG direction markers are left to rtlcss. Flip the icons explicitly so the
+// visual arrows continue to match the previous/next actions.
+html[dir='rtl'] .carousel-control-prev-icon,
+html[dir='rtl'] .carousel-control-next-icon {
+    transform: scaleX(-1);
+}
+
+.carousel > .carousel-control-prev,
+.carousel > .carousel-control-next {
+    top: 50% !important;
+    bottom: auto !important;
+    height: auto !important;
+    transform: translateY(-50%) !important;
+}
+
 .card {
     box-shadow: $box-shadow-sm;
 }
