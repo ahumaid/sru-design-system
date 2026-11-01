@@ -42,11 +42,11 @@ const toggleCatalog = () => {
 </script>
 
 <template>
-  <section class="mb-5" id="icons" aria-labelledby="icons-title">
-    <div class="mb-4">
-      <p class="small text-primary text-uppercase fw-bold mb-2">{{ $t('phrases.29-icons') }}</p>
-      <h2 id="icons-title">{{ $t('phrases.lucide-icons') }}</h2>
-      <p class="text-secondary mb-0">{{ $t('phrases.browse-the-full-lucide-collection-and-search-by-icon-name-use-the-shown-name-in-a') }} <code>data-lucide</code> {{ $t('phrases.attribute-then-call') }} <code>lucide.createIcons()</code> {{ $t('phrases.to-render-it') }}</p>
+  <section class="gallery-section" id="icons" aria-labelledby="icons-title">
+    <div class="gallery-section-heading bg-body-tertiary border-start border-primary border-4 rounded-3 p-3 p-md-4 mb-4">
+      <p class="small text-primary fw-bold text-uppercase mb-2">{{ $t('phrases.29-icons') }}</p>
+      <h2 class="h3 fw-bold mb-0" id="icons-title">{{ $t('phrases.lucide-icons') }}</h2>
+      <p class="text-secondary mt-2 mb-0">{{ $t('phrases.browse-the-full-lucide-collection-and-search-by-icon-name-use-the-shown-name-in-a') }} <code>data-lucide</code> {{ $t('phrases.attribute-then-call') }} <code>lucide.createIcons()</code> {{ $t('phrases.to-render-it') }}</p>
     </div>
     <div class="card">
       <div class="card-body">

@@ -49,7 +49,7 @@ const initializeCurrentPage = async () => {
   syncDocumentSettings();
 };
 
-watch(() => route.fullPath, initializeCurrentPage);
+watch(() => route.path, initializeCurrentPage);
 watch(locale, initializeCurrentPage, { flush: 'post' });
 
 onMounted(async () => {
@@ -75,8 +75,8 @@ onMounted(async () => {
       </aside>
 
       <main class="col-lg-9 col-xl-10 pt-3">
-        <RouterView v-slot="{ Component, route: activeRoute }">
-          <component :is="Component" :key="activeRoute.fullPath" />
+        <RouterView v-slot="{ Component }">
+          <component :is="Component" />
         </RouterView>
         <footer class="border-top pt-4 pb-5 mt-5 text-secondary small">
           <p class="mb-1">{{ $t('app.footer') }}</p>

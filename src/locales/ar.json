@@ -342,7 +342,7 @@
     "light-preview": "معاينة المظهر الفاتح",
     "enter-a-name": "أدخل اسماً",
     "add-a-short-description": "أضف وصفاً قصيراً",
-    "name-example-com": "name@example.com",
+    "name-example-com": "name{'@'}example.com",
     "choose-a-role": "اختر دوراً",
     "close": "إغلاق",
     "abstract-purple-and-blue-university-brand-illustration": "رسم تجريدي لهوية الجامعة باللونين البنفسجي والأزرق",

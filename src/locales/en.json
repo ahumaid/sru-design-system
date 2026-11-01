@@ -342,7 +342,7 @@
     "light-preview": "Light preview",
     "enter-a-name": "Enter a name",
     "add-a-short-description": "Add a short description",
-    "name-example-com": "name@example.com",
+    "name-example-com": "name{'@'}example.com",
     "choose-a-role": "Choose a role",
     "close": "Close",
     "abstract-purple-and-blue-university-brand-illustration": "Abstract purple and blue university brand illustration",
