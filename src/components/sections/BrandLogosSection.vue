@@ -1,3 +1,12 @@
+<script setup>
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import HtmlSnippet from '../HtmlSnippet.vue';
+
+const { t } = useI18n({ useScope: 'global' });
+const logoSnippet = computed(() => `<img src="/img/logo-color.png" alt="${t('phrases.university-logo-alt-text')}">`);
+</script>
+
 <template>
   <section class="gallery-section" id="brand-logos" aria-labelledby="brand-logos-title">
     <div class="gallery-section-heading bg-body-tertiary border-start border-primary border-4 rounded-3 p-3 p-md-4 mb-4">
@@ -36,7 +45,7 @@
 
     <div class="alert alert-secondary mt-4 mb-0" role="note">
       <p class="mb-2">{{ $t('copy.brandLogoEmbedNote') }}</p>
-      <code class="d-block text-break">&lt;img src="/img/logo-color.png" alt="{{ $t('phrases.university-logo-alt-text') }}"&gt;</code>
+      <HtmlSnippet :code="logoSnippet" :label="$t('app.snippet')" />
     </div>
   </section>
 </template>

@@ -1,37 +1,108 @@
 <template>
-<section class="gallery-section" id="foundations" aria-labelledby="foundations-title">
-            <div class="gallery-section-heading bg-body-tertiary border-start border-primary border-4 rounded-3 p-3 p-md-4 mb-4">
-              <p class="small text-primary fw-bold text-uppercase mb-2">{{ $t('phrases.01-foundations') }}</p>
-              <h2 class="h3 fw-bold mb-0" id="foundations-title">{{ $t('labels.foundations-title') }}</h2>
-              <p class="text-secondary mt-2 mb-0">{{ $t('copy.foundationDescription') }}</p>
+  <section class="vstack gap-4 py-3" id="foundations" aria-labelledby="foundations-title">
+    <header class="bg-body-tertiary border-start border-primary border-4 rounded-3 p-4 p-md-5">
+      <p class="small text-primary fw-bold text-uppercase mb-2">{{ $t('phrases.01-foundations') }}</p>
+      <h2 class="h3 fw-bold mb-0" id="foundations-title">{{ $t('labels.foundations-title') }}</h2>
+      <p class="text-secondary mt-2 mb-0">{{ $t('copy.foundationDescription') }}</p>
+    </header>
+
+    <div class="row row-cols-2 row-cols-md-4 g-3">
+      <div class="col">
+        <div class="card h-100 text-bg-primary border-0">
+          <div class="card-body d-flex flex-column justify-content-between gap-4 p-3 p-md-4">
+            <h3 class="h5 mb-0">{{ $t('phrases.primary') }}</h3>
+            <code class="badge bg-white text-dark align-self-start">primary</code>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 text-bg-secondary border-0">
+          <div class="card-body d-flex flex-column justify-content-between gap-4 p-3 p-md-4">
+            <h3 class="h5 mb-0">{{ $t('phrases.secondary') }}</h3>
+            <code class="badge bg-white text-dark align-self-start">secondary</code>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 text-bg-success border-0">
+          <div class="card-body d-flex flex-column justify-content-between gap-4 p-3 p-md-4">
+            <h3 class="h5 mb-0">{{ $t('phrases.success') }}</h3>
+            <code class="badge bg-white text-dark align-self-start">success</code>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 text-bg-info border-0">
+          <div class="card-body d-flex flex-column justify-content-between gap-4 p-3 p-md-4">
+            <h3 class="h5 mb-0">{{ $t('phrases.information') }}</h3>
+            <code class="badge bg-white text-dark align-self-start">info</code>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 text-bg-warning border-0">
+          <div class="card-body d-flex flex-column justify-content-between gap-4 p-3 p-md-4">
+            <h3 class="h5 mb-0">{{ $t('phrases.warning') }}</h3>
+            <code class="badge bg-white text-dark align-self-start">warning</code>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 text-bg-danger border-0">
+          <div class="card-body d-flex flex-column justify-content-between gap-4 p-3 p-md-4">
+            <h3 class="h5 mb-0">{{ $t('phrases.danger') }}</h3>
+            <code class="badge bg-white text-dark align-self-start">danger</code>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 text-bg-light">
+          <div class="card-body d-flex flex-column justify-content-between gap-4 p-3 p-md-4">
+            <h3 class="h5 mb-0">{{ $t('phrases.light') }}</h3>
+            <code class="badge bg-white text-dark align-self-start">light</code>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 text-bg-dark border-0">
+          <div class="card-body d-flex flex-column justify-content-between gap-4 p-3 p-md-4">
+            <h3 class="h5 mb-0">{{ $t('phrases.dark') }}</h3>
+            <code class="badge bg-white text-dark align-self-start">dark</code>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-xl-6">
+        <article class="card h-100">
+          <div class="card-header bg-body-tertiary px-4 py-3">
+            <h3 class="h5 mb-0">{{ $t('phrases.typography-scale') }}</h3>
+          </div>
+          <div class="card-body p-4">
+            <div class="d-grid gap-2 mb-4">
+              <p class="h1 fw-bold mb-0">{{ $t('phrases.heading-1') }}</p>
+              <p class="h2 fw-bold mb-0">{{ $t('phrases.heading-2') }}</p>
+              <p class="h3 fw-bold mb-0">{{ $t('phrases.heading-3') }}</p>
             </div>
-            <div class="row g-3 mb-4">
-              <div class="col-6 col-md-4 col-xl-3"><div class="color-tile bg-primary text-white">{{ $t('phrases.primary') }} <code>primary</code></div></div>
-              <div class="col-6 col-md-4 col-xl-3"><div class="color-tile bg-secondary text-white">{{ $t('phrases.secondary') }} <code>secondary</code></div></div>
-              <div class="col-6 col-md-4 col-xl-3"><div class="color-tile bg-success text-white">{{ $t('phrases.success') }} <code>success</code></div></div>
-              <div class="col-6 col-md-4 col-xl-3"><div class="color-tile bg-info text-white">{{ $t('phrases.information') }} <code>info</code></div></div>
-              <div class="col-6 col-md-4 col-xl-3"><div class="color-tile bg-warning text-dark">{{ $t('phrases.warning') }} <code>warning</code></div></div>
-              <div class="col-6 col-md-4 col-xl-3"><div class="color-tile bg-danger text-white">{{ $t('phrases.danger') }} <code>danger</code></div></div>
-              <div class="col-6 col-md-4 col-xl-3"><div class="color-tile bg-light text-dark border">{{ $t('phrases.light') }} <code>light</code></div></div>
-              <div class="col-6 col-md-4 col-xl-3"><div class="color-tile bg-dark text-white">{{ $t('phrases.dark') }} <code>dark</code></div></div>
-            </div>
-            <div class="row g-4">
-              <div class="col-xl-6">
-                <div class="showcase-panel h-100">
-                  <h3 class="h5">{{ $t('phrases.typography-scale') }}</h3>
-                  <h1>{{ $t('phrases.heading-1') }}</h1><h2>{{ $t('phrases.heading-2') }}</h2><h3>{{ $t('phrases.heading-3') }}</h3>
-                  <p class="lead">{{ $t('copy.typographyLead') }}</p>
-                  <p>{{ $t('phrases.body-text-for-longer-content') }} <RouterLink to="/components/buttons">{{ $t('phrases.links-follow-the-university-palette') }}</RouterLink>{{ $t('phrases.and') }} <strong>{{ $t('phrases.important-text') }}</strong> {{ $t('phrases.keeps-accessible-contrast') }}</p>
-                  <p class="text-secondary mb-0">{{ $t('phrases.secondary-text') }} <small>{{ $t('phrases.small-supporting-text') }}</small></p>
-                </div>
-              </div>
-              <div class="col-xl-6">
-                <div class="showcase-panel h-100">
-                  <h3 class="h5">{{ $t('phrases.arabic-sample') }}</h3>
-                  <p lang="ar" dir="rtl" class="fs-4">جامعة سليمان الراجحي — التحول الرقمي</p>
-                  <p lang="ar" dir="rtl" class="mb-0">تتبع النصوص العربية اتجاه القراءة من اليمين إلى اليسار، مع بقاء ترتيب المكونات متناسقاً.</p>
-                </div>
-              </div>
-            </div>
-          </section>
+            <p class="lead">{{ $t('copy.typographyLead') }}</p>
+            <p>{{ $t('phrases.body-text-for-longer-content') }} <RouterLink to="/components/buttons">{{ $t('phrases.links-follow-the-university-palette') }}</RouterLink>{{ $t('phrases.and') }} <strong>{{ $t('phrases.important-text') }}</strong> {{ $t('phrases.keeps-accessible-contrast') }}</p>
+            <p class="text-secondary mb-0">{{ $t('phrases.secondary-text') }} <small>{{ $t('phrases.small-supporting-text') }}</small></p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-xl-6">
+        <article class="card h-100">
+          <div class="card-header bg-body-tertiary px-4 py-3">
+            <h3 class="h5 mb-0">{{ $t('phrases.arabic-sample') }}</h3>
+          </div>
+          <div class="card-body p-4">
+            <p lang="ar" dir="rtl" class="fs-4 border-bottom pb-3 mb-3">جامعة سليمان الراجحي — التحول الرقمي</p>
+            <p lang="ar" dir="rtl" class="mb-0">تتبع النصوص العربية اتجاه القراءة من اليمين إلى اليسار، مع بقاء ترتيب المكونات متناسقاً.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 </template>

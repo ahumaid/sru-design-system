@@ -1,4 +1,6 @@
 import { i18n } from '../i18n.js';
+import { createVNode, render } from 'vue';
+import HtmlSnippet from '../components/HtmlSnippet.vue';
 
 const root = document.documentElement;
 const boundToastButtons = new WeakSet();
@@ -70,124 +72,26 @@ const formatHtml = (element) => Array.from(element.childNodes)
     .map((child) => formatNode(child))
     .join('\n');
 
-const appendSyntaxToken = (parent, className, value) => {
-    const token = document.createElement('span');
-    token.className = className;
-    token.textContent = value;
-    parent.append(token);
-};
-
-const appendTag = (code, source) => {
-    const match = source.match(/^<(\/?)\s*([\w:-]+)([\s\S]*?)(\/?)>$/);
-    if (!match) {
-        code.append(document.createTextNode(source));
-        return;
-    }
-
-    const [, closingSlash, tagName, attributes, selfClosingSlash] = match;
-    appendSyntaxToken(code, 'syntax-punctuation', `<${closingSlash}`);
-    appendSyntaxToken(code, 'syntax-tag', tagName);
-
-    const attributePattern = /(\s*)([^\s=/>]+)(\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?/g;
-    let cursor = 0;
-    let attribute;
-    while ((attribute = attributePattern.exec(attributes))) {
-        if (attribute.index > cursor) {
-            code.append(document.createTextNode(attributes.slice(cursor, attribute.index)));
-        }
-        code.append(document.createTextNode(attribute[1]));
-        appendSyntaxToken(code, 'syntax-attribute', attribute[2]);
-        if (attribute[3]) {
-            const equalsIndex = attribute[3].indexOf('=');
-            code.append(document.createTextNode(attribute[3].slice(0, equalsIndex + 1)));
-            const value = attribute[3].slice(equalsIndex + 1);
-            const leadingSpace = value.match(/^\s*/)[0];
-            code.append(document.createTextNode(leadingSpace));
-            appendSyntaxToken(code, 'syntax-value', value.slice(leadingSpace.length));
-        }
-        cursor = attributePattern.lastIndex;
-    }
-    if (cursor < attributes.length) {
-        code.append(document.createTextNode(attributes.slice(cursor)));
-    }
-
-    appendSyntaxToken(code, 'syntax-punctuation', `${selfClosingSlash}>`);
-};
-
-const highlightHtml = (code, source) => {
-    let cursor = 0;
-    while (cursor < source.length) {
-        const nextTag = source.indexOf('<', cursor);
-        if (nextTag === -1) {
-            code.append(document.createTextNode(source.slice(cursor)));
-            break;
-        }
-        if (nextTag > cursor) {
-            code.append(document.createTextNode(source.slice(cursor, nextTag)));
-        }
-
-        if (source.startsWith('<!--', nextTag)) {
-            const commentEnd = source.indexOf('-->', nextTag + 4);
-            const end = commentEnd === -1 ? source.length : commentEnd + 3;
-            appendSyntaxToken(code, 'syntax-comment', source.slice(nextTag, end));
-            cursor = end;
-            continue;
-        }
-
-        let quote = '';
-        let end = nextTag + 1;
-        for (; end < source.length; end += 1) {
-            const character = source[end];
-            if (quote) {
-                if (character === quote) quote = '';
-            } else if (character === '"' || character === "'") {
-                quote = character;
-            } else if (character === '>') {
-                end += 1;
-                break;
-            }
-        }
-
-        if (source[end - 1] !== '>') {
-            code.append(document.createTextNode(source.slice(nextTag)));
-            break;
-        }
-        appendTag(code, source.slice(nextTag, end));
-        cursor = end;
-    }
-};
-
 const addClassReferences = () => {
     document.querySelectorAll('.showcase-panel:not(.icon-gallery-panel):not(.has-class-reference)').forEach((panel) => {
         const snippet = formatHtml(panel).trim();
-        const reference = document.createElement('details');
-        reference.className = 'class-reference';
-        reference.dataset.classReference = 'true';
-
-        const summary = document.createElement('summary');
-        summary.textContent = i18n.global.t('app.snippet');
-        const editor = document.createElement('div');
-        editor.className = 'html-editor';
-
-        const toolbar = document.createElement('div');
-        toolbar.className = 'html-editor-toolbar';
-        toolbar.innerHTML = '<span class="html-editor-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="html-editor-filename">snippet.html</span><span class="html-editor-language">HTML</span>';
-
-        const pre = document.createElement('pre');
-        const code = document.createElement('code');
-        highlightHtml(code, snippet);
-        pre.append(code);
-        editor.append(toolbar, pre);
-        reference.append(summary, editor);
+        const snippetMount = document.createElement('div');
+        snippetMount.className = 'w-100';
+        snippetMount.dataset.htmlSnippetMount = 'true';
+        render(createVNode(HtmlSnippet, {
+            code: snippet,
+            label: i18n.global.t('app.snippet'),
+        }), snippetMount);
         panel.classList.add('has-class-reference');
-        panel.append(reference);
+        panel.append(snippetMount);
     });
 };
 
 const refreshClassReferences = () => {
-    document.querySelectorAll('.class-reference').forEach((reference) => {
-        reference.closest('.showcase-panel')?.classList.remove('has-class-reference');
-        reference.remove();
+    document.querySelectorAll('[data-html-snippet-mount]').forEach((snippetMount) => {
+        snippetMount.closest('.showcase-panel')?.classList.remove('has-class-reference');
+        render(null, snippetMount);
+        snippetMount.remove();
     });
     addClassReferences();
 };
