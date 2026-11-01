@@ -153,10 +153,10 @@ these headers.
 
 ## تحديث القالب / Updating the theme
 
-عدّل `src/styles/sru-theme.scss`. توجد أنماط تخطيط المعرض بصورة منفصلة في
-`src/styles/gallery.scss`. يعيد الأمر `npm run build` إنشاء ملفات التصميم
-المنشورة وبناء موقع المعرض.
+استخدم مكونات Bootstrap 5.3.8 وأدواته ورموز القالب المتاحة، ولا تضف تنسيقات
+CSS مخصصة. يعيد الأمر `npm run build` إنشاء ملفات التصميم المنشورة وبناء موقع
+المعرض.
 
-Edit `src/styles/sru-theme.scss`. Gallery layout styles are kept separately in
-`src/styles/gallery.scss`. Run `npm run build` to regenerate the published
-design system files and build the gallery site.
+Use the available Bootstrap 5.3.8 components, utilities, and theme tokens; do
+not add custom CSS. Run `npm run build` to regenerate the published design
+system files and build the gallery site.

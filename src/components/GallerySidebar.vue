@@ -44,11 +44,11 @@ const componentLinks = [
 
 <template>
   <nav class="gallery-nav app-navigation sticky-lg-top" :aria-label="isArabic ? 'مكونات نظام التصميم' : 'Design system components'">
-    <p class="small text-secondary fw-bold text-uppercase mb-2">{{ isArabic ? 'الدليل' : 'Guide' }}</p>
-    <div class="list-group list-group-flush mb-4">
+    <p class="small text-secondary fw-bold text-uppercase">{{ isArabic ? 'الدليل' : 'Guide' }}</p>
+    <div class="list-group list-group-flush">
       <RouterLink v-for="link in guideLinks" :key="link.name" exact-active-class="active" class="list-group-item list-group-item-action" :to="link.to">{{ isArabic ? link.labelAr : link.label }}</RouterLink>
     </div>
-    <p class="small text-secondary fw-bold text-uppercase mb-2">{{ isArabic ? 'المكونات' : 'Components' }}</p>
+    <p class="small text-secondary fw-bold text-uppercase">{{ isArabic ? 'المكونات' : 'Components' }}</p>
     <div class="list-group list-group-flush">
       <RouterLink v-for="link in componentLinks" :key="link.name" exact-active-class="active" class="list-group-item list-group-item-action" :to="link.to">{{ isArabic ? link.labelAr : link.label }}</RouterLink>
     </div>
