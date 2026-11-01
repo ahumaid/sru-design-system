@@ -86,7 +86,7 @@
               <p class="h3 fw-bold mb-0">{{ $t('phrases.heading-3') }}</p>
             </div>
             <p class="lead">{{ $t('copy.typographyLead') }}</p>
-            <p>{{ $t('phrases.body-text-for-longer-content') }} <RouterLink to="/components/buttons">{{ $t('phrases.links-follow-the-university-palette') }}</RouterLink>{{ $t('phrases.and') }} <strong>{{ $t('phrases.important-text') }}</strong> {{ $t('phrases.keeps-accessible-contrast') }}</p>
+            <p>{{ $t('phrases.body-text-for-longer-content') }} <a href="/#buttons">{{ $t('phrases.links-follow-the-university-palette') }}</a>{{ $t('phrases.and') }} <strong>{{ $t('phrases.important-text') }}</strong> {{ $t('phrases.keeps-accessible-contrast') }}</p>
             <p class="text-secondary mb-0">{{ $t('phrases.secondary-text') }} <small>{{ $t('phrases.small-supporting-text') }}</small></p>
           </div>
         </article>

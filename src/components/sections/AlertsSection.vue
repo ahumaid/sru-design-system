@@ -4,7 +4,7 @@
             <div class="showcase-panel d-grid gap-3">
               <div class="alert alert-primary mb-0" role="alert">
                 {{ $t('alerts.primaryLead') }}
-                <RouterLink to="/components/buttons" class="alert-link">{{ $t('alerts.actionLink') }}</RouterLink>.
+                <a href="/#buttons" class="alert-link">{{ $t('alerts.actionLink') }}</a>.
               </div>
               <div class="alert alert-success mb-0" role="alert">{{ $t('alerts.saved') }}</div>
               <div class="alert alert-warning alert-dismissible fade show mb-0" role="alert">

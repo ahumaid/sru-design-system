@@ -12,15 +12,15 @@ defineEmits(['toggle-language', 'toggle-theme']);
 <template>
   <nav class="navbar app-navigation navbar-expand-lg navbar-dark bg-primary flex-shrink-0 shadow-sm" :aria-label="$t('app.mainNav')">
     <div class="container-fluid px-lg-4">
-      <RouterLink class="navbar-brand" to="/">
+      <a class="navbar-brand" href="/#top">
         <img src="/img/logo-white.png" :alt="$t('app.brand')" width="163" height="30">
-      </RouterLink>
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#top-nav" aria-controls="top-nav" aria-expanded="false" :aria-label="$t('app.navToggle')">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="top-nav">
         <div class="navbar-nav me-auto">
-          <RouterLink class="nav-link" exact-active-class="active" to="/">{{ $t('app.gallery') }}</RouterLink>
+          <a class="nav-link active" href="/#top">{{ $t('app.gallery') }}</a>
           <a class="nav-link" href="/#installation">{{ $t('app.usageGuide') }}</a>
         </div>
         <div class="d-flex flex-wrap gap-2 py-2 py-lg-0">

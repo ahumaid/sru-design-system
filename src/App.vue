@@ -1,12 +1,11 @@
 <script setup>
 import { computed, nextTick, onMounted, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import TopNavbar from './components/TopNavbar.vue';
 import GallerySidebar from './components/GallerySidebar.vue';
 import GlobalOverlays from './components/GlobalOverlays.vue';
+import HomeView from './views/HomeView.vue';
 
-const route = useRoute();
 const { locale, t } = useI18n({ useScope: 'global' });
 const isRtl = computed(() => locale.value === 'ar');
 const isDark = ref(false);
@@ -37,7 +36,6 @@ const initializeCurrentPage = async () => {
   syncDocumentSettings();
 };
 
-watch(() => route.path, initializeCurrentPage);
 watch(locale, initializeCurrentPage, { flush: 'post' });
 
 onMounted(async () => {
@@ -63,9 +61,7 @@ onMounted(async () => {
         </aside>
 
         <main id="main-content" tabindex="-1" class="col-lg-9 col-xl-10 h-100 pt-3 overflow-auto">
-          <RouterView v-slot="{ Component }">
-            <component :is="Component" />
-          </RouterView>
+          <HomeView />
           <footer class="border-top pt-4 pb-5 mt-5 text-secondary small">
             <p class="mb-1">{{ $t('app.footer') }}</p>
           </footer>
