@@ -43,6 +43,7 @@ const router = createRouter({
       ['dropdowns', () => import('./components/sections/DropdownsSection.vue')],
       ['forms', () => import('./components/sections/FormsSection.vue')],
       ['list-group', () => import('./components/sections/ListGroupSection.vue')],
+      ['logos', () => import('./components/sections/BrandLogosSection.vue')],
       ['modal', () => import('./components/sections/ModalSection.vue')],
       ['navbar', () => import('./components/sections/NavbarSection.vue')],
       ['navs', () => import('./components/sections/NavsSection.vue')],

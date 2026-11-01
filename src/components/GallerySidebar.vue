@@ -7,6 +7,7 @@ const guideLinks = [
 
 const componentLinks = [
   { name: 'foundations', key: 'foundations', to: '/foundations' },
+  { name: 'logos', key: 'logos', to: '/components/logos' },
   { name: 'icons', key: 'icons', to: '/components/icons' },
   { name: 'accordion', key: 'accordion', to: '/components/accordion' },
   { name: 'alerts', key: 'alerts', to: '/components/alerts' },
