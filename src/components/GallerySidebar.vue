@@ -40,11 +40,11 @@ const componentLinks = [
 
 <template>
   <nav class="gallery-nav app-navigation sticky-lg-top" :aria-label="$t('app.navigationLabel')">
-    <p class="small text-secondary fw-bold text-uppercase">{{ $t('app.guide') }}</p>
+    <h2 class="h6 fw-bold text-primary border-bottom border-2 border-primary pb-2 mb-2">{{ $t('app.guide') }}</h2>
     <div class="list-group list-group-flush">
       <RouterLink v-for="link in guideLinks" :key="link.name" exact-active-class="active" class="list-group-item list-group-item-action" :to="link.to">{{ $t(link.key) }}</RouterLink>
     </div>
-    <p class="small text-secondary fw-bold text-uppercase">{{ $t('app.components') }}</p>
+    <h2 class="h6 fw-bold text-primary border-bottom border-2 border-primary pb-2 mt-4 mb-2">{{ $t('app.components') }}</h2>
     <div class="list-group list-group-flush">
       <RouterLink v-for="link in componentLinks" :key="link.name" exact-active-class="active" class="list-group-item list-group-item-action" :to="link.to">{{ $t(`nav.components.${link.key}`) }}</RouterLink>
     </div>

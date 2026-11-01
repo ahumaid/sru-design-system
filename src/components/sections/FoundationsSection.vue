@@ -1,9 +1,9 @@
 <template>
 <section class="gallery-section" id="foundations" aria-labelledby="foundations-title">
-            <div class="gallery-section-heading">
-              <p class="eyebrow">{{ $t('phrases.01-foundations') }}</p>
-              <h2 id="foundations-title">{{ $t('labels.foundations-title') }}</h2>
-              <p class="text-secondary">{{ $t('copy.foundationDescription') }}</p>
+            <div class="gallery-section-heading bg-body-tertiary border-start border-primary border-4 rounded-3 p-3 p-md-4 mb-4">
+              <p class="small text-primary fw-bold text-uppercase mb-2">{{ $t('phrases.01-foundations') }}</p>
+              <h2 class="h3 fw-bold mb-0" id="foundations-title">{{ $t('labels.foundations-title') }}</h2>
+              <p class="text-secondary mt-2 mb-0">{{ $t('copy.foundationDescription') }}</p>
             </div>
             <div class="row g-3 mb-4">
               <div class="col-6 col-md-4 col-xl-3"><div class="color-tile bg-primary text-white">{{ $t('phrases.primary') }} <code>primary</code></div></div>

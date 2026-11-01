@@ -1,6 +1,6 @@
 <template>
 <section class="gallery-section" id="forms" aria-labelledby="forms-title">
-            <div class="gallery-section-heading"><p class="eyebrow">{{ $t('phrases.13-data-entry') }}</p><h2 id="forms-title">{{ $t('labels.forms-title') }}</h2><p class="text-secondary">{{ $t('copy.formDescription') }}</p></div>
+            <div class="gallery-section-heading bg-body-tertiary border-start border-primary border-4 rounded-3 p-3 p-md-4 mb-4"><p class="small text-primary fw-bold text-uppercase mb-2">{{ $t('phrases.13-data-entry') }}</p><h2 class="h3 fw-bold mb-0" id="forms-title">{{ $t('labels.forms-title') }}</h2><p class="text-secondary mt-2 mb-0">{{ $t('copy.formDescription') }}</p></div>
             <div class="row g-4">
               <div class="col-xl-6"><div class="showcase-panel h-100">
                 <h3 class="h5">{{ $t('phrases.controls-and-select') }}</h3>

@@ -1,9 +1,9 @@
 <template>
 <section class="gallery-section" id="installation" aria-labelledby="installation-title">
-            <div class="gallery-section-heading">
-              <p class="eyebrow">{{ $t('phrases.guide-03') }}</p>
-              <h2 id="installation-title">{{ $t('labels.installation-title') }}</h2>
-              <p class="text-secondary">{{ $t('copy.installationDescription') }}</p>
+            <div class="gallery-section-heading bg-body-tertiary border-start border-primary border-4 rounded-3 p-3 p-md-4 mb-4">
+              <p class="small text-primary fw-bold text-uppercase mb-2">{{ $t('phrases.guide-03') }}</p>
+              <h2 class="h3 fw-bold mb-0" id="installation-title">{{ $t('labels.installation-title') }}</h2>
+              <p class="text-secondary mt-2 mb-0">{{ $t('copy.installationDescription') }}</p>
             </div>
             <div class="card"><div class="card-body">
               <h3 class="h6">{{ $t('phrases.ltr-stylesheet') }}</h3>

@@ -69,12 +69,12 @@ onMounted(async () => {
   />
 
   <div class="container-fluid px-3 px-lg-4" id="top">
-    <div class="row g-4 py-4 py-lg-5">
+    <div class="row g-4 pb-4 pb-lg-5">
       <aside class="col-lg-3 col-xl-2 px-0">
         <GallerySidebar />
       </aside>
 
-      <main class="col-lg-9 col-xl-10">
+      <main class="col-lg-9 col-xl-10 pt-3">
         <RouterView v-slot="{ Component, route: activeRoute }">
           <component :is="Component" :key="activeRoute.fullPath" />
         </RouterView>

@@ -1,9 +1,9 @@
 <template>
   <section class="gallery-section" id="brand-logos" aria-labelledby="brand-logos-title">
-    <div class="gallery-section-heading">
-      <p class="eyebrow">{{ $t('phrases.university-identity') }}</p>
-      <h2 id="brand-logos-title">{{ $t('labels.brand-logos-title') }}</h2>
-      <p class="text-secondary">{{ $t('copy.brandLogoDescription') }}</p>
+    <div class="gallery-section-heading bg-body-tertiary border-start border-primary border-4 rounded-3 p-3 p-md-4 mb-4">
+      <p class="small text-primary fw-bold text-uppercase mb-2">{{ $t('phrases.university-identity') }}</p>
+      <h2 class="h3 fw-bold mb-0" id="brand-logos-title">{{ $t('labels.brand-logos-title') }}</h2>
+      <p class="text-secondary mt-2 mb-0">{{ $t('copy.brandLogoDescription') }}</p>
     </div>
 
     <div class="row g-4">
