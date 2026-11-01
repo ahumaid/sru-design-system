@@ -12,7 +12,7 @@
     "build": "npm run build:assets && vite build",
     "build:assets": "npm run build:theme && npm run build:rtl && npm run build:bootstrap",
     "build:theme": "sass --quiet-deps --silence-deprecation=import --load-path=node_modules --no-source-map --style=compressed src/styles/sru-theme.scss public/design-system/sru-theme.css",
-    "build:rtl": "rtlcss public/design-system/sru-theme.css public/design-system/sru-theme.rtl.css",
+    "build:rtl": "node scripts/build-direction-stylesheet.js",
     "build:bootstrap": "cp node_modules/bootstrap/dist/js/bootstrap.bundle.min.js public/design-system/bootstrap.bundle.js",
     "preview": "vite preview --host 0.0.0.0"
   },
@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.10",
+    "postcss": "^8.5.32",
     "rtlcss": "^4.3.0",
     "sass": "^1.106.1",
     "vite": "^8.0.0"

@@ -2,8 +2,7 @@
 import HtmlSnippet from '../HtmlSnippet.vue';
 
 const snippets = {
-  ltrStylesheet: `<link rel="stylesheet" href="${window.location.origin}/design-system/sru-theme.css">`,
-  rtlStylesheet: `<link rel="stylesheet" href="${window.location.origin}/design-system/sru-theme.rtl.css">`,
+  stylesheet: `<link rel="stylesheet" href="${window.location.origin}/design-system/sru-theme.css">`,
   javascript: `<script defer src="${window.location.origin}/design-system/bootstrap.bundle.js"><\/script>`,
   lucideCdn: '<script src="https://unpkg.com/lucide@latest"><\/script>',
   lucide: `<button class="btn btn-primary" type="button">
@@ -25,12 +24,8 @@ const snippets = {
     <div class="card">
       <div class="card-body d-grid gap-3">
         <div>
-          <h3 class="h6">{{ $t('phrases.ltr-stylesheet') }}</h3>
-          <HtmlSnippet :code="snippets.ltrStylesheet" :label="$t('app.snippet')" />
-        </div>
-        <div>
-          <h3 class="h6">{{ $t('phrases.rtl-stylesheet') }}</h3>
-          <HtmlSnippet :code="snippets.rtlStylesheet" :label="$t('app.snippet')" />
+          <h3 class="h6">{{ $t('phrases.stylesheet') }}</h3>
+          <HtmlSnippet :code="snippets.stylesheet" :label="$t('app.snippet')" />
         </div>
         <div>
           <h3 class="h6">{{ $t('phrases.optional-javascript') }}</h3>
@@ -46,7 +41,7 @@ const snippets = {
           <p class="mt-3">{{ $t('copy.lucideMarkupUsage') }}</p>
           <HtmlSnippet :code="snippets.lucide" :label="$t('app.snippet')" />
         </div>
-        <i18n-t keypath="copy.rtlStylesheetNote" tag="p" class="installation-note mb-0"><template #file><code>sru-theme.rtl.css</code></template></i18n-t>
+        <i18n-t keypath="copy.directionNote" tag="p" class="installation-note mb-0"><template #file><code>sru-theme.css</code></template></i18n-t>
         <i18n-t keypath="app.cspNote" tag="p" class="small text-secondary mb-0" id="icon-csp-note"><template #domain><code>unpkg.com</code></template><template #directive><code>script-src</code></template></i18n-t>
       </div>
     </div>

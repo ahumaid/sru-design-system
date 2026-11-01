@@ -8,29 +8,34 @@
 You do not need to download the design system files or the Lucide library. Copy
 and paste the hosted snippets below into your site.
 
-أضف ملف التنسيق المستضاف داخل عنصر `<head>`. يتضمن الملف Bootstrap 5.3.8 وسمة جامعة سليمان الراجحي، لذلك لا تضف ملف Bootstrap CSS آخر.
+أضف الملف الأساسي المستضاف داخل عنصر `<head>`. يتضمن Bootstrap 5.3.8 وسمة جامعة سليمان الراجحي، لذلك لا تضف ملف Bootstrap CSS آخر.
+
+Add the hosted base stylesheet inside `<head>`. It includes Bootstrap 5.3.8 and
+the Sulaiman AlRajhi University theme, so do not add another Bootstrap CSS file.
 
 ```html
 <link rel="stylesheet" href="/design-system/sru-theme.css">
 ```
 
-للصفحات العربية أو الصفحات الأخرى من اليمين إلى اليسار، استخدم ملف RTL:
+للصفحات العربية أو الصفحات الأخرى من اليمين إلى اليسار، اضبط `dir="rtl"` على عنصر `<html>`. يتضمن ملف التنسيق نفسه دعم RTL.
 
 ```html
-<link rel="stylesheet" href="/design-system/sru-theme.rtl.css">
+<html lang="ar" dir="rtl">
+  <head>
+    <link rel="stylesheet" href="/design-system/sru-theme.css">
+  </head>
+</html>
 ```
 
-حمّل حزمة JavaScript المستضافة قبل إغلاق وسم `</body>` عند استخدام مكونات Bootstrap التفاعلية:
+For Arabic or other right-to-left pages, set `dir="rtl"` on the `<html>` element. RTL support is built into the same stylesheet.
+
+حزمة JavaScript الخاصة بـ Bootstrap اختيارية. حمّلها مرة واحدة قبل إغلاق `</body>` عند استخدام المكونات التفاعلية مثل القوائم المنسدلة والنوافذ والطي والشرائح واللوحات الجانبية والتلميحات والنوافذ المنبثقة والإشعارات. تتضمن Popper ولا تحتاج إلى jQuery.
+
+The Bootstrap JavaScript bundle is optional. Load it once before `</body>` when you use interactive components such as dropdowns, modals, collapse, carousels, offcanvas, tooltips, popovers, or toasts. It includes Popper and does not require jQuery.
 
 ```html
 <script defer src="/design-system/bootstrap.bundle.js"></script>
 ```
-
-حزمة JavaScript الخاصة بـ Bootstrap اختيارية. حمّلها عند استخدام المكونات التفاعلية
-مثل النوافذ المنبثقة والقوائم المنسدلة والطي والشرائح واللوحات الجانبية والتلميحات
-والنوافذ المنبثقة والإشعارات فقط. تتضمن الحزمة Popper بالفعل.
-
-تتضمن الحزمة Popper ولا تحتاج إلى jQuery. حمّلها مرة واحدة فقط. وهي توفر سلوك القوائم المنسدلة والنوافذ المنبثقة والطي والشرائط المتحركة واللوحات الجانبية والتلميحات والنوافذ التوضيحية والإشعارات ومكونات Bootstrap التفاعلية الأخرى.
 
 ## استخدام أيقونات Lucide
 

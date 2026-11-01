@@ -78,12 +78,10 @@ just deps
 
 The stable paths served by Cloudflare Pages are:
 
-- `/design-system/sru-theme.css` — Bootstrap 5.3.8 مع قالب الجامعة باتجاه LTR.
-- `/design-system/sru-theme.rtl.css` — القالب نفسه بعد تحويله إلى RTL.
+- `/design-system/sru-theme.css` — Bootstrap 5.3.8 وقالب الجامعة، مع دعم الاتجاهين.
 - `/design-system/bootstrap.bundle.js` — حزمة JavaScript الخاصة بـ Bootstrap مع Popper.
 
-- `/design-system/sru-theme.css` — Bootstrap 5.3.8 with the university theme in LTR.
-- `/design-system/sru-theme.rtl.css` — the same theme transformed to RTL.
+- `/design-system/sru-theme.css` — Bootstrap 5.3.8 and the university theme, with support for both directions.
 - `/design-system/bootstrap.bundle.js` — Bootstrap JavaScript bundle with Popper.
 
 استخدم النطاق الإنتاجي للمواقع الأخرى. يتوفر دليل الاستخدام الكامل للنسخ
@@ -97,25 +95,25 @@ Use the production domain on other sites. The published
 <script defer src="/design-system/bootstrap.bundle.js"></script>
 ```
 
-استخدم `sru-theme.rtl.css` للصفحات العربية ذات الاتجاه RTL. تلزم حزمة
-JavaScript للمكوّنات التفاعلية مثل القوائم المنسدلة والنوافذ والطيّ والشرائح
-واللوحات الجانبية والتلميحات والنوافذ المنبثقة والتنبيهات. تتضمن الحزمة Popper
-ولا تحتاج إلى jQuery. إذا كان الموقع يحمّل JavaScript الخاص بـ Bootstrap
+للصفحات العربية ذات الاتجاه RTL، اضبط `dir="rtl"` على عنصر `<html>` واستخدم الملف
+نفسه. تلزم حزمة JavaScript للمكونات التفاعلية مثل القوائم المنسدلة والنوافذ والطيّ
+والشرائح واللوحات الجانبية والتلميحات والنوافذ المنبثقة والتنبيهات. تتضمن الحزمة
+Popper ولا تحتاج إلى jQuery. إذا كان الموقع يحمّل JavaScript الخاص بـ Bootstrap
 مسبقاً، فلا تحمّل حزمة ثانية.
 
-Use `sru-theme.rtl.css` for Arabic pages with RTL direction. The JavaScript
-bundle is required for interactive components such as dropdowns, modals,
-collapse, carousels, offcanvas panels, tooltips, popovers, and toasts. It includes
-Popper and does not require jQuery. If your site already loads Bootstrap
-JavaScript, do not load a second bundle.
+For Arabic pages with RTL direction, set `dir="rtl"` on the `<html>` element and
+use the same stylesheet. The JavaScript bundle is required for interactive
+components such as dropdowns, modals, collapse, carousels, offcanvas panels,
+tooltips, popovers, and toasts. It includes Popper and does not require jQuery.
+If your site already loads Bootstrap JavaScript, do not load a second bundle.
 
-تتضمن ملفات CSS أنماط Bootstrap كاملةً وقالب الجامعة؛ لذلك لا تضف ملف CSS
+يتضمن ملف التنسيق أنماط Bootstrap كاملةً وقالب الجامعة؛ لذلك لا تضف ملف CSS
 ثانياً لـ Bootstrap. يُحمّل القالب خط Cairo من Google Fonts. عند استخدام سياسة
 أمن محتوى مقيّدة، اسمح بـ `fonts.googleapis.com` ضمن `style-src` وبـ
 `fonts.gstatic.com` ضمن `font-src`.
 
-The CSS files include full Bootstrap styles and the university theme, so do not
-add another Bootstrap stylesheet. The theme loads the Cairo font from Google
+The stylesheet includes full Bootstrap styles and the university theme, so
+do not add another Bootstrap stylesheet. The theme loads the Cairo font from Google
 Fonts. For a restrictive Content Security Policy, allow `fonts.googleapis.com`
 in `style-src` and `fonts.gstatic.com` in `font-src`.
 

@@ -17,12 +17,6 @@ const syncDocumentSettings = () => {
   root.lang = locale.value;
   root.dir = isRtl.value ? 'rtl' : 'ltr';
   root.dataset.bsTheme = isDark.value ? 'dark' : 'light';
-  const themeStylesheet = document.querySelector('#theme-css');
-  if (themeStylesheet) {
-    themeStylesheet.href = isRtl.value
-      ? '/design-system/sru-theme.rtl.css'
-      : '/design-system/sru-theme.css';
-  }
   document.title = t('app.title');
   document.querySelector('meta[name="description"]')?.setAttribute('content', t('app.description'));
 };

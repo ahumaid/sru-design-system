@@ -1,11 +1,9 @@
 # known issues / المشاكل المعروفة
 
-## RTL stylesheet is a complete bundle / ملف RTL حزمة كاملة
+## One stylesheet supports both directions / ملف واحد يدعم الاتجاهين
 
-ملف `sru-theme.rtl.css` حزمة كاملة، وليس ملف تجاوزات جزئية. حمّل ملف CSS واحداً
-فقط: `sru-theme.css` لصفحات LTR أو `sru-theme.rtl.css` لصفحات RTL. لا تحمّل
-الملفين معاً.
+يحتوي `sru-theme.css` على القالب ودعم RTL. استخدم الملف نفسه لكل الصفحات،
+واضبط `dir="rtl"` على عنصر `<html>` للصفحات ذات الاتجاه من اليمين إلى اليسار.
 
-`sru-theme.rtl.css` is a complete theme bundle, not a partial override. Load one
-stylesheet only: `sru-theme.css` for LTR pages or `sru-theme.rtl.css` for RTL
-pages. Do not load both files.
+`sru-theme.css` includes the theme and RTL support. Use the same file for every
+page, and set `dir="rtl"` on the `<html>` element for right-to-left pages.

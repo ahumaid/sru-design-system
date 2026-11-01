@@ -11,17 +11,16 @@ Use this skill when building or reviewing an SRU website.
 
 - Read the SRU Design System usage guide and inspect the component gallery.
 - Find the closest existing gallery example and use it as the reference for markup, states, spacing, typography, colors, responsive behavior, and page direction.
-- Confirm whether the page is left-to-right (LTR) or right-to-left (RTL), and use the matching published stylesheet.
+- Load `sru-theme.css` on every page. For a right-to-left (RTL) page, set `dir="rtl"` on the `<html>` element; the stylesheet applies its RTL rules automatically.
 
 ## Published assets
 
 Use these published assets from the same host that serves this design system.
 
-- LTR CSS: `https://<design-system-domain>/design-system/sru-theme.css`
-- RTL CSS: `https://<design-system-domain>/design-system/sru-theme.rtl.css`
+- CSS stylesheet: `https://<design-system-domain>/design-system/sru-theme.css`
 - Bootstrap JavaScript bundle: `https://<design-system-domain>/design-system/bootstrap.bundle.js`
 
-The CSS bundles already include Bootstrap 5.3.8 and the SRU theme. Use the RTL CSS bundle for Arabic and other right-to-left pages. Load the JavaScript bundle only when interactive Bootstrap components are used; it already includes Popper.
+The stylesheet includes Bootstrap 5.3.8, the SRU theme, and RTL support. Use the same stylesheet for left-to-right and right-to-left pages. Set `dir="rtl"` on the `<html>` element for Arabic and other right-to-left pages. Load the JavaScript bundle only when interactive Bootstrap components are used; it already includes Popper.
 
 ## Implementation rules
 
