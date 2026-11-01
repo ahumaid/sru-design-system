@@ -39,7 +39,7 @@ const componentLinks = [
 </script>
 
 <template>
-  <nav class="gallery-nav app-navigation" :aria-label="$t('app.navigationLabel')">
+  <nav class="gallery-nav app-navigation pt-3" :aria-label="$t('app.navigationLabel')">
     <h2 class="h6 fw-bold text-primary border-bottom border-2 border-primary pb-2 mb-2">{{ $t('app.guide') }}</h2>
     <div class="list-group list-group-flush">
       <RouterLink v-for="link in guideLinks" :key="link.name" exact-active-class="active" class="list-group-item list-group-item-action" :to="link.to">{{ $t(link.key) }}</RouterLink>
