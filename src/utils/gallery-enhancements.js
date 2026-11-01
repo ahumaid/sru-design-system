@@ -1,25 +1,9 @@
+import { i18n } from '../i18n.js';
+
 const root = document.documentElement;
-
-const englishAiPrompt = `You are building with the Sulaiman AlRajhi University (SRU) Design System.
-
-Before creating or changing any component or HTML design, read this guide and inspect the Sulaiman AlRajhi University component gallery. Find the closest existing example and use it as your reference for markup, states, spacing, typography, colors, responsive behavior, and LTR or RTL direction.
-
-Follow these rules:
-- Use the published university stylesheet and its Bootstrap 5.3.8 components and utilities. The stylesheet already includes Bootstrap; never add a second Bootstrap CSS file.
-- Do not add custom styling, inline styles, CSS overrides, theme or token overrides, !important rules, or replacement styles to change the appearance of the system or its components unless the user explicitly asks for that styling or override. Do not infer permission from a request to build or implement a component.
-- If the requested result cannot be built with the existing system, explain the limitation and ask the user before adding custom styles or overrides.
-- Keep HTML semantic, accessible, keyboard usable, responsive, and compatible with the page direction.
-- Load the Bootstrap JavaScript bundle only when interactive components need it; it already includes Popper.
-- When using Lucide icons, load https://unpkg.com/lucide@latest and call lucide.createIcons() after adding the icon elements to the page.
-- Use the icon names shown in the gallery. Hide decorative icons from screen readers, and give icon-only buttons a clear accessible name.
-
-Before finishing, compare the result with the gallery example you used and confirm that no unrequested styling or overrides were introduced.`;
-
-let arabicAiPrompt = '';
-let englishTextNodes = new Map();
-let englishCopy = new Map();
-let englishLabels = {};
-const englishTextDefaults = new WeakMap();
+const boundToastButtons = new WeakSet();
+const boundRangeInputs = new WeakSet();
+const boundValidationForms = new WeakSet();
 
 const voidElements = new Set([
     'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr',
@@ -173,443 +157,6 @@ const highlightHtml = (code, source) => {
     }
 };
 
-const arabicLabels = {
-    'page-title': 'نظام تصميم واحد لكل موقع',
-    'introduction-title': 'مقدمة',
-    'getting-started-title': 'البدء باستخدام النظام',
-    'installation-title': 'التثبيت في موقع إلكتروني',
-    'foundations-title': 'الألوان والخطوط',
-    'accordion-title': 'الأكورديون',
-    'alerts-title': 'التنبيهات',
-    'badge-title': 'الشارات',
-    'breadcrumb-title': 'مسار التنقل',
-    'buttons-title': 'الأزرار',
-    'button-group-title': 'مجموعة الأزرار',
-    'cards-title': 'البطاقات',
-    'carousel-title': 'الشريط المتحرك',
-    'close-title': 'زر الإغلاق',
-    'collapse-title': 'الطي',
-    'dropdowns-title': 'القوائم المنسدلة',
-    'forms-title': 'النماذج',
-    'list-title': 'قائمة العناصر',
-    'modal-title': 'النافذة المنبثقة',
-    'navbar-title': 'شريط التنقل',
-    'navs-title': 'التنقل وعلامات التبويب',
-    'offcanvas-title': 'اللوحة الجانبية',
-    'pagination-title': 'ترقيم الصفحات',
-    'placeholders-title': 'العناصر النائبة',
-    'popovers-title': 'النوافذ التوضيحية',
-    'progress-title': 'التقدم',
-    'scrollspy-title': 'مراقبة التمرير',
-    'spinners-title': 'مؤشرات التحميل',
-    'tables-title': 'الجداول',
-    'toasts-title': 'الإشعارات',
-    'tooltips-title': 'التلميحات',
-    'helpers-title': 'المساعدات والأدوات',
-};
-
-const localizedCopy = [
-    ['#introduction .gallery-section-heading .text-secondary', 'يجمع نظام تصميم جامعة سليمان الراجحي (SRU) بين Bootstrap 5.3.8 وألوان الجامعة وخطوطها والأنماط المخصصة لاتجاه الصفحة. استخدم المكونات ورموز التصميم نفسها عبر مواقع الجامعة.'],
-    ['#introduction .col-md-4:nth-child(1) p', 'يتضمن ملف التنسيق Bootstrap. أضف ملف تنسيق الجامعة فقط إلى صفحتك.'],
-    ['#introduction .col-md-4:nth-child(2) p', 'اختر ملف التنسيق المناسب لاتجاه لغة الصفحة.'],
-    ['#introduction .col-md-4:nth-child(3) p', 'حمّل حزمة JavaScript عند استخدام مكونات Bootstrap التفاعلية فقط.'],
-    ['#getting-started .gallery-section-heading .text-secondary', 'للمطورين ومساعدات البرمجة بالذكاء الاصطناعي التي تبني مواقع جامعة سليمان الراجحي، اتبعوا خطوات الدمج نفسها:'],
-    ['#getting-started li:nth-child(1)', 'اختر ملف التنسيق الذي يطابق اتجاه الصفحة ولغتها.'],
-    ['#getting-started li:nth-child(2)', 'أنشئ التخطيطات باستخدام مكونات وأدوات Bootstrap 5.3.8؛ يوفر مظهر الجامعة الألوان والخطوط المشتركة.'],
-    ['#getting-started li:nth-child(3)', 'حمّل حزمة JavaScript عند استخدام المكونات التفاعلية فقط، مثل النوافذ المنبثقة والقوائم المنسدلة والتلميحات.'],
-    ['#getting-started li:nth-child(5)', 'استخدم أمثلة هذا المعرض كنماذج، وتحقق من دعم لوحة المفاتيح واتجاه الكتابة من اليمين إلى اليسار (RTL) عند الحاجة.'],
-    ['#getting-started .ai-review-hint', 'وكلاء الذكاء الاصطناعي يخطئون. تقع على عاتقك مسؤولية مقارنة مخرجاتهم بمثال المعرض المرجعي والتأكد من التزامها بنظام التصميم قبل اعتمادها.'],
-    ['#installation .gallery-section-heading .text-secondary', 'أضف ملف التنسيق المستضاف داخل ترويسة الصفحة. استخدم ملف التنسيق للكتابة من اليمين إلى اليسار (RTL) للصفحات العربية، وأضف حزمة JavaScript عند الحاجة إلى مكونات تفاعلية.'],
-    ['#installation .installation-note', 'للصفحات العربية أو الصفحات الأخرى من اليمين إلى اليسار، استخدم sru-theme.rtl.css. يتضمن ملف التنسيق Bootstrap 5.3.8، لذلك لا تحمّل ملف Bootstrap CSS آخر.'],
-    ['.gallery-hero .lead', 'تصفح المكونات والحالات والتفاعلات التي يمكن للمطورين استخدامها في مواقع الجامعة. بدّل الاتجاه والمظهر لمعاينة النظام نفسه في الوضع من اليمين إلى اليسار والوضع الداكن.'],
-    ['.gallery-hero .card .small', 'يتضمن ملف CSS Bootstrap ورموز تصميم جامعة سليمان الراجحي. أضف حزمة JavaScript للمكونات التفاعلية.'],
-    ['#foundations .gallery-section-heading .text-secondary', 'تستخدم ألوان Bootstrap السياقية لوحة الجامعة. خط Cairo هو الخط المشترك للمحتوى اللاتيني والعربي.'],
-    ['#foundations .showcase-panel .lead', 'فقرة تمهيدية قصيرة بمزيد من التركيز.'],
-    ['#forms .gallery-section-heading .text-secondary', 'تشترك عناصر النماذج في أنماط التركيز والحدود والتحقق. تبقى التسميات ظاهرة ومرتبطة بحقول الإدخال.'],
-    ['#accordion-one .accordion-body', 'تجمع الأكورديونات المحتوى المرتبط في أقسام قابلة للتوسيع. يبدأ العنصر الأول مفتوحاً.'],
-    ['#accordion-two .accordion-body', 'استخدم تسميات واضحة وحافظ على سلوك لوحة المفاتيح المدمج.'],
-    ['#cards .card-text:nth-of-type(1)', 'سطح مرن لعرض الملخص والحالة والخطوة التالية.'],
-    ['#cards .card-text:nth-of-type(2)', 'تستخدم ترويسة البطاقة وتذييلها نمط الحدود المشترك.'],
-    ['#cards .card-text:nth-of-type(3)', 'تحافظ خلفيات البطاقات السياقية على لوحة الألوان نفسها.'],
-    ['#demo-carousel .carousel-item:nth-child(1) .mb-0', 'شريحة متجاوبة مع وصف توضيحي سهل الوصول.'],
-    ['#demo-carousel .carousel-item:nth-child(2) .mb-0', 'استخدم المكونات نفسها عبر مواقع الجامعة.'],
-    ['#demo-carousel .carousel-item:nth-child(3) .mb-0', 'استخدم عناصر التحكم للتنقل بين الشرائح.'],
-    ['#modal .showcase-panel p', 'استخدم النافذة المنبثقة لمهمة مركزة تحتاج إلى استجابة واضحة.'],
-    ['#demo-modal .modal-body', 'طلبك جاهز للإرسال. هل تريد المتابعة؟'],
-    ['#offcanvas .showcase-panel p', 'تعمل اللوحات الجانبية للتنقل وعناصر التحكم الثانوية على الشاشات الصغيرة.'],
-    ['#demo-offcanvas .offcanvas-body p', 'اجعل التنقل الثانوي سهل الوصول.'],
-    ['#scrollspy .showcase-panel > p', 'مرر داخل اللوحة لمشاهدة تحديث عنصر التنقل النشط.'],
-    ['#spy-one + p', 'يحدّث Scrollspy التنقل بناءً على موضع التمرير الحالي، وهو مفيد للمقالات الطويلة وصفحات الإعدادات.'],
-    ['#spy-two + p', 'استخدم تسلسلاً واضحاً للعناوين حتى يكون لكل هدف تسمية مفهومة.'],
-    ['#spy-three', 'القسم الثالث'],
-    ['#spy-three + p', 'يتحرك العنصر النشط عند دخول هذا القسم إلى منطقة التمرير.'],
-    ['#toasts .showcase-panel p', 'تعرض الإشعارات تحديثاً موجزاً وغير معيق للحالة.'],
-    ['#helpers .gallery-section-heading .text-secondary', 'تحافظ الأدوات المساعدة الشائعة على تجاوب التخطيطات دون إضافة CSS خاص بكل حالة.'],
-    ['#helpers .text-truncate', 'يوضح هذا السطر اقتطاع النص عندما لا تتسع الحاوية لتسمية طويلة.'],
-];
-
-const arabicUi = {
-    Guide: 'الدليل',
-    'Guide · 01': 'الدليل · 01',
-    'Guide · 02': 'الدليل · 02',
-    'Guide · 03': 'الدليل · 03',
-    'Bootstrap included': 'يتضمن Bootstrap',
-    'Lucide icons': 'أيقونات Lucide',
-    'Search Lucide icons': 'البحث في أيقونات Lucide',
-    'Search by icon name': 'ابحث باسم الأيقونة',
-    'Browse the full Lucide collection and search by icon name. Use the shown name in a': 'تصفح مجموعة Lucide كاملة وابحث باسم الأيقونة. استخدم الاسم الظاهر في الشفرة بصيغة',
-    'attribute, then call': '، ثم استدعِ',
-    'to render it.': 'لعرضها.',
-    'Load Lucide when the page uses icons, then call': 'حمّل Lucide عند استخدام الأيقونات، ثم استدعِ',
-    'after the elements with': 'بعد عناصر الصفحة التي تحتوي على',
-    'are in the page.': 'في الصفحة.',
-    'When using Lucide icons, load': 'عند استخدام أيقونات Lucide، حمّل',
-    'and call': 'واستدعِ',
-    'after the icon elements are in the page.': 'بعد إضافة عناصر الأيقونات إلى الصفحة.',
-    'LTR and RTL': 'من اليسار إلى اليمين ومن اليمين إلى اليسار',
-    'Interactive components': 'المكونات التفاعلية',
-    'Getting started': 'البدء',
-    'LTR stylesheet': 'ملف تنسيق من اليسار إلى اليمين',
-    'RTL stylesheet': 'ملف تنسيق من اليمين إلى اليسار',
-    'Optional JavaScript': 'JavaScript اختياري',
-    'AI coding prompt · copy and paste': 'تعليمات للوكيل البرمجي · للنسخ',
-    'Give this prompt to an AI coding agent before it works on your site:': 'أرسل هذه التعليمات إلى وكيل برمجي بالذكاء الاصطناعي قبل أن يعمل على موقعك:',
-    Components: 'المكونات',
-    'Component gallery': 'معرض المكونات',
-    'Usage guide': 'دليل الاستخدام',
-    'Sulaiman AlRajhi University': 'جامعة سليمان الراجحي',
-    'Sulaiman AlRajhi University Design System': 'نظام تصميم جامعة سليمان الراجحي (SRU)',
-    'Sulaiman AlRajhi University Design System · Bootstrap 5.3.8': 'نظام تصميم جامعة سليمان الراجحي · Bootstrap 5.3.8',
-    'Sulaiman AlRajhi University Portal': 'بوابة جامعة سليمان الراجحي',
-    'Sulaiman AlRajhi University · Bootstrap 5.3.8': 'جامعة سليمان الراجحي · Bootstrap 5.3.8',
-    'Use this system': 'استخدم هذا النظام',
-    'A primary alert with an action link.': 'تنبيه أساسي مع رابط إجراء.',
-    'Your changes were saved successfully.': 'تم حفظ تغييراتك بنجاح.',
-    'Review needed. Check the details before continuing.': 'تحتاج إلى مراجعة. تحقق من التفاصيل قبل المتابعة.',
-    'The request could not be completed. Try again.': 'تعذر إكمال الطلب. حاول مرة أخرى.',
-    Service: 'خدمة',
-    'Application request': 'طلب خدمة',
-    'View request': 'عرض الطلب',
-    'With a header': 'بترويسة',
-    'Department profile': 'ملف القسم',
-    'Updated today': 'تم التحديث اليوم',
-    'Featured card': 'بطاقة مميزة',
-    Explore: 'استكشاف',
-    'Digital services': 'الخدمات الرقمية',
-    'Designed for people': 'مصمم للناس',
-    'University identity': 'هوية الجامعة',
-    'One clear system': 'نظام واضح واحد',
-    'Bootstrap components': 'مكونات Bootstrap',
-    'Built to adapt': 'مصمم للتكيف',
-    Actions: 'إجراءات',
-    Request: 'طلب',
-    'Open details': 'فتح التفاصيل',
-    'Edit information': 'تعديل المعلومات',
-    'Cancel request': 'إلغاء الطلب',
-    Home: 'الرئيسية',
-    Services: 'الخدمات',
-    Contact: 'تواصل',
-    Search: 'بحث',
-    'Open side panel': 'فتح اللوحة الجانبية',
-    'Quick links': 'روابط سريعة',
-    Profile: 'الملف الشخصي',
-    Notifications: 'الإشعارات',
-    Reports: 'التقارير',
-    Previous: 'السابق',
-    Next: 'التالي',
-    'Show toast': 'عرض الإشعار',
-    'Hover or focus me': 'مرر المؤشر أو ركز هنا',
-    'Tooltip on the right': 'تلميح على اليمين',
-    Complete: 'مكتمل',
-    'In review': 'قيد المراجعة',
-    Received: 'مستلم',
-    Today: 'اليوم',
-    Yesterday: 'أمس',
-    'View options': 'خيارات العرض',
-    'Text formatting': 'تنسيق النص',
-    'Controls and select': 'عناصر التحكم والاختيار',
-    'Full name': 'الاسم الكامل',
-    Description: 'الوصف',
-    Department: 'القسم',
-    'Select a department': 'اختر قسماً',
-    Admissions: 'القبول والتسجيل',
-    'Digital transformation': 'التحول الرقمي',
-    'Student services': 'خدمات الطلاب',
-    'Supporting text explains what the field is used for.': 'يوضح النص المساند استخدام هذا الحقل.',
-    'Checks and radios': 'خيارات التحديد وأزرار الاختيار',
-    'Send me status updates': 'أرسل لي تحديثات الحالة',
-    'Include supporting documents': 'إرفاق المستندات الداعمة',
-    'Preferred contact method': 'طريقة التواصل المفضلة',
-    Email: 'البريد الإلكتروني',
-    Phone: 'الهاتف',
-    'Enable notifications': 'تفعيل الإشعارات',
-    'Range and input group': 'النطاق ومجموعة الإدخال',
-    Satisfaction: 'مستوى الرضا',
-    Check: 'تحقق',
-    Amount: 'المبلغ',
-    'Floating labels': 'التسميات العائمة',
-    'Choose one': 'اختر واحداً',
-    Student: 'طالب',
-    'Staff member': 'موظف',
-    'Your role': 'دورك',
-    'Form layout and validation': 'تخطيط النموذج والتحقق',
-    Name: 'الاسم',
-    'Looks good.': 'يبدو جيداً.',
-    'Enter your name.': 'أدخل اسمك.',
-    'University email': 'البريد الإلكتروني الجامعي',
-    'Enter a valid email address.': 'أدخل عنوان بريد إلكتروني صحيحاً.',
-    'I confirm this information is correct.': 'أؤكد صحة هذه المعلومات.',
-    'Confirmation is required.': 'التأكيد مطلوب.',
-    'Validate form': 'التحقق من النموذج',
-    'Toggle navigation': 'تبديل التنقل',
-    'Bootstrap components': 'مكونات Bootstrap',
-    'One theme, every website.': 'سمة واحدة لكل موقع.',
-    'Links follow the university palette': 'تتبع الروابط لوحة ألوان الجامعة',
-    '01 · Foundations': '01 · الأساسيات',
-    '02 · Content': '02 · المحتوى',
-    '03 · Feedback': '03 · التنبيهات',
-    '04 · Labels': '04 · التسميات',
-    '05 · Navigation': '05 · التنقل',
-    '06 · Actions': '06 · الإجراءات',
-    '07 · Actions': '07 · الإجراءات',
-    '08 · Content': '08 · المحتوى',
-    '09 · Content': '09 · المحتوى',
-    '10 · Actions': '10 · الإجراءات',
-    '11 · Interaction': '11 · التفاعل',
-    '12 · Interaction': '12 · التفاعل',
-    '13 · Data entry': '13 · إدخال البيانات',
-    '14 · Content': '14 · المحتوى',
-    '15 · Interaction': '15 · التفاعل',
-    '16 · Navigation': '16 · التنقل',
-    '17 · Navigation': '17 · التنقل',
-    '18 · Navigation': '18 · التنقل',
-    '19 · Navigation': '19 · التنقل',
-    '20 · Loading': '20 · التحميل',
-    '21 · Interaction': '21 · التفاعل',
-    '22 · Status': '22 · الحالة',
-    '23 · Navigation': '23 · التنقل',
-    '24 · Status': '24 · الحالة',
-    '25 · Data': '25 · البيانات',
-    '26 · Feedback': '26 · التنبيهات',
-    '27 · Help': '27 · المساعدة',
-    '28 · Layout': '28 · التخطيط',
-    '29 · Icons': '29 · الأيقونات',
-    'Color and type': 'الألوان والخطوط',
-    Primary: 'أساسي',
-    Secondary: 'ثانوي',
-    Success: 'نجاح',
-    Info: 'معلومات',
-    Information: 'معلومات',
-    Warning: 'تحذير',
-    Danger: 'خطر',
-    Light: 'فاتح',
-    Dark: 'داكن',
-    'Typography scale': 'مقياس أحجام الخطوط',
-    'Heading 1': 'العنوان 1',
-    'Heading 2': 'العنوان 2',
-    'Heading 3': 'العنوان 3',
-    'Lead paragraph — a short introduction with more emphasis.': 'فقرة تمهيدية قصيرة بمزيد من التركيز.',
-    'Body text for longer content.': 'نص أساسي للمحتوى الطويل.',
-    ', and': '، كما أن',
-    'important text': 'النصوص المهمة',
-    'keeps accessible contrast.': 'تحافظ على تباين واضح وسهل الوصول.',
-    'Secondary text ·': 'نص ثانوي ·',
-    'Small supporting text': 'نص مساند صغير',
-    'Arabic sample': 'نموذج باللغة العربية',
-    Accordion: 'الأكورديون',
-    Alerts: 'التنبيهات',
-    Badge: 'الشارة',
-    Breadcrumb: 'مسار التنقل',
-    Buttons: 'الأزرار',
-    'Button group': 'مجموعة الأزرار',
-    Cards: 'البطاقات',
-    Carousel: 'الشريط المتحرك',
-    'Close button': 'زر الإغلاق',
-    Collapse: 'الطي',
-    Dropdowns: 'القوائم المنسدلة',
-    Forms: 'النماذج',
-    'List group': 'قائمة العناصر',
-    Modal: 'النافذة المنبثقة',
-    Navbar: 'شريط التنقل',
-    'Navs and tabs': 'التنقل وعلامات التبويب',
-    Offcanvas: 'اللوحة الجانبية',
-    Pagination: 'ترقيم الصفحات',
-    Placeholders: 'العناصر النائبة',
-    Popovers: 'النوافذ التوضيحية',
-    Progress: 'التقدم',
-    Scrollspy: 'مراقبة التمرير',
-    Spinners: 'مؤشرات التحميل',
-    Tables: 'الجداول',
-    Toasts: 'الإشعارات',
-    Tooltips: 'التلميحات',
-    'Helpers and utilities': 'المساعدات والأدوات',
-    'First section': 'القسم الأول',
-    'Second section': 'القسم الثاني',
-    'A primary alert with an action link.': 'تنبيه أساسي مع رابط إجراء.',
-    'action link': 'رابط إجراء',
-    'Review needed.': 'تحتاج إلى مراجعة.',
-    'Check the details before continuing.': 'تحقق من التفاصيل قبل المتابعة.',
-    Published: 'منشور',
-    'Needs review': 'بحاجة إلى مراجعة',
-    'Design system': 'نظام التصميم',
-    'Outline primary': 'أساسي بإطار',
-    'Outline secondary': 'ثانوي بإطار',
-    'Outline success': 'نجاح بإطار',
-    'Outline danger': 'خطر بإطار',
-    'Link button': 'زر رابط',
-    Large: 'كبير',
-    Default: 'افتراضي',
-    Small: 'صغير',
-    Disabled: 'معطل',
-    Loading: 'جارٍ التحميل',
-    'Loading…': 'جارٍ التحميل…',
-    List: 'قائمة',
-    Grid: 'شبكة',
-    Map: 'خريطة',
-    Service: 'خدمة',
-    'A flexible surface for a summary, status, and next step.': 'مساحة مرنة لعرض الملخص والحالة والخطوة التالية.',
-    'The card header and footer use the shared border treatment.': 'تستخدم ترويسة البطاقة وتذييلها نمط الحدود المشترك.',
-    'Contextual card backgrounds keep the same theme palette.': 'تحافظ خلفيات البطاقات السياقية على لوحة ألوان السمة نفسها.',
-    'Slide 1': 'الشريحة 1',
-    'Slide 2': 'الشريحة 2',
-    'Slide 3': 'الشريحة 3',
-    'A responsive slide with an accessible caption.': 'شريحة متجاوبة مع وصف توضيحي سهل الوصول.',
-    'Dismissible content': 'محتوى قابل للإغلاق',
-    'Disabled close button': 'زر إغلاق معطل',
-    'Show details': 'عرض التفاصيل',
-    'Collapsed content expands in place and works with keyboard activation.': 'يتوسع المحتوى المطوي في موضعه ويمكن استخدامه بلوحة المفاتيح.',
-    'Split action': 'إجراء مقسم',
-    'Toggle dropdown': 'تبديل القائمة المنسدلة',
-    'Alternative action': 'إجراء بديل',
-    'Email address': 'عنوان البريد الإلكتروني',
-    SAR: 'ريال سعودي',
-    'Active item': 'عنصر نشط',
-    Now: 'الآن',
-    'With supporting text below.': 'مع نص مساند أدناه.',
-    'A second actionable item': 'عنصر ثانٍ قابل للتنفيذ',
-    'A third actionable item': 'عنصر ثالث قابل للتنفيذ',
-    Inbox: 'صندوق الوارد',
-    Requests: 'الطلبات',
-    'Archived (disabled)': 'مؤرشف (معطل)',
-    'Use a modal for a focused task that needs a clear response.': 'استخدم نافذة منبثقة لمهمة محددة تتطلب استجابة واضحة.',
-    'Open modal': 'فتح النافذة المنبثقة',
-    'Confirm changes': 'تأكيد التغييرات',
-    Cancel: 'إلغاء',
-    Continue: 'متابعة',
-    'Toggle sample navbar': 'تبديل شريط التنقل النموذجي',
-    Overview: 'نظرة عامة',
-    Details: 'التفاصيل',
-    History: 'السجل',
-    'A tab panel displays one related view at a time.': 'تعرض لوحة علامات التبويب عرضاً واحداً ذا صلة في كل مرة.',
-    'Keep tab labels short and descriptive.': 'اجعل تسميات علامات التبويب قصيرة وواضحة.',
-    'Use tabs for peer content, not sequential steps.': 'استخدم علامات التبويب للمحتوى المتوازي، لا للخطوات المتتابعة.',
-    'Active pill': 'علامة نشطة',
-    'Another pill': 'علامة أخرى',
-    'Offcanvas panels work for navigation and secondary controls on smaller screens.': 'تناسب اللوحات الجانبية التنقل وعناصر التحكم الثانوية على الشاشات الصغيرة.',
-    'Example page navigation': 'مثال على التنقل بين الصفحات',
-    'More information': 'مزيد من المعلومات',
-    'Use a popover for short, contextual help that needs a title.': 'استخدم نافذة توضيحية للمساعدة السياقية القصيرة التي تحتاج إلى عنوان.',
-    'Click for popover': 'انقر لعرض النافذة التوضيحية',
-    'Dismissible popover': 'نافذة توضيحية قابلة للإغلاق',
-    'Click or move focus away to dismiss this popover.': 'انقر خارج النافذة التوضيحية أو انقل التركيز لإغلاقها.',
-    'Focus to dismiss': 'ركز لإغلاق النافذة',
-    'Basic progress': 'التقدم الأساسي',
-    'Success progress': 'التقدم الناجح',
-    'Striped animated progress': 'تقدم متحرك مخطط',
-    Completed: 'مكتمل',
-    'In progress': 'قيد التنفيذ',
-    'Scroll the panel to see the active navigation item update.': 'مرر داخل اللوحة لمشاهدة تحديث عنصر التنقل النشط.',
-    Sections: 'الأقسام',
-    One: 'الأول',
-    Two: 'الثاني',
-    Three: 'الثالث',
-    'Section one': 'القسم الأول',
-    'Scrollspy updates navigation based on the current scroll position. It is useful for long articles and settings pages.': 'تحدّث مراقبة التمرير عناصر التنقل وفق موضع التمرير الحالي، وهي مفيدة للمقالات الطويلة وصفحات الإعدادات.',
-    'This content creates enough space to scroll.': 'يوفر هذا المحتوى مساحة كافية للتمرير.',
-    'Section two': 'القسم الثاني',
-    'Use a clear heading hierarchy so each target has a meaningful label.': 'استخدم تسلسلاً واضحاً للعناوين ليحمل كل هدف تسمية مفهومة.',
-    'Continue through the panel to the next section.': 'تابع التمرير داخل اللوحة للوصول إلى القسم التالي.',
-    'Section three': 'القسم الثالث',
-    'The active item moves as this section enters the scroll area.': 'يتغير العنصر النشط عند دخول هذا القسم إلى منطقة التمرير.',
-    'Recent requests': 'الطلبات الأخيرة',
-    Reference: 'المرجع',
-    Updated: 'تاريخ التحديث',
-    Status: 'الحالة',
-    Actions: 'الإجراءات',
-    'Account access': 'الوصول إلى الحساب',
-    'Student record': 'سجل الطالب',
-    'New application': 'طلب جديد',
-    View: 'عرض',
-    'Oct 28': '28 أكتوبر',
-    'Toasts show brief, non-blocking status feedback.': 'تعرض الإشعارات تحديثاً موجزاً للحالة دون مقاطعة المستخدم.',
-    'Helpful context for this action': 'معلومات مساعدة حول هذا الإجراء',
-    'Hover or focus me': 'مرر المؤشر أو ركز هنا',
-    'Tooltips also work on keyboard focus': 'تعمل التلميحات أيضاً عند التركيز بلوحة المفاتيح',
-    'Tooltip on the right': 'تلميح على اليمين',
-    'Common helpers keep layouts responsive without adding one-off CSS.': 'تحافظ الأدوات المساعدة الشائعة على تجاوب التخطيطات دون إضافة CSS مخصص لكل حالة.',
-    'Responsive ratio': 'نسبة أبعاد متجاوبة',
-    '16:9 content': 'محتوى بنسبة 16:9',
-    'Example stretched link': 'مثال على رابط ممتد',
-    'Stacks and text utilities': 'التكديس وأدوات النص',
-    'Vertical stack item one': 'العنصر الأول في التكديس الرأسي',
-    'Vertical stack item two': 'العنصر الثاني في التكديس الرأسي',
-    'Left item': 'العنصر الأيسر',
-    'Right item': 'العنصر الأيمن',
-    'This line demonstrates text truncation when a long label does not fit in its container.': 'يوضح هذا السطر اقتطاع النص عندما لا تتسع الحاوية لتسمية طويلة.',
-    'Visually hidden and focus ring': 'الإخفاء المرئي ومؤشر التركيز',
-    'Visible action': 'إجراء ظاهر',
-    'for assistive technology': 'للتقنيات المساعدة',
-    'Tab through the page to see the shared focus ring.': 'تنقل بين عناصر الصفحة بلوحة المفاتيح لمشاهدة مؤشر التركيز المشترك.',
-    'Image and figure': 'الصورة والتعليق التوضيحي',
-    'Figure caption · images scale to their container.': 'تعليق الصورة · تتكيف الصور مع حجم الحاوية.',
-    'Just now': 'الآن',
-    'Your preferences have been saved.': 'تم حفظ تفضيلاتك.',
-    'Preview RTL': 'معاينة من اليمين إلى اليسار',
-    'Preview LTR': 'معاينة من اليسار إلى اليمين',
-    'Dark preview': 'معاينة المظهر الداكن',
-    'Light preview': 'معاينة المظهر الفاتح',
-};
-
-const englishUi = Object.fromEntries(Object.entries(arabicUi).map(([english, arabic]) => [arabic, english]));
-const arabicAttributes = {
-    'Enter a name': 'أدخل اسماً',
-    'Add a short description': 'أضف وصفاً قصيراً',
-    'name@example.com': 'name@example.com',
-    Amount: 'المبلغ',
-    'Choose a role': 'اختر دوراً',
-    'Toggle navigation': 'تبديل التنقل',
-    'Bootstrap components': 'مكونات Bootstrap',
-    'View options': 'خيارات العرض',
-    'Text formatting': 'تنسيق النص',
-    Close: 'إغلاق',
-    'Disabled close button': 'زر إغلاق معطل',
-    'Slide 1': 'الشريحة 1',
-    'Slide 2': 'الشريحة 2',
-    'Slide 3': 'الشريحة 3',
-    Actions: 'الإجراءات',
-    'Toggle sample navbar': 'تبديل شريط التنقل النموذجي',
-    Search: 'بحث',
-    Breadcrumb: 'مسار التنقل',
-    'Example page navigation': 'مثال على التنقل بين الصفحات',
-    'Basic progress': 'التقدم الأساسي',
-    'Success progress': 'التقدم الناجح',
-    'Striped animated progress': 'تقدم متحرك مخطط',
-    Completed: 'مكتمل',
-    'In progress': 'قيد التنفيذ',
-    'More information': 'مزيد من المعلومات',
-    'Use a popover for short, contextual help that needs a title.': 'استخدم نافذة توضيحية للمساعدة السياقية القصيرة التي تحتاج إلى عنوان.',
-    'Dismissible popover': 'نافذة توضيحية قابلة للإغلاق',
-    'Click or move focus away to dismiss this popover.': 'انقر خارج النافذة التوضيحية أو انقل التركيز لإغلاقها.',
-    'Helpful context for this action': 'معلومات مساعدة حول هذا الإجراء',
-    'Tooltips also work on keyboard focus': 'تعمل التلميحات أيضاً عند التركيز بلوحة المفاتيح',
-    'Abstract purple and blue university brand illustration': 'رسم تجريدي لهوية الجامعة باللونين البنفسجي والأزرق',
-    'Design system components': 'مكونات نظام التصميم',
-    'Search Lucide icons': 'البحث في أيقونات Lucide',
-    'Search by icon name': 'ابحث باسم الأيقونة',
-    'Lucide icon preview': 'معاينة أيقونات Lucide',
-};
-const englishAttributes = Object.fromEntries(Object.entries(arabicAttributes).map(([english, arabic]) => [arabic, english]));
-
 const addClassReferences = () => {
     document.querySelectorAll('.showcase-panel:not(.icon-gallery-panel):not(.has-class-reference)').forEach((panel) => {
         const snippet = formatHtml(panel).trim();
@@ -618,7 +165,7 @@ const addClassReferences = () => {
         reference.dataset.classReference = 'true';
 
         const summary = document.createElement('summary');
-        summary.textContent = 'HTML snippet';
+        summary.textContent = i18n.global.t('app.snippet');
         const editor = document.createElement('div');
         editor.className = 'html-editor';
 
@@ -637,73 +184,21 @@ const addClassReferences = () => {
     });
 };
 
-const capturePageDefaults = () => {
-    englishTextNodes = new Map();
-    const textWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-    let textNode;
-    while ((textNode = textWalker.nextNode())) {
-        if (textNode.parentElement?.closest('.class-reference, .app-navigation')) continue;
-        if (!englishTextDefaults.has(textNode)) englishTextDefaults.set(textNode, textNode.nodeValue);
-        englishTextNodes.set(textNode, englishTextDefaults.get(textNode));
-    }
-
-    englishCopy = new Map(localizedCopy.map(([selector]) => [selector, document.querySelector(selector)?.textContent]));
-    englishLabels = Object.fromEntries(Object.keys(arabicLabels).map((id) => [
-        id,
-        document.querySelector(`#${id}`)?.textContent,
-    ]));
-
-    const prompt = document.querySelector('#ai-prompt-copy');
-    if (prompt && !arabicAiPrompt) arabicAiPrompt = prompt.textContent.trim();
+const refreshClassReferences = () => {
+    document.querySelectorAll('.class-reference').forEach((reference) => {
+        reference.closest('.showcase-panel')?.classList.remove('has-class-reference');
+        reference.remove();
+    });
+    addClassReferences();
 };
 
-export const setLanguage = (isArabic) => {
-    root.lang = isArabic ? 'ar' : 'en';
-    const aiPromptCopy = document.querySelector('#ai-prompt-copy');
-    if (aiPromptCopy) aiPromptCopy.textContent = isArabic ? arabicAiPrompt : englishAiPrompt;
-    document.title = isArabic
-        ? 'نظام تصميم جامعة سليمان الراجحي — معرض المكونات'
-        : 'Sulaiman AlRajhi University Design System — Component Gallery';
-    document.querySelector('meta[name="description"]')?.setAttribute('content', isArabic
-        ? 'معاينة مباشرة لنظام تصميم جامعة سليمان الراجحي المبني على Bootstrap ومكوناته.'
-        : 'Live preview of the Sulaiman AlRajhi University design system, built on Bootstrap and its components.');
-    document.querySelectorAll('.class-reference summary').forEach((summary) => {
-        summary.textContent = isArabic ? 'شفرة HTML' : 'HTML snippet';
-    });
+export const setLocale = (locale) => {
+    i18n.global.locale.value = locale;
+    root.lang = locale;
+    document.title = i18n.global.t('app.title');
+    document.querySelector('meta[name="description"]')?.setAttribute('content', i18n.global.t('app.description'));
+    refreshClassReferences();
 
-    Object.entries(isArabic ? arabicLabels : englishLabels).forEach(([id, label]) => {
-        const element = document.querySelector(`#${id}`);
-        if (element && label) element.textContent = label;
-    });
-    localizedCopy.forEach(([selector, arabicText]) => {
-        const element = document.querySelector(selector);
-        const englishText = englishCopy.get(selector);
-        if (element && englishText) element.textContent = isArabic ? arabicText : englishText;
-    });
-    const textWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-    let textNode;
-    while ((textNode = textWalker.nextNode())) {
-        if (textNode.parentElement?.closest('.class-reference, .app-navigation')) continue;
-        if (!isArabic && englishTextNodes.has(textNode)) {
-            textNode.nodeValue = englishTextNodes.get(textNode);
-            continue;
-        }
-        const current = textNode.nodeValue;
-        const trimmed = current.trim();
-        const translated = isArabic ? arabicUi[trimmed] : englishUi[trimmed];
-        if (!translated) continue;
-        const start = current.length - current.trimStart().length;
-        const end = current.trimEnd().length;
-        textNode.nodeValue = `${current.slice(0, start)}${translated}${current.slice(end)}`;
-    }
-    document.querySelectorAll('body *').forEach((element) => {
-        ['placeholder', 'aria-label', 'title', 'data-bs-original-title', 'data-bs-content'].forEach((attribute) => {
-            const value = element.getAttribute(attribute);
-            if (!value) return;
-            const translated = isArabic ? arabicAttributes[value] : englishAttributes[value];
-            if (translated) element.setAttribute(attribute, translated);
-        });
-    });
     if (globalThis.bootstrap) {
         [
             ['[data-bs-toggle="tooltip"]', globalThis.bootstrap.Tooltip],
@@ -715,25 +210,20 @@ export const setLanguage = (isArabic) => {
             });
         });
     }
-    const iconCspNote = document.querySelector('#icon-csp-note');
-    if (iconCspNote) {
-        iconCspNote.innerHTML = isArabic
-            ? 'إذا كانت الصفحة تستخدم سياسة أمان المحتوى (CSP)، اسمح بالمجال <code>unpkg.com</code> ضمن <code>script-src</code>.'
-            : 'If the page uses a Content Security Policy (CSP), allow <code>unpkg.com</code> in <code>script-src</code>.';
-    }
 };
 
-export const initializeGalleryPage = (isArabic) => {
-    addClassReferences();
-    capturePageDefaults();
-    setLanguage(isArabic);
+export const initializeGalleryPage = (locale) => {
+    setLocale(locale);
 
     if (globalThis.bootstrap) {
         const toastElement = document.querySelector('#demo-toast');
         const toastButton = document.querySelector('#show-toast');
-        toastButton?.addEventListener('click', () => {
-            if (toastElement) globalThis.bootstrap.Toast.getOrCreateInstance(toastElement).show();
-        });
+        if (toastButton && !boundToastButtons.has(toastButton)) {
+            toastButton.addEventListener('click', () => {
+                if (toastElement) globalThis.bootstrap.Toast.getOrCreateInstance(toastElement).show();
+            });
+            boundToastButtons.add(toastButton);
+        }
 
         const scrollspyElement = document.querySelector('#scrollspy-content');
         if (scrollspyElement) {
@@ -743,15 +233,23 @@ export const initializeGalleryPage = (isArabic) => {
         }
     }
 
-    document.querySelector('#demo-range')?.addEventListener('input', (event) => {
-        const value = document.querySelector('#range-value');
-        if (value) value.textContent = event.currentTarget.value;
-    });
+    const rangeInput = document.querySelector('#demo-range');
+    if (rangeInput && !boundRangeInputs.has(rangeInput)) {
+        rangeInput.addEventListener('input', (event) => {
+            const value = document.querySelector('#range-value');
+            if (value) value.textContent = event.currentTarget.value;
+        });
+        boundRangeInputs.add(rangeInput);
+    }
 
-    document.querySelector('#validation-form')?.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const form = event.currentTarget;
-        form.classList.add('was-validated');
-        if (form.checkValidity()) form.querySelector('button[type="submit"]')?.blur();
-    });
+    const validationForm = document.querySelector('#validation-form');
+    if (validationForm && !boundValidationForms.has(validationForm)) {
+        validationForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const form = event.currentTarget;
+            form.classList.add('was-validated');
+            if (form.checkValidity()) form.querySelector('button[type="submit"]')?.blur();
+        });
+        boundValidationForms.add(validationForm);
+    }
 };

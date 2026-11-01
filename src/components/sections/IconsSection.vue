@@ -1,9 +1,8 @@
 <script setup>
 import { computed, nextTick, onMounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-defineProps({
-  isArabic: { type: Boolean, default: true },
-});
+const { locale } = useI18n({ useScope: 'global' });
 
 const icons = globalThis.lucide?.icons ?? {};
 const names = Object.keys(icons).sort((first, second) => first.localeCompare(second));
@@ -47,29 +46,26 @@ const toggleCatalog = () => {
 <template>
   <section class="gallery-section" id="icons" aria-labelledby="icons-title">
     <div class="gallery-section-heading">
-      <p class="eyebrow">29 · Icons</p>
-      <h2 id="icons-title">Lucide icons</h2>
-      <p class="text-secondary">
-        Browse the full Lucide collection and search by icon name. Use the shown name in a
-        <code>data-lucide</code> attribute, then call <code>lucide.createIcons()</code> to render it.
-      </p>
+      <p class="eyebrow">{{ $t('phrases.29-icons') }}</p>
+      <h2 id="icons-title">{{ $t('phrases.lucide-icons') }}</h2>
+      <p class="text-secondary"> {{ $t('phrases.browse-the-full-lucide-collection-and-search-by-icon-name-use-the-shown-name-in-a') }} <code>data-lucide</code> {{ $t('phrases.attribute-then-call') }} <code>lucide.createIcons()</code> {{ $t('phrases.to-render-it') }} </p>
     </div>
     <div class="showcase-panel icon-gallery-panel">
       <div class="icon-gallery-toolbar">
-        <label v-if="expanded" class="visually-hidden" for="icon-search">{{ isArabic ? 'البحث في أيقونات Lucide' : 'Search Lucide icons' }}</label>
+        <label v-if="expanded" class="visually-hidden" for="icon-search">{{ $t('icons.searchLabel') }}</label>
         <input
           v-if="expanded"
           id="icon-search"
           v-model="search"
           class="form-control"
           type="search"
-          :placeholder="isArabic ? 'ابحث باسم الأيقونة' : 'Search by icon name'"
+          :placeholder="$t('icons.searchPlaceholder')"
           autocomplete="off"
         >
         <p class="small text-secondary mb-0" aria-live="polite">
-          <span v-if="expanded">{{ visibleNames.length.toLocaleString(isArabic ? 'ar' : 'en') }} / {{ names.length.toLocaleString(isArabic ? 'ar' : 'en') }}</span>
-          <span v-else>{{ sampleNames.length.toLocaleString(isArabic ? 'ar' : 'en') }}</span>
-          <span>{{ isArabic ? 'أيقونة معروضة' : 'icons shown' }}</span>
+          <span v-if="expanded">{{ visibleNames.length.toLocaleString(locale) }} / {{ names.length.toLocaleString(locale) }}</span>
+          <span v-else>{{ sampleNames.length.toLocaleString(locale) }}</span>
+          <span>{{ $t('icons.shown') }}</span>
         </p>
       </div>
       <div
@@ -77,7 +73,7 @@ const toggleCatalog = () => {
         ref="iconGrid"
         id="lucide-icon-grid"
         class="icon-grid"
-        :aria-label="isArabic ? 'معاينة أيقونات Lucide' : 'Lucide icon preview'"
+        :aria-label="$t('icons.preview')"
       >
         <div v-for="name in visibleNames" :key="name" class="icon-card">
           <i :data-lucide="toKebabCase(name)" aria-hidden="true"></i>
@@ -85,13 +81,13 @@ const toggleCatalog = () => {
         </div>
       </div>
       <p v-if="visibleNames.length === 0" class="small text-secondary mt-3 mb-0" role="status" aria-live="polite">
-        {{ isArabic ? 'لا توجد أيقونات تطابق البحث.' : 'No icons match your search.' }}
+        {{ $t('icons.noResults') }}
       </p>
       <button class="btn btn-outline-primary mt-3" type="button" aria-controls="lucide-icon-grid" :aria-expanded="expanded" @click="toggleCatalog">
-        {{ isArabic ? (expanded ? 'عرض عينة الأيقونات' : `عرض كل الأيقونات (${names.length.toLocaleString('ar')})`) : (expanded ? 'Show sample icons' : `Show all icons (${names.length.toLocaleString('en')})`) }}
+        {{ expanded ? $t('icons.sample') : $t('icons.all', { count: names.length.toLocaleString(locale) }) }}
       </button>
       <p v-if="names.length === 0" class="small text-danger mt-3 mb-0" role="status">
-        {{ isArabic ? 'تعذر تحميل أيقونات Lucide. تحقق من الاتصال ثم أعد تحميل الصفحة.' : 'Lucide icons could not be loaded. Check the connection and reload the page.' }}
+        {{ $t('icons.loadError') }}
       </p>
     </div>
   </section>
