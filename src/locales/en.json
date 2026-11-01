@@ -387,8 +387,12 @@
     "abstract-purple-and-blue-university-brand-illustration": "Abstract purple and blue university brand illustration",
     "color-logo": "Color logo",
     "white-logo": "White logo",
+    "square-logo-icon": "Square logo icon",
+    "favicon": "Favicon",
     "color-logo-alt": "Sulaiman AlRajhi University color logo",
     "white-logo-alt": "Sulaiman AlRajhi University white logo",
+    "square-logo-icon-alt": "Sulaiman AlRajhi University square logo icon",
+    "favicon-alt": "Sulaiman AlRajhi University favicon",
     "university-logo-alt-text": "Sulaiman AlRajhi University",
     "design-system-components": "Design system components",
     "lucide-icon-preview": "Lucide icon preview",
@@ -481,7 +485,10 @@
     "brandLogoDescription": "Choose the logo version that has enough contrast with its background. Keep the image at its original proportions.",
     "colorLogoUsage": "Use the color logo on a light background so its colors stay clear.",
     "whiteLogoUsage": "Use the white logo on a dark background. It may disappear on a light background.",
-    "brandLogoEmbedNote": "Add the logo as an image and provide meaningful alternative text. For example:"
+    "squareLogoIconUsage": "Use the square logo icon for app icons and other square placements.",
+    "faviconUsage": "Use this 32 × 32 px image for browser tabs.",
+    "brandLogoEmbedNote": "Add the logo as an image and provide meaningful alternative text. For example:",
+    "faviconEmbedNote": "Add this link in the page head to set the favicon:"
   },
   "labels": {
     "page-title": "One theme, every website.",
