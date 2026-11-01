@@ -1,5 +1,5 @@
 <template>
-<section class="gallery-section" id="helpers" aria-labelledby="helpers-title">
+<section class="gallery-section" aria-labelledby="helpers-title">
             <div class="gallery-section-heading bg-body-tertiary border-start border-primary border-4 rounded-3 p-3 p-md-4 mb-4"><p class="small text-primary fw-bold text-uppercase mb-2">{{ $t('phrases.28-layout') }}</p><h2 class="h3 fw-bold mb-0" id="helpers-title">{{ $t('labels.helpers-title') }}</h2><p class="text-secondary mt-2 mb-0">{{ $t('copy.helperDescription') }}</p></div>
             <div class="row g-4">
               <div class="col-md-6"><div class="showcase-panel"><h3 class="h5">{{ $t('phrases.responsive-ratio') }}</h3><p class="text-secondary">{{ $t('copy.helperRatioDescription') }}</p><div class="ratio ratio-16x9 ratio-demo rounded overflow-hidden"><div class="d-flex align-items-center justify-content-center bg-primary text-white">{{ $t('phrases.16-9-content') }}</div></div></div></div>

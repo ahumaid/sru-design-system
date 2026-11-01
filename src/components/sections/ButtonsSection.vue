@@ -1,5 +1,5 @@
 <template>
-<section class="gallery-section" id="buttons" aria-labelledby="buttons-title">
+<section class="gallery-section" aria-labelledby="buttons-title">
             <div class="gallery-section-heading bg-body-tertiary border-start border-primary border-4 rounded-3 p-3 p-md-4 mb-4"><p class="small text-primary fw-bold text-uppercase mb-2">{{ $t('phrases.06-actions') }}</p><h2 class="h3 fw-bold mb-0" id="buttons-title">{{ $t('labels.buttons-title') }}</h2></div>
             <div class="showcase-panel d-grid gap-4">
               <div class="d-flex flex-wrap gap-2"><button class="btn btn-primary">{{ $t('phrases.primary') }}</button><button class="btn btn-secondary">{{ $t('phrases.secondary') }}</button><button class="btn btn-success">{{ $t('phrases.success') }}</button><button class="btn btn-danger">{{ $t('phrases.danger') }}</button><button class="btn btn-warning">{{ $t('phrases.warning') }}</button><button class="btn btn-info">{{ $t('phrases.info') }}</button><button class="btn btn-light">{{ $t('phrases.light') }}</button><button class="btn btn-dark">{{ $t('phrases.dark') }}</button></div>

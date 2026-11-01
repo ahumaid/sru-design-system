@@ -1,5 +1,5 @@
 <template>
-<section class="gallery-section" id="carousel" aria-labelledby="carousel-title">
+<section class="gallery-section" aria-labelledby="carousel-title">
             <div class="gallery-section-heading bg-body-tertiary border-start border-primary border-4 rounded-3 p-3 p-md-4 mb-4"><p class="small text-primary fw-bold text-uppercase mb-2">{{ $t('phrases.09-content') }}</p><h2 class="h3 fw-bold mb-0" id="carousel-title">{{ $t('labels.carousel-title') }}</h2></div>
             <div class="showcase-panel p-0">
               <div class="d-flex align-items-center justify-content-between gap-3 px-4 pt-4"><p class="small text-secondary mb-0">{{ $t('copy.carouselControls') }}</p><span class="badge text-bg-primary">{{ $t('phrases.slide-count') }}</span></div>

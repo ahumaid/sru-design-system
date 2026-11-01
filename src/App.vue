@@ -10,6 +10,11 @@ const { locale, t } = useI18n({ useScope: 'global' });
 const isRtl = computed(() => locale.value === 'ar');
 const isDark = ref(false);
 let initializeGalleryPage = null;
+const initialHash = window.location.hash;
+
+if (initialHash) {
+  window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+}
 
 const syncDocumentSettings = () => {
   const root = document.documentElement;
@@ -30,9 +35,9 @@ const toggleTheme = () => {
   syncDocumentSettings();
 };
 
-const initializeCurrentPage = async () => {
+const initializeCurrentPage = async (hash = window.location.hash) => {
   await nextTick();
-  initializeGalleryPage?.(locale.value);
+  initializeGalleryPage?.(locale.value, hash);
   syncDocumentSettings();
 };
 
@@ -41,7 +46,10 @@ watch(locale, initializeCurrentPage, { flush: 'post' });
 onMounted(async () => {
   const galleryEnhancements = await import('./utils/gallery-enhancements.js');
   initializeGalleryPage = galleryEnhancements.initializeGalleryPage;
-  initializeCurrentPage();
+  await initializeCurrentPage(initialHash);
+  if (initialHash) {
+    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}${initialHash}`);
+  }
 });
 </script>
 

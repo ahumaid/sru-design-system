@@ -42,7 +42,7 @@ const toggleCatalog = () => {
 </script>
 
 <template>
-  <section class="gallery-section" id="icons" aria-labelledby="icons-title">
+  <section class="gallery-section" aria-labelledby="icons-title">
     <div class="gallery-section-heading bg-body-tertiary border-start border-primary border-4 rounded-3 p-3 p-md-4 mb-4">
       <p class="small text-primary fw-bold text-uppercase mb-2">{{ $t('phrases.29-icons') }}</p>
       <h2 class="h3 fw-bold mb-0" id="icons-title">{{ $t('phrases.lucide-icons') }}</h2>

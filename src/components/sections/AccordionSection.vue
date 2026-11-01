@@ -1,5 +1,5 @@
 <template>
-<section class="gallery-section" id="accordion" aria-labelledby="accordion-title">
+<section class="gallery-section" aria-labelledby="accordion-title">
             <div class="gallery-section-heading bg-body-tertiary border-start border-primary border-4 rounded-3 p-3 p-md-4 mb-4"><p class="small text-primary fw-bold text-uppercase mb-2">{{ $t('phrases.02-content') }}</p><h2 class="h3 fw-bold mb-0" id="accordion-title">{{ $t('labels.accordion-title') }}</h2></div>
             <div class="showcase-panel mb-4">
               <h3 class="h5 mb-3">{{ $t('copy.accordionStandardExample') }}</h3>

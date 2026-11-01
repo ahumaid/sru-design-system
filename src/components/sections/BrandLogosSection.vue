@@ -8,7 +8,7 @@ const logoSnippet = computed(() => `<img src="/img/logo-color.png" alt="${t('phr
 </script>
 
 <template>
-  <section class="gallery-section" id="brand-logos" aria-labelledby="brand-logos-title">
+  <section class="gallery-section" aria-labelledby="brand-logos-title">
     <div class="gallery-section-heading bg-body-tertiary border-start border-primary border-4 rounded-3 p-3 p-md-4 mb-4">
       <p class="small text-primary fw-bold text-uppercase mb-2">{{ $t('phrases.university-identity') }}</p>
       <h2 class="h3 fw-bold mb-0" id="brand-logos-title">{{ $t('labels.brand-logos-title') }}</h2>

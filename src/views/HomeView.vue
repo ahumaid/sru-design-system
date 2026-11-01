@@ -9,6 +9,7 @@ import { gallerySections } from '../data/gallery-sections.js';
     <div
       v-for="section in gallerySections"
       :key="section.id"
+      :id="section.id"
       class="gallery-section-frame card shadow-sm border-0 rounded-3 p-3 p-md-4"
     >
       <component :is="section.component" />

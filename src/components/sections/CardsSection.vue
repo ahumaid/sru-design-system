@@ -1,5 +1,5 @@
 <template>
-<section class="gallery-section" id="cards" aria-labelledby="cards-title">
+<section class="gallery-section" aria-labelledby="cards-title">
             <div class="gallery-section-heading bg-body-tertiary border-start border-primary border-4 rounded-3 p-3 p-md-4 mb-4"><p class="small text-primary fw-bold text-uppercase mb-2">{{ $t('phrases.08-content') }}</p><h2 class="h3 fw-bold mb-0" id="cards-title">{{ $t('labels.cards-title') }}</h2></div>
             <div class="row g-3">
               <div class="col-md-6 col-xl-4"><article class="card h-100"><div class="card-body"><span class="badge text-bg-primary mb-2">{{ $t('phrases.service') }}</span><h3 class="h5 card-title">{{ $t('phrases.application-request') }}</h3><p class="card-text text-secondary">{{ $t('copy.cardSummary') }}</p><a href="/#buttons" class="btn btn-primary">{{ $t('phrases.view-request') }}</a></div></article></div>

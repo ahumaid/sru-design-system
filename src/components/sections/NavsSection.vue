@@ -1,5 +1,5 @@
 <template>
-<section class="gallery-section" id="navs" aria-labelledby="navs-title">
+<section class="gallery-section" aria-labelledby="navs-title">
             <div class="gallery-section-heading bg-body-tertiary border-start border-primary border-4 rounded-3 p-3 p-md-4 mb-4"><p class="small text-primary fw-bold text-uppercase mb-2">{{ $t('phrases.17-navigation') }}</p><h2 class="h3 fw-bold mb-0" id="navs-title">{{ $t('labels.navs-title') }}</h2></div>
             <div class="showcase-panel">
               <ul class="nav nav-tabs" id="demo-tabs" role="tablist"><li class="nav-item" role="presentation"><button class="nav-link active" id="tab-overview" data-bs-toggle="tab" data-bs-target="#tab-panel-overview" type="button" role="tab" aria-controls="tab-panel-overview" aria-selected="true">{{ $t('phrases.overview') }}</button></li><li class="nav-item" role="presentation"><button class="nav-link" id="tab-details" data-bs-toggle="tab" data-bs-target="#tab-panel-details" type="button" role="tab" aria-controls="tab-panel-details" aria-selected="false">{{ $t('phrases.details') }}</button></li><li class="nav-item" role="presentation"><button class="nav-link" id="tab-history" data-bs-toggle="tab" data-bs-target="#tab-panel-history" type="button" role="tab" aria-controls="tab-panel-history" aria-selected="false">{{ $t('phrases.history') }}</button></li></ul>

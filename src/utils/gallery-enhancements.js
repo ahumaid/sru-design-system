@@ -118,7 +118,25 @@ const initializeInteractiveComponents = () => {
     });
 };
 
-const initializeGalleryScrollSpy = () => {
+const scrollToGalleryHash = (hash) => {
+    const content = document.querySelector('#main-content');
+    const id = decodeURIComponent(hash.replace(/^#/, ''));
+    const section = document.getElementById(id);
+    const target = section?.closest('.gallery-section-frame') ?? section;
+    if (!content || !target) return false;
+    const topPadding = Number.parseFloat(getComputedStyle(content).paddingTop) || 0;
+
+    content.scrollTo({
+        top: target.getBoundingClientRect().top
+            - content.getBoundingClientRect().top
+            + content.scrollTop
+            - topPadding,
+        behavior: 'instant',
+    });
+    return true;
+};
+
+const initializeGalleryScrollSpy = (hash = window.location.hash) => {
     if (!globalThis.bootstrap) return;
 
     const content = document.querySelector('#main-content');
@@ -127,6 +145,7 @@ const initializeGalleryScrollSpy = () => {
 
     globalThis.bootstrap.ScrollSpy.getOrCreateInstance(content, {
         target: '#gallery-sidebar-nav',
+        rootMargin: '0px 0px -75%',
     }).refresh();
 
     if (!boundGalleryNavigation.has(navigation)) {
@@ -134,37 +153,31 @@ const initializeGalleryScrollSpy = () => {
             const link = event.target.closest('a[href]');
             if (!link || !navigation.contains(link)) return;
 
+            const hash = new URL(link.href, window.location.href).hash;
+            if (!hash || !scrollToGalleryHash(hash)) return;
+
+            event.preventDefault();
+            history.pushState(null, '', hash);
+
             navigation.querySelectorAll('.active').forEach((item) => item.classList.remove('active'));
             link.classList.add('active');
         });
         boundGalleryNavigation.add(navigation);
     }
 
-    if (!window.location.hash) return;
+    if (!hash) return;
 
     const activeLink = Array.from(navigation.querySelectorAll('a[href]'))
-        .find((link) => new URL(link.href, window.location.href).hash === window.location.hash);
+        .find((link) => new URL(link.href, window.location.href).hash === hash);
     if (!activeLink) return;
 
     navigation.querySelectorAll('.active').forEach((link) => link.classList.remove('active'));
     activeLink.classList.add('active');
 };
 
-const scrollToCurrentGalleryHash = () => {
-    if (!window.location.hash) return;
-
-    const content = document.querySelector('#main-content');
-    const id = decodeURIComponent(window.location.hash.slice(1));
-    const section = document.getElementById(id);
-    const target = section?.closest('.gallery-section-frame') ?? section;
-    if (!content || !target) return;
-
-    content.scrollTo({
-        top: target.getBoundingClientRect().top
-            - content.getBoundingClientRect().top
-            + content.scrollTop,
-        behavior: 'auto',
-    });
+const scrollToCurrentGalleryHash = (hash = window.location.hash) => {
+    if (!hash) return;
+    scrollToGalleryHash(hash);
 };
 
 const observeGalleryContent = () => {
@@ -200,15 +213,15 @@ export const setLocale = (locale) => {
     }
 };
 
-export const initializeGalleryPage = (locale) => {
+export const initializeGalleryPage = (locale, hash = window.location.hash) => {
     observeGalleryContent();
     setLocale(locale);
     addClassReferences();
     initializeInteractiveComponents();
-    initializeGalleryScrollSpy();
-    scrollToCurrentGalleryHash();
+    initializeGalleryScrollSpy(hash);
+    scrollToCurrentGalleryHash(hash);
     requestAnimationFrame(() => {
-        requestAnimationFrame(scrollToCurrentGalleryHash);
+        requestAnimationFrame(() => scrollToCurrentGalleryHash(hash));
     });
 
     if (globalThis.bootstrap) {

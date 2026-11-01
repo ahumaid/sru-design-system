@@ -1,5 +1,5 @@
 <template>
-  <section class="vstack gap-4 py-3" id="foundations" aria-labelledby="foundations-title">
+  <section class="vstack gap-4 py-3" aria-labelledby="foundations-title">
     <header class="bg-body-tertiary border-start border-primary border-4 rounded-3 p-4 p-md-5">
       <p class="small text-primary fw-bold text-uppercase mb-2">{{ $t('phrases.01-foundations') }}</p>
       <h2 class="h3 fw-bold mb-0" id="foundations-title">{{ $t('labels.foundations-title') }}</h2>
