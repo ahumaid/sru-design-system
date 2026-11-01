@@ -1,0 +1,8 @@
+node_modules
+dist
+.wrangler
+.git
+.idea
+.env
+.env.*
+!.env.example

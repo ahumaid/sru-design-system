@@ -1,0 +1,12 @@
+name: sru-design-system-local
+
+services:
+  app:
+    build:
+      context: .
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+
+volumes:
+  node_modules:
