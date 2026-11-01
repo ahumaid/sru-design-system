@@ -1,16 +1,21 @@
 <script setup>
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import HtmlSnippet from '../HtmlSnippet.vue';
 
-const snippets = {
-  stylesheet: `<link rel="stylesheet" href="${window.location.origin}/design-system/sru-theme.css">`,
-  javascript: `<script defer src="${window.location.origin}/design-system/bootstrap.bundle.js"><\/script>`,
+const { t } = useI18n({ useScope: 'global' });
+const origin = typeof window !== 'undefined' ? window.location.origin : '';
+
+const snippets = computed(() => ({
+  stylesheet: `<link rel="stylesheet" href="${origin}/design-system/sru-theme.css">`,
+  javascript: `<script defer src="${origin}/design-system/bootstrap.bundle.js"><\/script>`,
   lucideCdn: '<script src="https://unpkg.com/lucide@latest"><\/script>',
   lucide: `<button class="btn btn-primary" type="button">
   <i data-lucide="search" aria-hidden="true"></i>
-  Search
+  ${t('phrases.search')}
 </button>
 <script>lucide.createIcons();<\/script>`,
-};
+}));
 </script>
 
 <template>

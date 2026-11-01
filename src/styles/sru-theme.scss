@@ -262,25 +262,6 @@ body {
     outline-offset: 3px;
 }
 
-.sec-head {
-    max-width: 760px;
-    margin: 0 auto 40px;
-    text-align: center;
-}
-
-.title {
-    margin: 0 0 10px;
-    font-size: clamp(26px, 3.2vw, 38px);
-    font-weight: 800;
-    line-height: 1.35;
-}
-
-.sec-sub {
-    margin: 0;
-    color: var(--sru-muted);
-    font-size: 16.5px;
-}
-
 .form-select:focus {
     border-color: var(--sru-blue);
     box-shadow: 0 0 0 0.25rem rgb(80 30 140 / 16%);
