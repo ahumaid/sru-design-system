@@ -2,18 +2,19 @@
 import { useI18n } from 'vue-i18n';
 
 defineProps({
-  isRtl: { type: Boolean, required: true },
   isDark: { type: Boolean, required: true },
 });
 
 const { locale } = useI18n({ useScope: 'global' });
-defineEmits(['toggle-language', 'toggle-direction', 'toggle-theme']);
+defineEmits(['toggle-language', 'toggle-theme']);
 </script>
 
 <template>
-  <nav class="navbar app-navigation navbar-expand-lg navbar-dark bg-primary sticky-top shadow-sm">
+  <nav class="navbar app-navigation navbar-expand-lg navbar-dark bg-primary flex-shrink-0 shadow-sm">
     <div class="container-fluid px-lg-4">
-      <RouterLink class="navbar-brand fw-bold" to="/">{{ $t('app.brand') }}</RouterLink>
+      <RouterLink class="navbar-brand" to="/">
+        <img src="/img/logo-white.png" :alt="$t('app.brand')" width="163" height="30">
+      </RouterLink>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#top-nav" aria-controls="top-nav" aria-expanded="false" :aria-label="$t('app.navToggle')">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -24,7 +25,6 @@ defineEmits(['toggle-language', 'toggle-direction', 'toggle-theme']);
         </div>
         <div class="d-flex flex-wrap gap-2 py-2 py-lg-0">
           <button class="btn btn-sm btn-outline-light" type="button" :aria-pressed="locale === 'ar'" @click="$emit('toggle-language')">{{ $t('app.english') }}</button>
-          <button class="btn btn-sm btn-outline-light" type="button" :aria-pressed="isRtl" @click="$emit('toggle-direction')">{{ $t(isRtl ? 'app.directionLtr' : 'app.directionRtl') }}</button>
           <button class="btn btn-sm btn-light" type="button" :aria-pressed="isDark" @click="$emit('toggle-theme')">{{ $t(isDark ? 'app.themeLight' : 'app.themeDark') }}</button>
         </div>
       </div>

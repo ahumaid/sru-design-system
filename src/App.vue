@@ -1,5 +1,5 @@
 <script setup>
-import { nextTick, onMounted, ref, watch } from 'vue';
+import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import TopNavbar from './components/TopNavbar.vue';
@@ -8,7 +8,7 @@ import GlobalOverlays from './components/GlobalOverlays.vue';
 
 const route = useRoute();
 const { locale, t } = useI18n({ useScope: 'global' });
-const isRtl = ref(true);
+const isRtl = computed(() => locale.value === 'ar');
 const isDark = ref(false);
 let initializeGalleryPage = null;
 
@@ -29,12 +29,6 @@ const syncDocumentSettings = () => {
 
 const toggleLanguage = () => {
   locale.value = locale.value === 'ar' ? 'en' : 'ar';
-  isRtl.value = locale.value === 'ar';
-  syncDocumentSettings();
-};
-
-const toggleDirection = () => {
-  isRtl.value = !isRtl.value;
   syncDocumentSettings();
 };
 
@@ -60,28 +54,28 @@ onMounted(async () => {
 </script>
 
 <template>
-  <TopNavbar
-    :is-rtl="isRtl"
-    :is-dark="isDark"
-    @toggle-language="toggleLanguage"
-    @toggle-direction="toggleDirection"
-    @toggle-theme="toggleTheme"
-  />
+  <div class="d-flex flex-column vh-100 overflow-hidden">
+    <TopNavbar
+      :is-dark="isDark"
+      @toggle-language="toggleLanguage"
+      @toggle-theme="toggleTheme"
+    />
 
-  <div class="container-fluid px-3 px-lg-4" id="top">
-    <div class="row g-4 pb-4 pb-lg-5">
-      <aside class="col-lg-3 col-xl-2 px-0">
-        <GallerySidebar />
-      </aside>
+    <div class="container-fluid flex-fill overflow-hidden px-3 px-lg-4" id="top">
+      <div class="row h-100 overflow-hidden g-4 pb-4 pb-lg-5">
+        <aside class="col-lg-3 col-xl-2 h-100 px-0 overflow-auto">
+          <GallerySidebar />
+        </aside>
 
-      <main class="col-lg-9 col-xl-10 pt-3">
-        <RouterView v-slot="{ Component }">
-          <component :is="Component" />
-        </RouterView>
-        <footer class="border-top pt-4 pb-5 mt-5 text-secondary small">
-          <p class="mb-1">{{ $t('app.footer') }}</p>
-        </footer>
-      </main>
+        <main class="col-lg-9 col-xl-10 h-100 pt-3 overflow-auto">
+          <RouterView v-slot="{ Component }">
+            <component :is="Component" />
+          </RouterView>
+          <footer class="border-top pt-4 pb-5 mt-5 text-secondary small">
+            <p class="mb-1">{{ $t('app.footer') }}</p>
+          </footer>
+        </main>
+      </div>
     </div>
   </div>
 
