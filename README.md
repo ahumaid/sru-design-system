@@ -84,11 +84,9 @@ The stable paths served by Cloudflare Pages are:
 - `/design-system/sru-theme.css` — Bootstrap 5.3.8 and the university theme, with support for both directions.
 - `/design-system/bootstrap.bundle.js` — Bootstrap JavaScript bundle with Popper.
 
-استخدم النطاق الإنتاجي للمواقع الأخرى. يتوفر دليل الاستخدام الكامل للنسخ
-واللصق على الموقع المنشور في `/design-system/INSTALL.md`:
+استخدم النطاق الإنتاجي للمواقع الأخرى. نموذج تضمين ملفات التنسيق والبرمجة للنسخ واللصق:
 
-Use the production domain on other sites. The published
-`/design-system/INSTALL.md` contains the full copy-and-paste installation guide:
+Use the production domain on other sites. Copy-and-paste installation snippet:
 
 ```html
 <link rel="stylesheet" href="/design-system/sru-theme.css">

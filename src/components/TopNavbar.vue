@@ -10,7 +10,7 @@ defineEmits(['toggle-language', 'toggle-theme']);
 </script>
 
 <template>
-  <nav class="navbar app-navigation navbar-expand-lg navbar-dark bg-primary flex-shrink-0 shadow-sm">
+  <nav class="navbar app-navigation navbar-expand-lg navbar-dark bg-primary flex-shrink-0 shadow-sm" :aria-label="$t('app.mainNav')">
     <div class="container-fluid px-lg-4">
       <RouterLink class="navbar-brand" to="/">
         <img src="/img/logo-white.png" :alt="$t('app.brand')" width="163" height="30">
@@ -21,7 +21,7 @@ defineEmits(['toggle-language', 'toggle-theme']);
       <div class="collapse navbar-collapse" id="top-nav">
         <div class="navbar-nav me-auto">
           <RouterLink class="nav-link" exact-active-class="active" to="/">{{ $t('app.gallery') }}</RouterLink>
-          <a class="nav-link" href="/design-system/INSTALL.md">{{ $t('app.usageGuide') }}</a>
+          <a class="nav-link" href="/#installation">{{ $t('app.usageGuide') }}</a>
         </div>
         <div class="d-flex flex-wrap gap-2 py-2 py-lg-0">
           <button class="btn btn-sm btn-outline-light" type="button" :aria-pressed="locale === 'ar'" @click="$emit('toggle-language')">{{ $t('app.english') }}</button>
