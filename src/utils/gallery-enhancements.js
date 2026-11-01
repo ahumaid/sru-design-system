@@ -6,6 +6,7 @@ const root = document.documentElement;
 const boundToastButtons = new WeakSet();
 const boundRangeInputs = new WeakSet();
 const boundValidationForms = new WeakSet();
+const boundGalleryNavigation = new WeakSet();
 let galleryContentObserver;
 
 const voidElements = new Set([
@@ -117,6 +118,55 @@ const initializeInteractiveComponents = () => {
     });
 };
 
+const initializeGalleryScrollSpy = () => {
+    if (!globalThis.bootstrap) return;
+
+    const content = document.querySelector('#main-content');
+    const navigation = document.querySelector('#gallery-sidebar-nav');
+    if (!content || !navigation) return;
+
+    globalThis.bootstrap.ScrollSpy.getOrCreateInstance(content, {
+        target: '#gallery-sidebar-nav',
+    }).refresh();
+
+    if (!boundGalleryNavigation.has(navigation)) {
+        navigation.addEventListener('click', (event) => {
+            const link = event.target.closest('a[href]');
+            if (!link || !navigation.contains(link)) return;
+
+            navigation.querySelectorAll('.active').forEach((item) => item.classList.remove('active'));
+            link.classList.add('active');
+        });
+        boundGalleryNavigation.add(navigation);
+    }
+
+    if (!window.location.hash) return;
+
+    const activeLink = Array.from(navigation.querySelectorAll('a[href]'))
+        .find((link) => new URL(link.href, window.location.href).hash === window.location.hash);
+    if (!activeLink) return;
+
+    navigation.querySelectorAll('.active').forEach((link) => link.classList.remove('active'));
+    activeLink.classList.add('active');
+};
+
+const scrollToCurrentGalleryHash = () => {
+    if (!window.location.hash) return;
+
+    const content = document.querySelector('#main-content');
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    const section = document.getElementById(id);
+    const target = section?.closest('.gallery-section-frame') ?? section;
+    if (!content || !target) return;
+
+    content.scrollTo({
+        top: target.getBoundingClientRect().top
+            - content.getBoundingClientRect().top
+            + content.scrollTop,
+        behavior: 'auto',
+    });
+};
+
 const observeGalleryContent = () => {
     if (galleryContentObserver) return;
 
@@ -155,6 +205,11 @@ export const initializeGalleryPage = (locale) => {
     setLocale(locale);
     addClassReferences();
     initializeInteractiveComponents();
+    initializeGalleryScrollSpy();
+    scrollToCurrentGalleryHash();
+    requestAnimationFrame(() => {
+        requestAnimationFrame(scrollToCurrentGalleryHash);
+    });
 
     if (globalThis.bootstrap) {
         const toastElement = document.querySelector('#demo-toast');
