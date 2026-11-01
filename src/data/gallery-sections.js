@@ -1,4 +1,5 @@
 import AccordionSection from '../components/sections/AccordionSection.vue';
+import AiSkillSection from '../components/sections/AiSkillSection.vue';
 import AlertsSection from '../components/sections/AlertsSection.vue';
 import BadgeSection from '../components/sections/BadgeSection.vue';
 import BreadcrumbSection from '../components/sections/BreadcrumbSection.vue';
@@ -36,6 +37,7 @@ export const gallerySections = [
   { id: 'introduction', group: 'guide', labelKey: 'guide.introduction', routeName: 'introduction', routePath: '/', component: IntroductionSection },
   { id: 'getting-started', group: 'guide', labelKey: 'guide.gettingStarted', routeName: 'getting-started', routePath: '/guide/getting-started', component: GettingStartedSection },
   { id: 'installation', group: 'guide', labelKey: 'guide.installation', routeName: 'installation', routePath: '/guide/installation', component: InstallationSection },
+  { id: 'ai-skill', group: 'guide', labelKey: 'guide.aiSkill', routeName: 'ai-skill', routePath: '/guide/ai-skill', component: AiSkillSection },
   { id: 'foundations', group: 'components', labelKey: 'nav.components.foundations', routeName: 'foundations', routePath: '/foundations', component: FoundationsSection },
   { id: 'brand-logos', group: 'components', labelKey: 'nav.components.logos', routeName: 'logos', routePath: '/components/logos', component: BrandLogosSection },
   { id: 'icons', group: 'components', labelKey: 'nav.components.icons', routeName: 'icons', routePath: '/components/icons', component: IconsSection },

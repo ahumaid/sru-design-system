@@ -93,8 +93,8 @@ Use the production domain on other sites. The published
 `/design-system/INSTALL.md` contains the full copy-and-paste installation guide:
 
 ```html
-<link rel="stylesheet" href="https://<design-system-domain>/design-system/sru-theme.css">
-<script defer src="https://<design-system-domain>/design-system/bootstrap.bundle.js"></script>
+<link rel="stylesheet" href="/design-system/sru-theme.css">
+<script defer src="/design-system/bootstrap.bundle.js"></script>
 ```
 
 استخدم `sru-theme.rtl.css` للصفحات العربية ذات الاتجاه RTL. تلزم حزمة
@@ -133,13 +133,11 @@ Cloudflare Pages project. Set `main` as the production branch, `npm run build`
 as the build command, and `dist` as the output directory. Cloudflare installs
 dependencies from `package-lock.json` before building.
 
-يمنح Cloudflare المشروع نطاقاً ينتهي بـ `pages.dev`. أضف النطاق المخصص الذي
-تختاره الجامعة إلى إعدادات مشروع Pages إذا رغبت في استخدام نطاق تابع للجامعة،
-ثم استبدل `<design-system-domain>` في أمثلة الاستخدام بالنطاق بعد تفعيله.
+يستضيف Cloudflare المشروع على نطاق الإنتاج الحالي. أضف النطاق المخصص الذي
+تختاره الجامعة إلى إعدادات مشروع Pages إذا رغبت في استخدام نطاق تابع للجامعة.
 
-Cloudflare assigns the project a `pages.dev` domain. To use a university domain,
-add the chosen custom domain in the Pages project settings, then replace
-`<design-system-domain>` in the usage examples with the active domain.
+Cloudflare hosts the project at its current production domain. To use a
+university domain, add the chosen custom domain in the Pages project settings.
 
 يضبط `public/_headers` التخزين المؤقت لمسارات ملفات التصميم الثابتة مع إعادة
 التحقق. يمكن للمتصفحات وCloudflare إعادة استخدام الملف ما دام دون تغيير، وجلب

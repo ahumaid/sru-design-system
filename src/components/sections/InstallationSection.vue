@@ -2,11 +2,11 @@
 import HtmlSnippet from '../HtmlSnippet.vue';
 
 const snippets = {
-  ltrStylesheet: '<link rel="stylesheet" href="https://<design-system-domain>/design-system/sru-theme.css">',
-  rtlStylesheet: '<link rel="stylesheet" href="https://<design-system-domain>/design-system/sru-theme.rtl.css">',
-  javascript: '<script defer src="https://<design-system-domain>/design-system/bootstrap.bundle.js"><\/script>',
-  lucide: `<script src="https://unpkg.com/lucide@latest"><\/script>
-<button class="btn btn-primary" type="button">
+  ltrStylesheet: `<link rel="stylesheet" href="${window.location.origin}/design-system/sru-theme.css">`,
+  rtlStylesheet: `<link rel="stylesheet" href="${window.location.origin}/design-system/sru-theme.rtl.css">`,
+  javascript: `<script defer src="${window.location.origin}/design-system/bootstrap.bundle.js"><\/script>`,
+  lucideCdn: '<script src="https://unpkg.com/lucide@latest"><\/script>',
+  lucide: `<button class="btn btn-primary" type="button">
   <i data-lucide="search" aria-hidden="true"></i>
   Search
 </button>
@@ -34,11 +34,16 @@ const snippets = {
         </div>
         <div>
           <h3 class="h6">{{ $t('phrases.optional-javascript') }}</h3>
+          <p>{{ $t('copy.bootstrapJavascriptUsage') }}</p>
           <HtmlSnippet :code="snippets.javascript" :label="$t('app.snippet')" />
         </div>
         <div>
           <h3 class="h6">{{ $t('phrases.lucide-icons') }}</h3>
           <p>{{ $t('phrases.load-lucide-when-the-page-uses-icons-then-call') }} <code>lucide.createIcons()</code> {{ $t('phrases.after-the-elements-with') }} <code>data-lucide</code> {{ $t('phrases.are-in-the-page') }}</p>
+          <h4 class="h6 mt-3">{{ $t('phrases.lucide-cdn') }}</h4>
+          <p>{{ $t('copy.lucideCdnUsage') }}</p>
+          <HtmlSnippet :code="snippets.lucideCdn" :label="$t('app.snippet')" />
+          <p class="mt-3">{{ $t('copy.lucideMarkupUsage') }}</p>
           <HtmlSnippet :code="snippets.lucide" :label="$t('app.snippet')" />
         </div>
         <i18n-t keypath="copy.rtlStylesheetNote" tag="p" class="installation-note mb-0"><template #file><code>sru-theme.rtl.css</code></template></i18n-t>

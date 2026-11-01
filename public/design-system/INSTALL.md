@@ -2,23 +2,33 @@
 
 ## إضافة النظام إلى موقع
 
+لا تحتاج إلى تنزيل ملفات نظام التصميم أو مكتبة Lucide. انسخ التعليمات المستضافة
+أدناه والصقها في موقعك.
+
+You do not need to download the design system files or the Lucide library. Copy
+and paste the hosted snippets below into your site.
+
 أضف ملف التنسيق المستضاف داخل عنصر `<head>`. يتضمن الملف Bootstrap 5.3.8 وسمة جامعة سليمان الراجحي، لذلك لا تضف ملف Bootstrap CSS آخر.
 
 ```html
-<link rel="stylesheet" href="https://<design-system-domain>/design-system/sru-theme.css">
+<link rel="stylesheet" href="/design-system/sru-theme.css">
 ```
 
 للصفحات العربية أو الصفحات الأخرى من اليمين إلى اليسار، استخدم ملف RTL:
 
 ```html
-<link rel="stylesheet" href="https://<design-system-domain>/design-system/sru-theme.rtl.css">
+<link rel="stylesheet" href="/design-system/sru-theme.rtl.css">
 ```
 
 حمّل حزمة JavaScript المستضافة قبل إغلاق وسم `</body>` عند استخدام مكونات Bootstrap التفاعلية:
 
 ```html
-<script defer src="https://<design-system-domain>/design-system/bootstrap.bundle.js"></script>
+<script defer src="/design-system/bootstrap.bundle.js"></script>
 ```
+
+حزمة JavaScript الخاصة بـ Bootstrap اختيارية. حمّلها عند استخدام المكونات التفاعلية
+مثل النوافذ المنبثقة والقوائم المنسدلة والطي والشرائح واللوحات الجانبية والتلميحات
+والنوافذ المنبثقة والإشعارات فقط. تتضمن الحزمة Popper بالفعل.
 
 تتضمن الحزمة Popper ولا تحتاج إلى jQuery. حمّلها مرة واحدة فقط. وهي توفر سلوك القوائم المنسدلة والنوافذ المنبثقة والطي والشرائط المتحركة واللوحات الجانبية والتلميحات والنوافذ التوضيحية والإشعارات ومكونات Bootstrap التفاعلية الأخرى.
 
@@ -26,13 +36,21 @@
 
 أضف مكتبة Lucide عند استخدام الأيقونات، ثم استدعِ `lucide.createIcons()` بعد عناصر الأيقونات. تستبدل المكتبة العناصر التي تحتوي على `data-lucide` برسوم SVG.
 
+أضف نص CDN التالي مرة واحدة عند استخدام أيقونات Lucide:
+
+```html
+<script src="https://unpkg.com/lucide@latest"></script>
+```
+
+أضف ترميز الأيقونة في الموضع المطلوب، ثم استدعِ `lucide.createIcons()` بعد إضافة
+العناصر إلى الصفحة:
+
 ```html
 <button class="btn btn-primary" type="button">
   <i data-lucide="search" aria-hidden="true"></i>
   بحث
 </button>
 
-<script src="https://unpkg.com/lucide@latest"></script>
 <script>
   lucide.createIcons();
 </script>
