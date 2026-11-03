@@ -1,12 +1,13 @@
 <script setup>
 import { ref, computed, nextTick, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import sruDesignSystemSkill from '../../data/sru-design-system-skill.md?raw';
+import sruDesignSystemPrompt from '../../data/sru-design-system-prompt.md?raw';
 import HtmlSnippet from '../HtmlSnippet.vue';
 
 const { locale } = useI18n({ useScope: 'global' });
 const browserOrigin = typeof window !== 'undefined' ? window.location.origin : '';
-const browserHostSkill = computed(() => sruDesignSystemSkill.replaceAll('https://<design-system-domain>', browserOrigin));
+const browserHostPrompt = computed(() => sruDesignSystemPrompt.replaceAll('https://<design-system-domain>', browserOrigin));
+const skillUrl = computed(() => `${browserOrigin}/design-system/sru-design-system-skill.md`);
 
 const copied = ref(false);
 let copyTimeout = null;
@@ -21,10 +22,10 @@ const renderIcons = async () => {
 const copySkill = async () => {
   try {
     if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(browserHostSkill.value);
+      await navigator.clipboard.writeText(browserHostPrompt.value);
     } else {
       const textarea = document.createElement('textarea');
-      textarea.value = browserHostSkill.value;
+      textarea.value = browserHostPrompt.value;
       textarea.style.position = 'fixed';
       textarea.style.opacity = '0';
       document.body.appendChild(textarea);
@@ -40,20 +41,8 @@ const copySkill = async () => {
       renderIcons();
     }, 2500);
   } catch (err) {
-    console.error('Failed to copy skill:', err);
+    console.error('Failed to copy prompt:', err);
   }
-};
-
-const downloadSkill = () => {
-  const blob = new Blob([browserHostSkill.value], { type: 'text/markdown;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const anchor = document.createElement('a');
-  anchor.href = url;
-  anchor.download = 'SKILL.md';
-  document.body.appendChild(anchor);
-  anchor.click();
-  document.body.removeChild(anchor);
-  URL.revokeObjectURL(url);
 };
 
 watch(locale, () => {
@@ -88,17 +77,12 @@ onMounted(() => {
             <i :data-lucide="copied ? 'check' : 'copy'" aria-hidden="true"></i>
             <span>{{ copied ? $t('app.copied') : $t('app.copySkill') }}</span>
           </button>
-          <button
-            type="button"
-            class="btn btn-outline-primary d-inline-flex align-items-center gap-2"
-            @click="downloadSkill"
-            :aria-label="$t('app.downloadSkill')"
-          >
-            <i data-lucide="download" aria-hidden="true"></i>
-            <span>{{ $t('app.downloadSkill') }}</span>
-          </button>
+          <a class="btn btn-outline-primary d-inline-flex align-items-center gap-2" :href="skillUrl" target="_blank" rel="noopener">
+            <i data-lucide="external-link" aria-hidden="true"></i>
+            <span>{{ $t('app.viewSkill') }}</span>
+          </a>
         </div>
-        <HtmlSnippet :code="browserHostSkill" :label="$t('phrases.ai-skill-snippet')" />
+        <HtmlSnippet :code="browserHostPrompt" :label="$t('phrases.ai-skill-snippet')" />
       </div>
     </div>
   </section>

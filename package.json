@@ -10,10 +10,11 @@
     "dev": "vite --host 0.0.0.0",
     "predev": "npm run build:assets",
     "build": "npm run build:assets && vite build",
-    "build:assets": "npm run build:theme && npm run build:rtl && npm run build:bootstrap",
+    "build:assets": "npm run build:theme && npm run build:rtl && npm run build:bootstrap && npm run build:ai-guides",
     "build:theme": "sass --quiet-deps --silence-deprecation=import --load-path=node_modules --no-source-map --style=compressed src/styles/sru-theme.scss public/design-system/sru-theme.css",
     "build:rtl": "node scripts/build-direction-stylesheet.js",
     "build:bootstrap": "cp node_modules/bootstrap/dist/js/bootstrap.bundle.min.js public/design-system/bootstrap.bundle.js",
+    "build:ai-guides": "node scripts/build-ai-guides.js",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {

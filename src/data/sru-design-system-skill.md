@@ -9,6 +9,7 @@ Use this skill when building or reviewing an SRU website.
 
 ## Before you work
 
+- Fetch and read the latest version of this skill from `https://design-system.sru.sa/design-system/sru-design-system-skill.md` before starting work. Use an available web or fetch capability to read it at that URL; do not download or save the skill file into the consumer project.
 - Read the SRU Design System usage guide and inspect the component gallery.
 - Find the closest existing gallery example and use it as the reference for markup, states, spacing, typography, colors, responsive behavior, and page direction.
 - Load `sru-theme.css` on every page. For a right-to-left (RTL) page, set `dir="rtl"` on the `<html>` element; the stylesheet applies its RTL rules automatically.
@@ -17,10 +18,12 @@ Use this skill when building or reviewing an SRU website.
 
 Use these published assets from the same host that serves this design system.
 
-- CSS stylesheet: `https://<design-system-domain>/design-system/sru-theme.css`
-- Bootstrap JavaScript bundle: `https://<design-system-domain>/design-system/bootstrap.bundle.js`
+- CSS stylesheet: `https://design-system.sru.sa/design-system/sru-theme.css`
+- Bootstrap JavaScript bundle: `https://design-system.sru.sa/design-system/bootstrap.bundle.js`
 
 The stylesheet includes Bootstrap 5.3.8, the SRU theme, and RTL support. Use the same stylesheet for left-to-right and right-to-left pages. Set `dir="rtl"` on the `<html>` element for Arabic and other right-to-left pages. Load the JavaScript bundle only when interactive Bootstrap components are used; it already includes Popper.
+
+If the consumer website uses a Content Security Policy (CSP), allow `https://design-system.sru.sa` in the directives required by the assets you use: `style-src` for the stylesheet, `script-src` for the Bootstrap bundle, and `img-src` for university logos. Keep the allowances limited to the required assets.
 
 ## Asset sourcing rule
 
@@ -28,12 +31,12 @@ Use only the CDN URLs provided in this skill when adding assets to a consumer pr
 
 ## University logo assets
 
-Use the university logo assets served from the design system host at `https://<design-system-domain>`:
+Use the university logo assets served from the design system host at `https://design-system.sru.sa`:
 
-- `https://<design-system-domain>/img/logo-color.png` for light backgrounds.
-- `https://<design-system-domain>/img/logo-white.png` for dark backgrounds.
-- `https://<design-system-domain>/img/logo-icon.png` (512 × 512) for square placements such as app icons.
-- `https://<design-system-domain>/img/favicon.png` (32 × 32) as the browser favicon. Add `<link rel="icon" type="image/png" sizes="32x32" href="https://<design-system-domain>/img/favicon.png">` inside the page `<head>`.
+- `https://design-system.sru.sa/img/logo-color.png` for light backgrounds.
+- `https://design-system.sru.sa/img/logo-white.png` for dark backgrounds.
+- `https://design-system.sru.sa/img/logo-icon.png` (512 × 512) for square placements such as app icons.
+- `https://design-system.sru.sa/img/favicon.png` (32 × 32) as the browser favicon. Add `<link rel="icon" type="image/png" sizes="32x32" href="https://design-system.sru.sa/img/favicon.png">` inside the page `<head>`.
 
 Use the Brand logos gallery to preview these files and their usage guidance.
 

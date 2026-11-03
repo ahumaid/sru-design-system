@@ -22,7 +22,7 @@
     "snippet": "HTML snippet",
     "copySkill": "Copy AI Skill",
     "copied": "Copied!",
-    "downloadSkill": "Download SKILL.md",
+    "viewSkill": "View AI Skill",
     "cspNote": "If the page uses a Content Security Policy (CSP), allow {domain} in {directive}."
   },
   "hero": {
@@ -71,7 +71,7 @@
     "getting-started": "Getting started",
     "stylesheet": "Stylesheet",
     "optional-javascript": "Optional JavaScript",
-    "ai-skill-snippet": "View the SKILL.md file",
+    "ai-skill-snippet": "View the installable AI skill",
     "components": "Components",
     "component-gallery": "Component gallery",
     "usage-guide": "Usage guide",
@@ -422,8 +422,8 @@
     "loadInteractiveJavascript": "Load the JavaScript bundle only when using interactive components such as modals, dropdowns, or tooltips.",
     "useGalleryExamples": "Use the examples in this gallery as patterns, and check keyboard access and RTL layout when relevant.",
     "aiReviewWarning": "AI agents make mistakes. You are responsible for comparing their output with the referenced gallery example and confirming it follows the design system before accepting it.",
-    "aiSkillExplanation": "This is a reusable skill for AI coding agents. It gives the agent the SRU Design System context and rules it should follow when it creates or reviews your website.",
-    "aiSkillUsage": "Save it as SKILL.md in the skills directory supported by your AI coding tool, or provide its contents to the agent before asking it to work on your site.",
+    "aiSkillExplanation": "This installable skill points an AI coding agent to the published SRU Design System guidance, the sole source of truth for UI decisions.",
+    "aiSkillUsage": "Save this content as SKILL.md in your AI coding tool's skills directory. The agent will fetch and read the linked guidance when needed; do not download that linked file into your project.",
     "installationDescription": "Designed for maximum developer velocity: no complex package installations or manual file management required. Simply copy and paste the hosted snippets below to begin building immediately.",
     "directionNote": "For Arabic or another right-to-left page, set dir=\"rtl\" on the html element and use {file}. RTL support is built in, and the stylesheet includes Bootstrap, so do not load another Bootstrap CSS file.",
     "heroDescription": "The unified digital design system for Sulaiman AlRajhi University: an empowering ecosystem built to support developers and accelerate digital delivery, featuring unified visual identity, native bidirectional support (RTL / LTR), light & dark themes, and accessible components (WCAG 2.1 AA) for maximum impact with minimal effort.",
