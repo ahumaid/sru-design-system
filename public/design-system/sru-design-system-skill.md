@@ -12,7 +12,7 @@ Use this skill when building or reviewing an SRU website.
 - Fetch and read the latest version of this skill from `https://design-system.sru.sa/design-system/sru-design-system-skill.md` before starting work. Use an available web or fetch capability to read it at that URL; do not download or save the skill file into the consumer project.
 - Read the SRU Design System usage guide and inspect the component gallery.
 - Find the closest existing gallery example and use it as the reference for markup, states, spacing, typography, colors, responsive behavior, and page direction.
-- Load `sru-theme.css` on every page. For a right-to-left (RTL) page, set `dir="rtl"` on the `<html>` element; the stylesheet applies its RTL rules automatically.
+- Load `sru-theme.css` on every page. For a right-to-left (RTL) page, set `dir="rtl"` on the `<html>` element; the stylesheet applies its RTL rules automatically. Set `data-bs-theme="dark"` on `<html>` to use the dark theme, or `data-bs-theme="light"` to use the light theme.
 
 ## Published assets
 
@@ -22,6 +22,22 @@ Use these published assets from the same host that serves this design system.
 - Bootstrap JavaScript bundle: `https://design-system.sru.sa/design-system/bootstrap.bundle.js`
 
 The stylesheet includes Bootstrap 5.3.8, the SRU theme, and RTL support. Use the same stylesheet for left-to-right and right-to-left pages. Set `dir="rtl"` on the `<html>` element for Arabic and other right-to-left pages. Load the JavaScript bundle only when interactive Bootstrap components are used; it already includes Popper.
+
+## Theme mode
+
+Set the `data-bs-theme` attribute on the `<html>` element to select the page theme. Preserve the page's language and direction attributes:
+
+```html
+<html lang="ar" dir="rtl" data-bs-theme="dark">
+```
+
+Use `data-bs-theme="light"` for the light theme. To switch themes while the page is open, update the attribute with JavaScript; this does not require the Bootstrap JavaScript bundle:
+
+```js
+document.documentElement.dataset.bsTheme = 'dark';
+```
+
+Set the value to `'light'` to switch back. Refer to the usage guide's dark theme example for a component preview.
 
 If the consumer website uses a Content Security Policy (CSP), allow `https://design-system.sru.sa` in the directives required by the assets you use: `style-src` for the stylesheet, `script-src` for the Bootstrap bundle, and `img-src` for university logos. Keep the allowances limited to the required assets.
 

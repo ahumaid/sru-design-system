@@ -115,6 +115,26 @@ do not add another Bootstrap stylesheet. The theme loads the Cairo font from Goo
 Fonts. For a restrictive Content Security Policy, allow `fonts.googleapis.com`
 in `style-src` and `fonts.gstatic.com` in `font-src`.
 
+## المظهر الداكن / Dark theme
+
+لتطبيق المظهر الداكن على الصفحة، أضف الخاصية `data-bs-theme="dark"` إلى عنصر
+`<html>` مع الإبقاء على خصائص اللغة والاتجاه المناسبة:
+
+```html
+<html lang="ar" dir="rtl" data-bs-theme="dark">
+```
+
+To apply the dark theme across a page, add `data-bs-theme="dark"` to the
+`<html>` element and keep the appropriate language and direction attributes.
+For a runtime theme switch, update the same attribute:
+
+```js
+document.documentElement.dataset.bsTheme = 'dark';
+```
+
+Set it to `'light'` to return to the light theme. The bundled Bootstrap
+JavaScript is not required for this theme change.
+
 ## النشر على Cloudflare Pages / Deploying to Cloudflare Pages
 
 لإعداد النشر التلقائي، اربط مستودع GitHub
