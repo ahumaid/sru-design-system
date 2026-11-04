@@ -243,6 +243,11 @@ html[dir='rtl'] .carousel-control-next-icon {
     background-color: var(--bs-primary-bg-subtle) !important;
 }
 
+[data-bs-theme='dark'] .bg-dark,
+[data-bs-theme='dark'] .text-bg-dark {
+    background-color: var(--bs-dark-bg-subtle) !important;
+}
+
 [data-bs-theme='dark'] .btn-primary,
 [data-bs-theme='dark'] .btn-outline-primary {
     --bs-btn-focus-shadow-rgb: var(--bs-link-color-rgb);
