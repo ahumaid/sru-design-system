@@ -1,17 +1,10 @@
-# نظام تصميم جامعة سليمان الراجحي (SRU) / Suleiman Al Rajhi University Design System
-
-المصدر المعتمد لقالب Bootstrap الخاص بالجامعة ومعرض مكوّناته للمطوّرين. بعد
-ربط المستودع بـ Cloudflare Pages، تُنشر التغييرات من الفرع الإنتاجي وتظل روابط
-ملفات القالب ثابتة دون أرقام إصدارات.
+# Suleiman Al Rajhi University (SRU) Design System
 
 The official source for the university's Bootstrap theme and developer component
 gallery. Once the repository is connected to Cloudflare Pages, changes deploy
 from the production branch and theme file URLs stay stable without version numbers.
 
-## التطوير المحلي / Local development
-
-يتطلب التطوير المحلي Docker وDocker Compose وJust. تعمل أوامر Node.js وnpm داخل
-الحاوية، ولا تحتاج إلى تثبيتهما على جهازك. شغّل خادم التطوير:
+## Local development
 
 Local development requires Docker, Docker Compose, and Just. Node.js and npm run
 inside the container, so you do not need to install them on your machine. Start
@@ -21,40 +14,26 @@ the development server with:
 just dev
 ```
 
-تعمل معاينة التطوير على `http://localhost:15173`. يختار Docker منفذاً متاحاً
-تلقائياً لمعاينة الإنتاج التي تبدأ بالأمر `just preview`.
-
 The development preview runs at `http://localhost:15173`. Docker automatically
 assigns an available port for the production preview started with `just preview`.
-
-افتح `http://localhost:15173`. يعرض الموقع مكوّنات Bootstrap، ويستخدم العربية
-لغةً افتراضية، ويوفر معاينات بالعربية والإنجليزية واتجاهي LTR وRTL ومظهري
-الإضاءة والظلام، إضافةً إلى أمثلة تفاعلية.
 
 Open `http://localhost:15173`. The gallery showcases Bootstrap components, uses
 Arabic by default, and includes Arabic and English previews in LTR and RTL, light
 and dark themes, and interactive examples.
 
-يعيد Vite تحميل معاينات المعرض عند حفظ التغييرات. بعد تعديل ملفات Sass الخاصة
-بملفات التصميم المنشورة، شغّل `just assets` ثم حدّث المتصفح:
-
-Vite hot reloads gallery previews when you save changes. After editing Sass
-that produces the published design system files, run `just assets` and refresh
-the browser:
+Vite hot reloads gallery previews when you save changes. After editing Sass that
+produces the published design system files, run `just assets` and refresh the
+browser:
 
 ```sh
 just assets
 ```
-
-لإنشاء ملفات الإنتاج ومعاينتها محلياً:
 
 To build the production files and preview them locally:
 
 ```sh
 just build
 ```
-
-لعرض ملفات الإنتاج محلياً، شغّل الأمر التالي. يعيد الأمر بناء الملفات أولاً:
 
 To preview the production files locally, run this command. It builds the files
 first:
@@ -63,8 +42,6 @@ first:
 just preview
 ```
 
-بعد تعديل `package.json` أو `package-lock.json`، حدّث الاعتماديات داخل الحاوية:
-
 If you change `package.json` or `package-lock.json`, update dependencies inside
 the container with:
 
@@ -72,19 +49,12 @@ the container with:
 just deps
 ```
 
-## الملفات المنشورة / Published files
-
-المسارات الثابتة التي يقدّمها Cloudflare Pages:
+## Published files
 
 The stable paths served by Cloudflare Pages are:
 
-- `/design-system/sru-theme.css` — Bootstrap 5.3.8 وقالب الجامعة، مع دعم الاتجاهين.
-- `/design-system/bootstrap.bundle.js` — حزمة JavaScript الخاصة بـ Bootstrap مع Popper.
-
 - `/design-system/sru-theme.css` — Bootstrap 5.3.8 and the university theme, with support for both directions.
 - `/design-system/bootstrap.bundle.js` — Bootstrap JavaScript bundle with Popper.
-
-استخدم النطاق الإنتاجي للمواقع الأخرى. نموذج تضمين ملفات التنسيق والبرمجة للنسخ واللصق:
 
 Use the production domain on other sites. Copy-and-paste installation snippet:
 
@@ -93,39 +63,26 @@ Use the production domain on other sites. Copy-and-paste installation snippet:
 <script defer src="/design-system/bootstrap.bundle.js"></script>
 ```
 
-للصفحات العربية ذات الاتجاه RTL، اضبط `dir="rtl"` على عنصر `<html>` واستخدم الملف
-نفسه. تلزم حزمة JavaScript للمكونات التفاعلية مثل القوائم المنسدلة والنوافذ والطيّ
-والشرائح واللوحات الجانبية والتلميحات والنوافذ المنبثقة والتنبيهات. تتضمن الحزمة
-Popper ولا تحتاج إلى jQuery. إذا كان الموقع يحمّل JavaScript الخاص بـ Bootstrap
-مسبقاً، فلا تحمّل حزمة ثانية.
-
 For Arabic pages with RTL direction, set `dir="rtl"` on the `<html>` element and
 use the same stylesheet. The JavaScript bundle is required for interactive
 components such as dropdowns, modals, collapse, carousels, offcanvas panels,
 tooltips, popovers, and toasts. It includes Popper and does not require jQuery.
 If your site already loads Bootstrap JavaScript, do not load a second bundle.
 
-يتضمن ملف التنسيق أنماط Bootstrap كاملةً وقالب الجامعة؛ لذلك لا تضف ملف CSS
-ثانياً لـ Bootstrap. يُحمّل القالب خط Cairo من Google Fonts. عند استخدام سياسة
-أمن محتوى مقيّدة، اسمح بـ `fonts.googleapis.com` ضمن `style-src` وبـ
-`fonts.gstatic.com` ضمن `font-src`.
-
-The stylesheet includes full Bootstrap styles and the university theme, so
-do not add another Bootstrap stylesheet. The theme loads the Cairo font from Google
+The stylesheet includes full Bootstrap styles and the university theme, so do
+not add another Bootstrap stylesheet. The theme loads the Cairo font from Google
 Fonts. For a restrictive Content Security Policy, allow `fonts.googleapis.com`
 in `style-src` and `fonts.gstatic.com` in `font-src`.
 
-## المظهر الداكن / Dark theme
+## Dark theme
 
-لتطبيق المظهر الداكن على الصفحة، أضف الخاصية `data-bs-theme="dark"` إلى عنصر
-`<html>` مع الإبقاء على خصائص اللغة والاتجاه المناسبة:
+To apply the dark theme across a page, add `data-bs-theme="dark"` to the
+`<html>` element and keep the appropriate language and direction attributes:
 
 ```html
 <html lang="ar" dir="rtl" data-bs-theme="dark">
 ```
 
-To apply the dark theme across a page, add `data-bs-theme="dark"` to the
-`<html>` element and keep the appropriate language and direction attributes.
 For a runtime theme switch, update the same attribute:
 
 ```js
@@ -135,13 +92,7 @@ document.documentElement.dataset.bsTheme = 'dark';
 Set it to `'light'` to return to the light theme. The bundled Bootstrap
 JavaScript is not required for this theme change.
 
-## النشر على Cloudflare Pages / Deploying to Cloudflare Pages
-
-لإعداد النشر التلقائي، اربط مستودع GitHub
-[`ahumaid/sru-design-system`](https://github.com/ahumaid/sru-design-system)
-بمشروع Cloudflare Pages. حدّد `main` فرعاً للإنتاج، و`npm run build` أمرًا
-للبناء، و`dist` مجلداً لملفات الإخراج. يثبّت Cloudflare الاعتماديات من
-`package-lock.json` قبل تنفيذ البناء.
+## Deploying to Cloudflare Pages
 
 For automatic deployments, connect the GitHub repository
 [`ahumaid/sru-design-system`](https://github.com/ahumaid/sru-design-system) to a
@@ -149,27 +100,15 @@ Cloudflare Pages project. Set `main` as the production branch, `npm run build`
 as the build command, and `dist` as the output directory. Cloudflare installs
 dependencies from `package-lock.json` before building.
 
-يستضيف Cloudflare المشروع على نطاق الإنتاج الحالي. أضف النطاق المخصص الذي
-تختاره الجامعة إلى إعدادات مشروع Pages إذا رغبت في استخدام نطاق تابع للجامعة.
-
 Cloudflare hosts the project at its current production domain. To use a
 university domain, add the chosen custom domain in the Pages project settings.
-
-يضبط `public/_headers` التخزين المؤقت لمسارات ملفات التصميم الثابتة مع إعادة
-التحقق. يمكن للمتصفحات وCloudflare إعادة استخدام الملف ما دام دون تغيير، وجلب
-النسخة الجديدة بعد النشر عند تحديثه من دون تغيير رابطه. تجنب قواعد التخزين
-المؤقت التي تتجاوز هذه الترويسات.
 
 `public/_headers` configures revalidation for cached design system files.
 Browsers and Cloudflare can reuse an unchanged file and fetch the updated file
 after a deployment without changing its URL. Avoid cache rules that override
 these headers.
 
-## تحديث القالب / Updating the theme
-
-استخدم مكونات Bootstrap 5.3.8 وأدواته ورموز القالب المتاحة، ولا تضف تنسيقات
-CSS مخصصة. يعيد الأمر `npm run build` إنشاء ملفات التصميم المنشورة وبناء موقع
-المعرض.
+## Updating the theme
 
 Use the available Bootstrap 5.3.8 components, utilities, and theme tokens; do
 not add custom CSS. Run `npm run build` to regenerate the published design
