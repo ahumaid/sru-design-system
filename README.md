@@ -54,6 +54,7 @@ just deps
 The stable paths served by Cloudflare Pages are:
 
 - `/design-system/sru-theme.css` — Bootstrap 5.3.8 and the university theme, with support for both directions.
+- `/design-system/sru-tokens.css` — lightweight token-only stylesheet for external integrations such as the SRU SSO SDK (ملف أنماط خفيف للتكاملات الخارجية مثل حزمة SRU SSO، ويحتوي على رموز التصميم فقط).
 - `/design-system/bootstrap.bundle.js` — Bootstrap JavaScript bundle with Popper.
 
 Use the production domain on other sites. Copy-and-paste installation snippet:
@@ -61,6 +62,16 @@ Use the production domain on other sites. Copy-and-paste installation snippet:
 ```html
 <link rel="stylesheet" href="/design-system/sru-theme.css">
 <script defer src="/design-system/bootstrap.bundle.js"></script>
+```
+
+External integrations that only need SRU design tokens can load the standalone
+stylesheet without Bootstrap or the full Design System:
+
+يمكن للتكاملات الخارجية التي تحتاج إلى رموز تصميم SRU فقط تحميل ملف الأنماط
+المستقل دون Bootstrap أو نظام التصميم الكامل:
+
+```html
+<link rel="stylesheet" href="https://design-system.sredu.sa/design-system/sru-tokens.css">
 ```
 
 For Arabic pages with RTL direction, set `dir="rtl"` on the `<html>` element and

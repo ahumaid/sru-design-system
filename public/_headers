@@ -3,6 +3,12 @@
   Access-Control-Allow-Origin: *
   X-Content-Type-Options: nosniff
 
+/design-system/sru-tokens.css
+  Content-Type: text/css; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  X-Content-Type-Options: nosniff
+
 /design-system/sru-design-system-skill.md
   Content-Type: text/markdown; charset=utf-8
 

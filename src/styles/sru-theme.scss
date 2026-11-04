@@ -148,6 +148,7 @@ html[dir='rtl'] .carousel-control-next-icon {
     --sru-white: #fff;
     --sru-purple: #501e8c;
     --sru-purple-dark: #3a1464;
+    --sru-bg-primary: #501e8c;
     --sru-purple-deep: #170822;
     --sru-purple-soft: #f0ebf8;
     --sru-purple-muted: #9486a0;
@@ -180,6 +181,10 @@ html[dir='rtl'] .carousel-control-next-icon {
     --sru-sso-dark-surface: #19161f;
     --sru-sso-dark-border: #45404b;
     --sru-sso-dark-text: #f5f2f8;
+    --sru-bg-dark: #3a1464;
+    --sru-bg-dark-secondary: #24242a;
+    --sru-bg-dark-tertiary: #2e2e36;
+    --bs-dark-bg-subtle: #b7a5cb;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -199,6 +204,9 @@ html[dir='rtl'] .carousel-control-next-icon {
     --sru-line: rgb(233 226 240 / 18%);
     --sru-surface: #24242a;
     --sru-surface-alt: #2e2e36;
+    --sru-bg-primary: #2b1745;
+    --sru-bg-dark: #211c25;
+    --bs-dark-bg-subtle: #211c25;
     --sru-shadow-soft: 0 10px 28px rgb(0 0 0 / 24%);
     --sru-shadow: 0 16px 44px rgb(0 0 0 / 34%);
     --sru-green-soft: #142d22;
