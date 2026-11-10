@@ -37,6 +37,16 @@ $danger: $red;
 $light: $gray-100;
 $dark: $sru-purple-dark;
 
+// Progress indicators use a clear track and SRU-colored fill.
+$progress-height: 1.5rem;
+$progress-font-size: .8125rem;
+$progress-bg: rgba(var(--bs-emphasis-color-rgb), .06);
+$progress-border-radius: 0;
+$progress-bar-bg: color-mix(in srgb, var(--bs-link-color) 45%, var(--sru-purple) 55%);
+$progress-bar-color: $white;
+$progress-bar-animation-timing: 2.5s linear infinite;
+$progress-bar-transition: width .4s cubic-bezier(.22, 1, .36, 1);
+
 $font-family-sans-serif: 'Cairo', sans-serif;
 $font-weight-base: 600;
 $body-color: $gray-900;
@@ -66,8 +76,12 @@ $box-shadow: 0 .5rem 1rem rgba($sru-purple-deep, .15);
 $box-shadow-sm: 0 .125rem .25rem rgba($sru-purple-deep, .08);
 $box-shadow-lg: 0 1rem 3rem rgba($sru-purple-deep, .18);
 $box-shadow-inset: inset 0 1px 2px rgba($sru-purple-deep, .08);
-$border-radius: 2px;
-$border-radius-lg: 2px;
+$border-radius: 0;
+$border-radius-sm: 0;
+$border-radius-lg: 0;
+$border-radius-xl: 0;
+$border-radius-xxl: 0;
+$border-radius-pill: 0;
 
 // Dark mode uses neutral charcoal-purple surfaces and high-contrast text so
 // long-form content stays comfortable to read without losing the SRU hue.
@@ -122,6 +136,119 @@ $form-invalid-color-dark: #ffaaa5;
 $form-invalid-border-color-dark: #ef7770;
 
 @import 'bootstrap/scss/bootstrap';
+
+// لمعان متحرك لشريط التقدم / A moving highlight for animated progress bars.
+@keyframes sru-progress-bar-shimmer {
+    from { background-position: 100% 0; }
+    to { background-position: 0 0; }
+}
+
+.progress-bar-animated {
+    background-image: linear-gradient(110deg, transparent 35%, rgba($white, .08) 43%, rgba($white, .42) 50%, rgba($white, .08) 57%, transparent 65%);
+    background-size: 220% 100%;
+    animation: sru-progress-bar-shimmer $progress-bar-animation-timing;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .progress-bar-animated {
+        background-position: 50% 0;
+        animation: none;
+    }
+}
+
+@keyframes sru-loader-orbit {
+    to { transform: rotate(1turn); }
+}
+
+@keyframes sru-loader-dot-pulse {
+    50% { opacity: .3; transform: scale(.55); }
+}
+
+@keyframes sru-loader-ripple {
+    0% { opacity: .8; transform: scale(.35); }
+    100% { opacity: 0; transform: scale(1.15); }
+}
+
+.sru-loader {
+    display: inline-flex;
+    flex: 0 0 auto;
+}
+
+.sru-loader-orbit {
+    width: 2rem;
+    height: 2rem;
+    position: relative;
+    animation: sru-loader-orbit 1.5s linear infinite;
+}
+
+.sru-loader-orbit::before,
+.sru-loader-orbit::after {
+    position: absolute;
+    border-radius: 50%;
+    content: '';
+}
+
+.sru-loader-orbit::before {
+    inset: .2rem;
+    border: 2px solid currentColor;
+    opacity: .35;
+}
+
+.sru-loader-orbit::after {
+    top: .05rem;
+    left: calc(50% - .2rem);
+    width: .4rem;
+    height: .4rem;
+    background-color: currentColor;
+}
+
+.sru-loader-dots {
+    align-items: center;
+    gap: .25rem;
+}
+
+.sru-loader-dots > span {
+    width: .5rem;
+    height: .5rem;
+    border-radius: 50%;
+    background-color: currentColor;
+    animation: sru-loader-dot-pulse .9s ease-in-out infinite;
+}
+
+.sru-loader-dots > span:nth-child(2) { animation-delay: .12s; }
+.sru-loader-dots > span:nth-child(3) { animation-delay: .24s; }
+
+.sru-loader-ripple {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+}
+
+.sru-loader-ripple::before,
+.sru-loader-ripple::after {
+    position: absolute;
+    inset: .125rem;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    content: '';
+    animation: sru-loader-ripple 1.6s ease-out infinite;
+}
+
+.sru-loader-ripple::after {
+    inset: .5rem;
+    animation-delay: .8s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sru-loader-orbit,
+    .sru-loader-dots > span,
+    .sru-loader-ripple::before,
+    .sru-loader-ripple::after {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+}
 
 // Bootstrap mirrors carousel control positions in RTL, while its embedded
 // SVG direction markers are left to rtlcss. Flip the icons explicitly so the
