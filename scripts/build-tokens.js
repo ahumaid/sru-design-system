@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const sourcePath = 'src/styles/sru-theme.scss';
-const outputPath = 'public/design-system/sru-tokens.css';
+const outputPath = process.argv[2] ?? 'public/design-system/sru-tokens.css';
 const tokenNames = [
     '--sru-font-family',
     '--sru-white',

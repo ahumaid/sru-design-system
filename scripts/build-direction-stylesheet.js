@@ -5,7 +5,7 @@ import postcss from 'postcss';
 import rtlcss from 'rtlcss';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const ltrPath = path.join(projectRoot, 'public/design-system/sru-theme.css');
+const ltrPath = process.argv[2] ?? path.join(projectRoot, 'public/design-system/sru-theme.css');
 const outputMarker = '/*SRU-RTL-OVERRIDES start';
 const existingCss = fs.readFileSync(ltrPath, 'utf8');
 const existingOverridesIndex = existingCss.indexOf(outputMarker);
