@@ -51,10 +51,13 @@ Use the university logo assets served from the design system host at `https://de
 
 - `https://design-system.sredu.sa/img/logo-color.png` for light backgrounds.
 - `https://design-system.sredu.sa/img/logo-white.png` for dark backgrounds.
+- `https://design-system.sredu.sa/img/logo-color-medium.png` (512 px wide) and `https://design-system.sredu.sa/img/logo-white-medium.png` (512 px wide) for medium-sized placements.
+- `https://design-system.sredu.sa/img/logo-color-small.png` (256 px wide) and `https://design-system.sredu.sa/img/logo-white-small.png` (256 px wide) for compact placements such as headers and footers.
 - `https://design-system.sredu.sa/img/logo-icon.png` (512 × 512) for square placements such as app icons.
+- `https://design-system.sredu.sa/img/logo-icon-white.png` (512 × 512) for square placements on dark backgrounds.
 - `https://design-system.sredu.sa/img/favicon.png` (32 × 32) as the browser favicon. Add `<link rel="icon" type="image/png" sizes="32x32" href="https://design-system.sredu.sa/img/favicon.png">` inside the page `<head>`.
 
-Use the Brand logos gallery to preview these files and their usage guidance.
+Choose the color or white version for sufficient contrast with the background, and choose a size suited to the placement. Use the Brand logos gallery to preview these files and their usage guidance.
 
 ## Implementation rules
 

@@ -10,6 +10,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  open: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const tokens = computed(() => {
@@ -80,7 +84,7 @@ const tokens = computed(() => {
 </script>
 
 <template>
-  <details class="mt-3 w-100">
+  <details class="mt-3 w-100" :open="open">
     <summary class="fw-semibold text-primary mb-3">{{ label }}</summary>
     <pre class="bg-black border border-secondary rounded-3 p-3 p-md-4 mb-0 overflow-auto text-light text-wrap text-break" dir="ltr" data-bs-theme="dark" tabindex="0"><code class="font-monospace small"><template v-for="(token, index) in tokens" :key="index"><br v-if="token.newline"><span v-else :class="token.className">{{ token.text }}</span></template></code></pre>
   </details>

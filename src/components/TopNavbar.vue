@@ -13,7 +13,7 @@ defineEmits(['toggle-language', 'toggle-theme']);
   <nav class="navbar app-navigation navbar-expand-lg navbar-dark bg-primary flex-shrink-0 shadow-sm" :aria-label="$t('app.mainNav')">
     <div class="container-fluid px-lg-4">
       <a class="navbar-brand" href="/#top">
-        <img src="/img/logo-white.png" :alt="$t('app.brand')" width="163" height="30">
+        <img src="/img/logo-white-small.png" :alt="$t('app.brand')" width="163" height="30">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#top-nav" aria-controls="top-nav" aria-expanded="false" :aria-label="$t('app.navToggle')">
         <span class="navbar-toggler-icon"></span>
