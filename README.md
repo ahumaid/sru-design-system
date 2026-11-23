@@ -54,25 +54,84 @@ just deps
 The stable paths served by Cloudflare Pages are:
 
 - `/design-system/sru-theme.css` — Bootstrap 5.3.8 and the university theme, with support for both directions.
-- `/design-system/sru-tokens.css` — lightweight token-only stylesheet for external integrations such as the SRU SSO SDK (ملف أنماط خفيف للتكاملات الخارجية مثل حزمة SRU SSO، ويحتوي على رموز التصميم فقط).
+- `/design-system/sru-tokens.css` — framework-independent CSS custom properties for widgets and other external integrations (خصائص CSS مخصصة مستقلة عن أطر العمل للوحدات المصغّرة والتكاملات الخارجية).
 - `/design-system/bootstrap.bundle.js` — Bootstrap JavaScript bundle with Popper.
 
-Use the production domain on other sites. Copy-and-paste installation snippet:
+Use the production domain on other sites. For the full design system, use this
+installation snippet:
+
+استخدم نطاق الإنتاج في المواقع الأخرى. ولتحميل نظام التصميم الكامل، استخدم
+المقطع التالي:
 
 ```html
 <link rel="stylesheet" href="/design-system/sru-theme.css">
 <script defer src="/design-system/bootstrap.bundle.js"></script>
 ```
 
-External integrations that only need SRU design tokens can load the standalone
-stylesheet without Bootstrap or the full Design System:
+External websites that only need SRU design tokens can load the standalone
+stylesheet without Bootstrap, component styles, or JavaScript:
 
-يمكن للتكاملات الخارجية التي تحتاج إلى رموز تصميم SRU فقط تحميل ملف الأنماط
-المستقل دون Bootstrap أو نظام التصميم الكامل:
+يمكن للمواقع الخارجية التي تحتاج إلى رموز تصميم SRU فقط تحميل ملف الأنماط
+المستقل دون Bootstrap أو أنماط المكونات أو JavaScript:
 
 ```html
 <link rel="stylesheet" href="https://design-system.sredu.sa/design-system/sru-tokens.css">
 ```
+
+### Widget design tokens
+
+The public token file defines only custom properties. It adds no global element
+styles, resets, framework styles, utility classes, or component rules. The names
+are framework-independent: `--sru-color-brand-primary` and
+`--sru-color-on-brand-primary` for brand surfaces and foregrounds;
+`--sru-color-brand-primary-emphasis` for emphasized brand text;
+`--sru-color-white` and `--sru-color-dark`; `--sru-color-text` and
+`--sru-color-text-muted`; `--sru-color-surface-page` and
+`--sru-color-surface-raised`; `--sru-color-border` and
+`--sru-color-danger`; and `--sru-on-dark-muted`, `--sru-on-dark-border`,
+`--sru-on-dark-divider`, and `--sru-on-dark-hover` for content on dark
+backgrounds.
+
+يعرّف ملف الرموز العام الخصائص المخصصة فقط، ولا يضيف أنماطًا عامة للعناصر أو
+إعادة ضبط أو أنماط أطر عمل أو فئات مساعدة أو قواعد للمكونات. أسماء الرموز
+مستقلة عن أطر العمل: `--sru-color-brand-primary` و
+`--sru-color-on-brand-primary` لخلفيات العلامة التجارية ومحتواها؛
+`--sru-color-brand-primary-emphasis` للنص البارز؛ `--sru-color-white` و
+`--sru-color-dark`؛ `--sru-color-text` و`--sru-color-text-muted`؛
+`--sru-color-surface-page` و`--sru-color-surface-raised`؛
+`--sru-color-border` و`--sru-color-danger`؛ و
+`--sru-on-dark-muted` و`--sru-on-dark-border` و`--sru-on-dark-divider` و
+`--sru-on-dark-hover` للمحتوى على الخلفيات الداكنة.
+
+Light values apply by default through `:root`. Set `data-sru-theme="light"` or
+`data-sru-theme="dark"` on the page or widget container to select a theme. For
+example, put `data-sru-theme="dark"` on `<html>` for a page-wide dark theme, or
+on the widget container to scope it to that widget. A runtime switch can update
+the same attribute with `document.documentElement.dataset.sruTheme = 'dark'`.
+
+تُطبّق قيم الوضع الفاتح افتراضيًا عبر `:root`. اختر الوضع بإضافة
+`data-sru-theme="light"` أو `data-sru-theme="dark"` إلى الصفحة أو حاوية الوحدة
+المصغّرة. أضف `data-sru-theme="dark"` إلى `<html>` لتطبيق الوضع الداكن على
+الصفحة، أو إلى حاوية الوحدة لتطبيقه عليها فقط. ويمكن تبديل الوضع أثناء التشغيل
+بتحديث الخاصية نفسها باستخدام `document.documentElement.dataset.sruTheme = 'dark'`.
+
+Font properties are `--sru-font-family-arabic`, `--sru-font-family-latin`,
+`--sru-font-weight-regular` (400), `--sru-font-weight-medium` (500),
+`--sru-font-weight-semibold` (600), `--sru-font-weight-bold` (700), and
+`--sru-font-weight-extrabold` (800). The Arabic and Latin WOFF2 subset URLs are
+available as `--sru-font-arabic-woff2-url` and
+`--sru-font-latin-woff2-url`. They are hosted by Google Fonts at `fonts.gstatic.com`,
+which responds with `Access-Control-Allow-Origin: *`. The token file provides
+font metadata and URLs; it does not define `@font-face` or load the fonts by itself.
+
+خصائص الخط هي `--sru-font-family-arabic` و`--sru-font-family-latin`، وأوزان
+`--sru-font-weight-regular` (400) و`--sru-font-weight-medium` (500) و
+`--sru-font-weight-semibold` (600) و`--sru-font-weight-bold` (700) و
+`--sru-font-weight-extrabold` (800). تتوفر روابط ملفات WOFF2 العربية واللاتينية
+عبر `--sru-font-arabic-woff2-url` و`--sru-font-latin-woff2-url`. تستضيفها Google
+Fonts على `fonts.gstatic.com`، ويُرجع الخادم الترويسة
+`Access-Control-Allow-Origin: *`. يوفر الملف بيانات الخطوط وروابطها، لكنه لا
+يعرّف `@font-face` ولا يحمّل الخطوط بمفرده.
 
 For Arabic pages with RTL direction, set `dir="rtl"` on the `<html>` element and
 use the same stylesheet. The JavaScript bundle is required for interactive
